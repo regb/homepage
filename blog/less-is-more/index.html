@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Less is More</title>
+
+  
+  <meta name="description" content="Scala has a minimalist design with few but powerful features that combine nicely together" />
+
+
+
+<!-- facebook Open Graph Metadatas -->
+<meta property="fb:admins"  content="1145810187" />
+<meta property="fb:app_id"  content="529158857268335" />
+<meta property="og:site_name" content="Reg's homepage | Régis Blanc" />
+<meta property="og:locale" content="en_US" />
+
+
+  <meta property="og:type" content="article" />
+
+
+
+  <meta property="og:title" content="Less is More" />
+
+
+
+  <meta property="og:description" content="Scala has a minimalist design with few but powerful features that combine nicely together" />
+
+
+
+  <meta property="og:url" content="http://regblanc.com/blog/less-is-more/" />
+
+
+
+  <meta property="og:image" content="http://regblanc.com/resources/mtg/looter-wide.jpg" />
+
+
+
+  
+
+
+
+  
+    <meta property="article:tag" content="scala" />
+  
+    <meta property="article:tag" content="design" />
+  
+    <meta property="article:tag" content="library" />
+  
+
+
+<!-- not really sure if that's of any use, but probably can't hurt to integrate -->
+
+  <meta property="article:published_time" content="2018-11-10T18:00:00+01:00" />
+
+
+
+<!-- Twitter cards metadatas -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@regbla" />
+<meta name="twitter:creator" content="@regbla" />
+
+
+  <meta name="twitter:title" content="Less is More" />
+
+
+
+<meta name="twitter:url" content="http://regblanc.com/blog/less-is-more/" />
+
+
+
+  <meta name="twitter:description" content="Scala has a minimalist design with few but powerful features that combine nicely together" />
+
+
+
+  <meta name="twitter:image" content="http://regblanc.com/resources/mtg/looter-square.jpg" />
+
+
+
+  <link rel="stylesheet" href="/libcss/bootstrap.min.css">
+  <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/libcss/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" 
+        href="http://regblanc.com/blog/less-is-more/">
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+<!--
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/contact/">Contact</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/games/">Games | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/fish-escape/">Fish Escape | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/scalavator/">Scalavator | Game for Android, Web, and Windows</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/projects/">My Projects | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/rat-trap/">Rat Trap | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/winsmash/">WinSmash | Android Game</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Régis Blanc</a>
+        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="/projects/">My Projects</a></li>
+          <li ><a href="/blog/">Blog</a></li>
+          <li ><a href="/about/">About</a></li>
+          <li ><a href="/contact/">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+</header>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post">
+      
+        <header class="post-header">
+          <h1 class="post-title">Less is More</h1>
+          <p class="post-meta">Posted on Nov 10, 2018</p>
+        </header>
+      
+        <article class="post-content">
+          <p>Scala has the reputation of being a complicated and bloated language. This
+impression comes from the large variety of libraries, architectures, and styles
+out there. Since developers have so many ways of using the language, the
+argument goes that the language is just an overly complicated mix of every
+programming languages features ever invented. This couldn’t possibly be further
+from the truth.</p>
+
+<p>What is true is that Scala is complex. However this complexity is not coming
+from the language, it is just the inherent complexity in writing software.
+Complexity should also not be confused with complication. Saying that something
+is complicated carries a notion that the thing was made complicated for
+the sake of it. It could have been made simpler. Complexity is the nature of
+the thing, and it’s inherent to the depth of the problem.</p>
+
+<p>Things can be basic or complex, but not both, and things can be simple or
+complicated, but not both. A basic problem should be ideally solved by a simple
+solution, however it is very common to introduce a complicated solution to a
+basic problem. A complex problem can rarely be solved by a simple tool,
+although when that happens, that’s usually the product of a genius. And some
+problems are just so complex that they require a complicated solution, but it’s
+never ideal. Scala is a tool which is not simple, but not complicated either,
+made to address a very complex domain.</p>
+
+<p>But I disgress; the essence of the criticisms against Scala often boils down to
+its bloated amount of features. Scala does have quite a number of features,
+many of them coming from advanced research in programming languages, which
+makes it a hard and challenging language to learn. But hard and challenging
+does not mean in any way bad. VIM is maybe the best text editor ever invented
+(along with Emacs), but it is also one of the hardest to learn and to master.
+But the effort eventually pays off, for when one finally understands its design
+philosophy, they unlock an unbounded boost in productivity.</p>
+
+<p>Scala has many features, but many of them are orthogonal to each other. What
+that means is that each feature brings a unique and necessary aspect to the
+language. Its design was actually carefully crafted so that only the minimal
+necessary set of features was added to the language. The expressiveness that
+people observe with Scala does not come from a large number of features, but
+from the powerful synergy among them. Each feature is individually clean and
+well-defined, and it can combine with every other features.</p>
+
+<p>Let’s move this abstract discussion to concrete examples: Scala is an
+object-oriented language and as such has classes and methods. A method in Scala
+is nothing special, you define it as you would define a function, but within a
+class:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">IntList</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">append</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntList</span> <span class="o">=</span> <span class="o">???</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>The class represents an immutable list of integers and it has an append` method
+to return a new list with a new integer appended to the end of the list.  Let’s
+not focus on the implementation, to keep the example to the point. Now, the
+class can be used in the expected manner:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span>  <span class="c1">// l1 = []
+</span><span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="nv">l1</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// l2 = [1]
+</span><span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="nv">l2</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// l3 = [1, 2]
+</span><span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="nv">l3</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">//</span> <span class="n">l4</span> <span class="k">=</span> <span class="o">[</span><span class="err">1</span>, <span class="err">2</span>, <span class="err">3</span><span class="o">]</span></code></pre></figure>
+
+<p>Most object-oriented languages use a similar syntax for defining and calling
+methods. Scala has a syntactic rule where methods with a single parameter can
+be used in infix notation. Infix notation is a fancy mathematical term that you
+can use to flex at parties, but it simply means that the name is used between
+the receiver and the argument, without additional syntax, just like a
+mathematical operator. Using this rule, the above could alternatively be
+written as:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span>
+<span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="n">l1</span> <span class="n">append</span> <span class="mi">1</span>
+<span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="n">l2</span> <span class="n">append</span> <span class="mi">2</span>
+<span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="n">l3</span> <span class="n">append</span> <span class="mi">3</span></code></pre></figure>
+
+<p>Not a huge difference, but some people might find the latter more pleasurable
+to read. It is a general rule that apply to all objects and all methods (as
+long as they have a single formal parameter). Not many Scala programmers would
+use this syntax in the above case, as it can make the code actually confusing,
+but it is a popular syntax when using higher-order functions:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">inc</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<span class="k">val</span> <span class="nv">l5</span> <span class="k">=</span> <span class="n">l4</span> <span class="n">map</span> <span class="n">incr</span> <span class="o">//</span> <span class="n">l5</span> <span class="k">=</span> <span class="o">[</span><span class="err">2</span>, <span class="err">3</span>, <span class="err">4</span><span class="o">]</span></code></pre></figure>
+
+<p>Of course, one could also use the syntax <code class="highlighter-rouge">l4.map(incr)</code> but it is somewhat of a
+convention to use the infix notation with higher-order functions as it tends to
+be more readable (perhaps due to the roots of the notation coming from the
+likes of Haskell and Caml). In more standard cases like the <code class="highlighter-rouge">append</code> function,
+it is more natural and readable to use the more familiar and consistant
+<code class="highlighter-rouge">object.method(arg)</code> syntax.</p>
+
+<p>Let us look at another example:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">Vector</span><span class="o">(</span><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">plus</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="py">a</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">a</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="py">b</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">b</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="k">val</span> <span class="nv">v1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">v2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="nv">v1</span><span class="o">.</span><span class="py">plus</span><span class="o">(</span><span class="n">v2</span><span class="o">)</span> <span class="o">//</span> <span class="n">v3</span> <span class="k">=</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span></code></pre></figure>
+
+<p>This is a simple 2D vector and an example of how to use it. It’s very close to
+how we would write in a language like Java, except for the short constructor
+syntax. This is also the canonical motivating example for why operator
+overloading makes sense. Scala supports it, although as a consequence of
+another feature: flexible syntax for identifiers. In Scala, identifiers are
+very flexible and, in particular, they can contain any combination of standard
+symbols (although if they do, they cannot contain <a href="https://www.scala-lang.org/files/archive/spec/2.11/02-identifiers-names-and-scopes.html">any other
+characers</a>).
+Taking advantage of that rule, the <code class="highlighter-rouge">plus</code> method could be defined more
+naturally as:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">Vector</span><span class="o">(</span><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="py">a</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">a</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="py">b</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">b</span><span class="o">)</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>The language treats <code class="highlighter-rouge">plus</code> and <code class="highlighter-rouge">+</code> in exactly the same way, so the way we use
+the vector remains the same:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">v1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">v2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="n">v1</span><span class="o">.+(</span><span class="n">v2</span><span class="o">)</span></code></pre></figure>
+
+<p>That is because <code class="highlighter-rouge">+</code> is just the name of the method and a method can be used
+with the <code class="highlighter-rouge">object.method(arg)</code> syntax. Of course, here it makes sense to take
+advantage of the infix notation for methods, and we can actually write:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span></code></pre></figure>
+
+<p>This is where operator overloading shines: this reads exactly like the
+mathematical description and the intent could not be clearer.</p>
+
+<p>We have just seen how two independent features — infix notation and flexible
+syntax for methods — combine elegantly to provide operator overloading. This
+is just one of many examples where Scala provides common and powerful features
+from two simpler and well-defined ones. But as this post is getting long, let
+me take a break there and come back <a href="/blog/scala-the-small-parts/">next time dissecting a few more
+examples</a>.</p>
+
+
+        </article>
+
+        <div class="share-page">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4">
+      <div class="social-media-share-lead">Share this on &rarr;</div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+    <ul class="social-media-share-list">
+
+      <li class="social-media-share-item social-media-share-twitter">
+        <a href="https://twitter.com/intent/tweet?text=Less is More&url=http://regblanc.com/blog/less-is-more/&via=regbla&related=regbla"
+           rel="nofollow" target="_blank" title="Share on Twitter">
+          <i class="fa fa-twitter fa-1x"></i> Twitter
+        </a>
+      </li>
+
+      <li class="social-media-share-item social-media-share-fb">
+        <a href="https://facebook.com/sharer.php?u=http://regblanc.com/blog/less-is-more/" rel="nofollow" 
+           target="_blank" title="Share on Facebook">
+          <i class="fa fa-facebook fa-1x"></i> Facebook
+        </a>
+      </li>
+
+    </ul>
+    </div>
+
+
+</div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <ul class="social-media-list">
+    <li class="social-media-item">
+      <a href="https://github.com/regb">
+        <i class="fa fa-github fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="https://twitter.com/regbla">
+        <i class="fa fa-twitter fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="http://instagram.com/regisbla">
+        <i class="fa fa-instagram fa-5x"></i>
+      </a>
+    </li>
+  </ul>
+
+  <p class="copyright text-muted">
+    Copyright © Régis Blanc
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/libjs/bootstrap.min.js"></script>
+
+</footer>
+
+
+  </body>
+
+</html>

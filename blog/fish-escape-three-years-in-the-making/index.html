@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Fish Escape, a Remake Three Years in the Making</title>
+
+  
+  <!-- for some stupid reason, I cannot convert '\n' to ' ', (using replace filter) 
+  and when I do a strip_newlines filter, all lines are collapsed into one, with
+  missing spaces if there was only a \n as separator. That means, the excerp
+  (first paragraph) should be writen with a space before each newline character
+  -->
+  <meta name="description" content="About five years ago, I published Rat Trap, my firstever completed game.  It was a project that taught me a lot about gamedevelopment. I had had afew attempt..." />
+
+
+
+<!-- facebook Open Graph Metadatas -->
+<meta property="fb:admins"  content="1145810187" />
+<meta property="fb:app_id"  content="529158857268335" />
+<meta property="og:site_name" content="Reg's homepage | Régis Blanc" />
+<meta property="og:locale" content="en_US" />
+
+
+  <meta property="og:type" content="article" />
+
+
+
+  <meta property="og:title" content="Fish Escape, a Remake Three Years in the Making" />
+
+
+
+  <meta property="og:description" content="About five years ago, I published Rat Trap, my firstever completed game.  It was a project that taught me a lot about gamedevelopment. I had had afew attempt..." />
+
+
+
+  <meta property="og:url" content="http://regblanc.com/blog/fish-escape-three-years-in-the-making/" />
+
+
+
+  <meta property="og:image" content="http://regblanc.com/resources/fish-escape/feature.png" />
+
+
+
+  
+
+
+
+  
+    <meta property="article:tag" content="games" />
+  
+    <meta property="article:tag" content="gamedev" />
+  
+    <meta property="article:tag" content="scala" />
+  
+
+
+<!-- not really sure if that's of any use, but probably can't hurt to integrate -->
+
+  <meta property="article:published_time" content="2019-12-07T21:24:00+01:00" />
+
+
+
+<!-- Twitter cards metadatas -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@regbla" />
+<meta name="twitter:creator" content="@regbla" />
+
+
+  <meta name="twitter:title" content="Fish Escape, a Remake Three Years in the Making" />
+
+
+
+<meta name="twitter:url" content="http://regblanc.com/blog/fish-escape-three-years-in-the-making/" />
+
+
+
+  <meta name="twitter:description" content="About five years ago, I published Rat Trap, my firstever completed game.  It was a project that taught me a lot about gamedevelopment. I had had afew attempt..." />
+
+
+
+  <meta name="twitter:image" content="http://regblanc.com/resources/fish-escape/logo.png" />
+
+
+
+  <link rel="stylesheet" href="/libcss/bootstrap.min.css">
+  <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/libcss/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" 
+        href="http://regblanc.com/blog/fish-escape-three-years-in-the-making/">
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+<!--
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/contact/">Contact</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/games/">Games | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/fish-escape/">Fish Escape | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/scalavator/">Scalavator | Game for Android, Web, and Windows</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/projects/">My Projects | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/rat-trap/">Rat Trap | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/winsmash/">WinSmash | Android Game</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Régis Blanc</a>
+        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="/projects/">My Projects</a></li>
+          <li ><a href="/blog/">Blog</a></li>
+          <li ><a href="/about/">About</a></li>
+          <li ><a href="/contact/">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+</header>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post">
+      
+        <header class="post-header">
+          <h1 class="post-title">Fish Escape, a Remake Three Years in the Making</h1>
+          <p class="post-meta">Posted on Dec 7, 2019</p>
+        </header>
+      
+        <article class="post-content">
+          <p>About five years ago, I published <a href="/games/rat-trap/">Rat Trap</a>, my first
+ever completed game.  It was a project that <a href="/blog/building-an-android-game-with-scala-and-inkscape/">taught me a lot about game
+development</a>. I had had a
+few attempts at making games in the past, but it never worked out.  With Rat
+Trap, I finally made a complete game that I published on a real platform, the
+<a href="https://play.google.com/store/apps/details?id=com.regblanc.rattrap">Google Play
+Store</a>.</p>
+
+<p>Rat Trap was well received, reaching more than 5000 downloads on Google Play (I
+consider this a success, given how many games get less than 10 total
+downloads), and averaging around a rating of 4.5 out of 5. I’m particularly
+proud of the fact that many of these reviews are from complete strangers, and
+they seemed to enjoy the game a lot. Even many of the friends with whom I shared
+the game seemed to get somewhat addicted to it, not to please me, but truly
+because of the gameplay.</p>
+
+<p>Of course, the game had very questionable graphics (it was all done by myself,
+a programmer), no sound, and a general lack of production value. I invested
+quite some time in polishing parts of the experience, such as making the
+gameplay as intuitive as possible, and easing the player into the game. But it
+was clear that the game was lacking in some significant areas to be truly
+successful.  However, the core gameplay seemed to stick quite well with most
+people, so I always thought that the game had potential, if I could make a much
+more polished and neat version.</p>
+
+<h4 id="the-genesis">The Genesis</h4>
+
+<p>Around three years ago, I met a long-term friend of mine for coffee. It was a
+general catch-up meeting, but somehow the discussion moved towards game
+development ideas. That friend was a freelance graphic designer, so he had a
+set of skills that was complementary to mine. We floated the idea that it would
+be cool if we were to work on a game together. By that time, I had
+self-published two small games, and I was exploring ideas for a next project.</p>
+
+<p>At the end of this meeting, I was excited to work on that project. But at the
+time, I was quite busy with a number of other commitments. Besides, I had had a
+number of challenging experiences with side-projects in the past few years, so
+I thought that jumping into a new one based on a coffee chat might not be the
+best of ideas. So I thought, let’s sit on this for a while.</p>
+
+<p>Additionally, waiting a bit was a good test to see if we were actually
+motivated by the project. Talking about how we are going to change the world is
+always a nice conversation topic, but when it comes to actually doing
+something, it’s a whole different story. It’s also fairly common to put in one
+or two days of work right after an interesting kick-off meeting, only for the
+motivation to die down eventually. By waiting some time and see if we still
+want to do this, and then starting to put in some work, I felt like we would
+have a more sustainable project.</p>
+
+<p>As you might have guessed — otherwise I wouldn’t be writing this article —
+the motivation stayed and about one month later, we decided to meet again about
+the project and to start coming up with some concrete tasks. And just like
+that, <em>Fish Escape</em> was born.</p>
+
+<p>One ground rule we decided on early on, which I think was essential, was to be
+very clear on the work expectations towards each other. And it might not be
+what you would expect. We agreed that none of us should expect any work done
+from the other, under any fixed timeline. We agreed that there might be entire
+months when we wouldn’t be doing anything, and we shouldn’t feel bad about it.</p>
+
+<p>Fundamentally, this was a way to prevent the classic bitter feeling when you
+are putting in a lot of work and you’re not seing the other reciprocate. This
+is probably one of the number one way a side-project falls apart, and I’ve
+witnessed it first hand from both sides. Essentially, this was meant to be a
+fun project, and it was to remain fun until the end.  It would be done when it
+would be done, and it would be done only if both of us wanted to work on it. I
+believe this principle might have helped us keep this project alive for the
+last three years.</p>
+
+<h4 id="keep-it-small-stupid">Keep it Small, Stupid</h4>
+
+<p>Now it was clear, we were going to make that game. It was time to work on
+design and scoping. I had already released two games before starting this
+project, so I had some experience in shipping games. My friend had never worked
+on a game before though, so there would be some learning curve there. I was
+well aware of the feature-creep trap, so I tried to limit the scope as much as
+possible.</p>
+
+<p>And it was necessary. We started out with the idea of making a polished and
+professional version of my very first mobile game. That seemed like a good
+plan, as the original game would serve as a prototype that we would heavily
+polish. That would ensure a limited scope and at the same time that would let
+me address many of the limitations of the game. We would also target Android,
+since that is what my original game targeted, and this is what I have the most
+familiarity with.</p>
+
+<p>But, at the time, I had a few other exciting prototypes. One of them was a
+mobile platformer with some innovative controls, and we started exploring ideas
+for that game. However this was way more ambitious than the original plan,
+would require a lot more content, a lot more programming, and generally a lot
+more stuff. Eventually we agreed to table this exciting project for later, and
+to focus on a first, small, easy game that we can release in a reasonable
+window of time, in order to test if we can work together. If it would prove to
+be a fruitful collaboration, we could revisit these other ideas later and work
+on them.</p>
+
+<p>Despite this heavy emphasis on keeping the scope small, the game still took
+more than three years to complete. There are various reasons for that, for one,
+it’s just what it takes; good products take time to craft. But there were other
+reasons the project took that long. For one, we worked purely part time, and
+even though we never gave up on the project, there were long periods of time
+with no progress whatsoever.  Next, I insisted on using my own <a href="https://github.com/regb/scala-game-library">custom
+engine</a>.  I just genuinely enjoy
+programming, and I believe in learning by experience, so I have been developing
+each on my game with my own engine that I keep improving over time. But that
+means I have been spending a lot of time re-inventing the wheel. There’s also a
+more pragmatic reason for that decision, which is that I want to use Scala for
+writing my game, and there’s not that many engines out there. And a final
+reason is that our experience in game development is still limited. We have
+been figuring things out along the way, and that has added a lot of time to the
+development.</p>
+
+<h4 id="a-ground-up-redesign">A Ground Up Redesign</h4>
+
+<p>You can try the original <a href="https://play.google.com/store/apps/details?id=com.regblanc.rattrap">Rat Trap game for
+Android</a>.
+If you played <a href="https://play.google.com/store/apps/details?id=com.limetalesgames.fishescapelite">Fish
+Escape</a>,
+it will feel familiar. To some people, their first reaction is that it’s the
+same game. It’s fine, I am not getting upset by this. I know it took several
+years of work, and I know what went into it. A good product is the collection
+of thousands of small details. Fish Escape has these thousands more polished
+details compared to Rat Trap, and I am convinced that the experience is vastly
+superior. But if you just look at the overall gameplay, it will seem roughly
+similar.</p>
+
+<p>For reference, here is one of the last levels of Rat Trap:</p>
+
+<div class="post-image-wrapper">
+  
+    <img src="/resources/rat-trap/screenshots/rat-trap-4.png" alt="Screenshot of Rat Trap version 1.0" />
+    
+  
+</div>
+
+<p>And without further ado, one of the last levels in Fish Escape:</p>
+
+<div class="post-image-wrapper">
+  
+    <img src="/resources/fish-escape/screenshots/level-all-actions.png" alt="Screenshot of Fish Escape" />
+    
+  
+</div>
+
+<p>There are obvious differences, such as the change of theme (from trapping a rat
+to trapping a penguin). We spent many months brainstorming on the best way to
+visually represent each element of the gameplay and each action.  I am very
+happy with how we were able to integrate the HUD into the background. By
+opposition, in Rat Trap it was simply slapped on top of the screen.</p>
+
+<p>Another visual, but less obvious difference, is the layout of the hexagonal
+map. The game is designed for mobile, so our maps are at most 5x5, and we were
+trying to optimize the space on the screen. You can see on the Rat Trap
+screenshot that the map is pretty close to the edge on each side. Fish Escape
+has a more natural and spacious margin on both edges. it’s not random. It comes
+from the insight that phone screen are usually very tall, and that we have more
+vertical than horizontal space available. That led us to changing the layout of
+the map to align the tiles vertically instead of horizontally, which eventually
+saved half a tile on the width.</p>
+
+<p>Then there were technical improvements. The most important, but not necessarly
+noticeable, is the penguin AI. The AI algorithm has been completely revamped,
+to make it much, much, smarter. In Rat Trap, the AI was based on a simple
+heuristics. It was a combination of a shortest path algorithm along with some
+bonuses to favor directions with several objectives. This worked well most of
+the time, until it did not. The annoying part is that some of the levels
+designed for Rat Trap had no solution, and only worked because of the
+particular heuristics used by the rat. The effect was that any improvement to
+the AI would force me to revisit and potentially redesign levels, or run the
+risk to make them infeasible.</p>
+
+<p>In Fish Escape, I wanted to make the AI perfect. The goal was that if there was
+a winning strategy, it would take it and beat the player. I believed that would
+lead to a more satisfying experience for the player: they would be trying to
+solve a puzzle, not trick an algorithm. I have definitely heard feedback about
+how the rat made a mistake at X or Y move, and some players felt like they won
+because the AI made a mistake, not because they made the right choice. A better
+AI would fix this. And besides, a perfect AI would make sure that none of my
+level design would get obsolete. That said, making that perfect AI turned out
+to be a significant amount of work, and I had to make some compromise in order
+to make it work. But this is a story for another day.</p>
+
+<h4 id="monetization">Monetization</h4>
+
+<p>Although this was a fun side project for both of us, we were very serious about
+making money. From the get-go, we had the objective to make an extremely
+polished game, with the potential to earn some hard cash. After all, if we were
+to just complete a concept game, we could have released it two years ago. But
+we spent two extra years fleshing out and polishing countless edges because we
+wanted to offer a high-quality experience.</p>
+
+<p>Very early on, we discussed about the best way to monetize the game. There are
+three classic monetization options: ad-supported, in-app purchases (IAP), and
+premium. We were not very fond of adding ads in our game, not for any sort of
+moral reason, but because that would have a direct impact on the player’s
+experience. Additionally, our game was not meant to be replayed forever, it was
+a concise experience with about a hundred hand-crafted levels, and once they
+are completed, there are no reason to keep playing the game. We believed that
+this was the right design for this game and did not want to implement specific
+mecanisms to get people to play longer (so that they could watch more ads). For
+similar reasons, we dismissed IAP.</p>
+
+<p>That left us with the option of making a premium game. This was a very
+appealing option and that’s the most common approach taken by indies. This is
+also the most respected option for real games, as the majority (but not all of
+them) of free-to-play games tend to be seen as an unethical and quick cash grab
+(not saying they are, but I believe that’s how players tend to see them). In
+contrast, most (but again, not all of them) premium games are usually
+associated with a respectful player experience, pay once, get good value out of
+the game. Having a premium game should also help us get some attention from
+journalists, while trying to get press for a free game would be pretty
+challenging.</p>
+
+<p>Unfortunately, the mobile landscape for premium games is tough, very tough.
+There are a few noticeable exceptions (<a href="http://ridiculousfishing.com/">Ridiculous
+Fishing</a>, <a href="http://asherv.com/threes/">Threes!</a>,
+<a href="https://en.wikipedia.org/wiki/Monument_Valley_(video_game)">Monument Valley</a>,
+among others, come to mind), but overall this is not a market for premium game.
+That did still feel like the best fit for our game, and the future will tell us
+if this was a good choice. We would like to believe that it’s still possible to
+be making a living as a game developer by simply publishing good games and
+selling them at a one-time price point.</p>
+
+<h4 id="compromising-with-early-access">Compromising with Early Access</h4>
+
+<p>And here we are, three years into the development, getting closer and closer to
+the end. Although we never gave up on that project, there have been a lot of
+slowdowns and extended breaks. And we can start to feel some project’s fatigue.
+What’s worse, we are starting to lose faith in the premium model. We have this
+feeling that we will release the game and it will just go unnoticed.</p>
+
+<p>And this is something we are willing to accept. This is our first game, and
+part of the objective is to put our studio on the map. Even if only a few
+hundred people buy the game, as long as they have a good experience and
+remember us, that’s mission accomplished. Maybe these hundred players will be
+waiting for our next game, and they might be telling their friend about it.
+Over time, if we manage to publish quality game after quality game, and if we
+keep respecting our players, this could snow-ball into an actual business. And
+even if it doesn’t, I will keep making games because I enjoy the activity.</p>
+
+<p>Nevertheless, we have been looking for ways to promote the game. Currently, we
+have serious concerns over the rate of conversion from getting to the store
+page to actually buying the game.  Our graphics are nice, but they are not a
+selling point. We do not have a crazy, awe-inspiring, trailer that would
+convince people. And on top of that, we do have any serious marketing budget to
+reach a lot of players. But what we have is a strong core gameplay that sticks
+with players, and a very polished in-game experience. These are things that do
+not communicate well through our screenshots and videos, but that we think
+players will feel when they start playing.</p>
+
+<p>So, as a way to exploit that, we have been strongly considering making a demo
+with a call to action at the end to buy the full game. That’s the old-school
+way of selling games, and as far as I’m concerned, it’s a totally fine way to
+go about it. However, it does not seem like a popular, let alone existing,
+approach today, especially on the app stores. The modern version of the demo is
+the in-game paywall in a free-to-play game, where you get the first N levels
+for free, and then have to pay a one-time fee to unlock the complete game.</p>
+
+<p>In all honesty, that would be a decent model for Fish Escape. It gives the
+first levels away for free, let people try the game out, and if they like it,
+they can pay a one-off fee to unlock the whole game. Eventually, we didn’t go
+with that solution, and there are two reasons, none of them might be very good
+though. The first reason, is a technical limitation. As I mentioned before, the
+game is built on my own engine, and it does not support IAP. When I started
+looking into the Google Play API for this, it looked overly complicated and I
+lost motivation to implement it. One day I will, but this day is not today. The
+second, more sensible reason has to do with player’s expectation. When a player
+is faced with a paywall, there’s a tendency to get frustrated and lose trust
+against the game. How do I know, as a player, that this is not just the first
+of many paywalls, even though you’re telling it’s a one-time fee? People might
+also leave negative reviews because they were never planning to spend any money
+but then get access to only a few levels, thus they end up complaining about
+the lack of content. There are also players which hate IAP, and they are going
+to dismiss the game due to the mere fact that the store page displays that this
+game contains IAP. That’s a pity, because these are the players we hope to
+target, the players who are willing to spend a few bucks to get a proper game,
+without ads and IAP.</p>
+
+<p>In order to address these concerns, we can look at the pre-IAP implementation
+of the paywall feature: using a Lite and a Pro version. That was a very
+widespread pattern, where an app would be split into a small lite version (the
+demo) and a paid version (the complete game).  These days, it’s very rare and
+almost all apps are using the IAP paywall method. I’m not sure why. I can see
+some advantages, like that having a single app is better for consolidation and
+it’s easier to manage.  But on the other hand you hit some of the problems I
+was discussing in the previous paragraph.</p>
+
+<p>In the end, we’ve decided to go with the latter model. Technically, it was
+easier to put in place. And there was this strong need to have a clean version
+of the game, free of any ads or IAP, with an official, and final, displayed
+price. There would be no hidden fee, you buy the game, you get the full
+experience. The lite version would be there as a way to test the game before
+buying it. And it would play on the game’s strength which is that once you
+start playing, you get converted.</p>
+
+<p>The last remaining question was about the scope of the lite version. Would this
+be a true old-school demo, or should we do something else? We considered
+several options, and decided to edge our bets. Essentially, we believe that
+there a large majority of players that are just never going to spend a single
+cent on mobile games. That’s a bit sad, but that’s probably true. These players
+might actually like our game, but there’s no point in giving them only 10
+levels, and on top of that we run the risk that they would just leave bad
+reviews due to the lack of content. We can offer a bit more content, maybe half
+of the complete game, which would still be several hours of playtime, and
+monetize it with ads.  That would make the lite version a game with a decent
+amount of content and supported by ads. For people that enjoys the game, they
+can go and buy the complete, ad-free version, as soon as they are convinced.
+For these who enjoy the game but do not want to spend money, they can enjoy a
+decent amount of content by accepting to see ads. Hopefully, in the end
+everyone get what they want.</p>
+
+<p>As a closing note, there is one last factor that pushed us towards that model.
+I mentioned at the start of this section that we were starting to feel tired
+about the whole development process. At this point, it would just feel good to
+release something.  Unfortunately, the game still needs a good amount of
+polishing to reach the standards that we set out for. But it turns out that a
+lot of that polishing is related to the latest levels of the game.  This means
+that the lite version is fairly close to completion. And given that this is
+meant to be a lite and free version, we thought it was acceptable for it to not
+be as perfect as we want the final game to be. Bottom line is, we can, today,
+release the lite version. We can get it to the market, use it to gather
+feedback, while we work on finalizing the complete, premium version of the
+game. Hopefully we will get a boost of confidence by having released something,
+and we can start sharing it with more people.</p>
+
+<h4 id="whats-next">What’s Next</h4>
+
+<p>In the short term, <em>Fish Escape Lite</em> is <a href="https://play.google.com/store/apps/details?id=com.limetalesgames.fishescapelite">out and available for
+Android</a>,
+This is a major milestone for <a href="https://www.limetalesgames.com">LimeTales</a> —
+the indie studio we founded to publish this game. In the coming months, we will
+be polishing and finishing the premium version of <em>Fish Escape</em> and release it
+as an ad-free, IAP-free, paid premium game on Android.</p>
+
+<p>In the longer term, we hope that this is only the first of many games for our
+young game studio. We doubt that <em>Fish Escape</em> will make enough money to
+sustain us full time on this enterprise. But assuming the game has a moderate
+success, we should be able to find the motivation to work on a new project
+following a similar part-time model.</p>
+
+<p><em>Although next time, we hope it’s going to take less than three years…</em></p>
+
+        </article>
+
+        <div class="share-page">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4">
+      <div class="social-media-share-lead">Share this on &rarr;</div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+    <ul class="social-media-share-list">
+
+      <li class="social-media-share-item social-media-share-twitter">
+        <a href="https://twitter.com/intent/tweet?text=Fish Escape, a Remake Three Years in the Making&url=http://regblanc.com/blog/fish-escape-three-years-in-the-making/&via=regbla&related=regbla"
+           rel="nofollow" target="_blank" title="Share on Twitter">
+          <i class="fa fa-twitter fa-1x"></i> Twitter
+        </a>
+      </li>
+
+      <li class="social-media-share-item social-media-share-fb">
+        <a href="https://facebook.com/sharer.php?u=http://regblanc.com/blog/fish-escape-three-years-in-the-making/" rel="nofollow" 
+           target="_blank" title="Share on Facebook">
+          <i class="fa fa-facebook fa-1x"></i> Facebook
+        </a>
+      </li>
+
+    </ul>
+    </div>
+
+
+</div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <ul class="social-media-list">
+    <li class="social-media-item">
+      <a href="https://github.com/regb">
+        <i class="fa fa-github fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="https://twitter.com/regbla">
+        <i class="fa fa-twitter fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="http://instagram.com/regisbla">
+        <i class="fa fa-instagram fa-5x"></i>
+      </a>
+    </li>
+  </ul>
+
+  <p class="copyright text-muted">
+    Copyright © Régis Blanc
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/libjs/bootstrap.min.js"></script>
+
+</footer>
+
+
+  </body>
+
+</html>

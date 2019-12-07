@@ -1,0 +1,2 @@
+Just a placeholder to not forget that resources would essentially contains any
+sort of images/video/executable/source code etc.

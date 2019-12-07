@@ -1,0 +1,103 @@
+html { overflow-y: scroll; }
+
+body { padding-top: 75px; }
+
+footer { margin: 50px 0; }
+
+p { margin-bottom: 20px; }
+
+body, p, ul, div { font-size: 22px; }
+
+a.navbar-brand { font-size: 22px; }
+
+h1 { font-size: 36px; }
+
+h2 { font-size: 30px; }
+
+h3 { font-size: 28px; }
+
+h4 { font-size: 26px; }
+
+h5 { font-size: 24px; }
+
+h6 { font-size: 22px; }
+
+h1, h2, h3 { font-weight: bold; }
+
+.copyright { text-align: center; font-size: 14px; }
+
+hr.small { max-width: 100px; margin: 15px auto; border-width: 4px; border-color: #000; }
+
+/* .share-page { text-align: center; background: $secondary-color; color: $light-color; padding: 8px 15px; border-radius: 5px; margin: 1.5 * $spacing-unit 0; a { font-weight: 700; color: #fff; margin-left: 10px; &:hover { border-bottom: 1px dashed #fff; } } } */
+/** Site footer */
+.site-footer { margin-top: 50px; margin-bottom: 50px; }
+
+.page-heading { text-align: center; }
+
+.social-media-list { text-align: center; font-size: 14px; list-style: none; padding: 0; margin: 0; }
+
+.social-media-item { display: inline-block; list-style: none; cursor: pointer; margin: 10px; }
+
+.social-media-item a { color: #404040; }
+
+.social-media-item a:hover { color: #0085a1; }
+
+/* social-media-share are the buttons on page to share */
+.share-page { margin-top: 50px; }
+
+.social-media-share-lead { display: block; float: left; font-weight: bold; margin-bottom: 10px; }
+
+.social-media-share-list { padding: 0; margin: auto; text-align: center; list-style: none; display: block; }
+
+.social-media-share-item { padding: 0; margin: 0; display: inline-block; color: white; border-radius: 3px; margin-right: 6px; }
+
+.social-media-share-item a { display: block; color: white; padding: 2px 10px 2px 10px; }
+
+.social-media-share-item a:hover { text-decoration: none; }
+
+.social-media-share-fb { background-color: #3b579d; }
+
+.social-media-share-fb:hover { background-color: #4f6cb5; }
+
+.social-media-share-twitter { background-color: #6cadde; }
+
+.social-media-share-twitter:hover { background-color: #77b5e4; }
+
+.social-media-share-google { background-color: #dc4e41; }
+
+.social-media-share-google:hover { background-color: #ea5b4e; }
+
+.game-title { margin-bottom: 10px; }
+
+.game-promo-text { /*text-align: center;*/ font-style: italic; margin-bottom: 10px; }
+
+.list-screenshots .col-screenshot { padding-left: 1px; padding-right: 1px; margin-bottom: 10px; }
+
+.screenshot { width: 100%; }
+
+.post-image-wrapper { display: block; text-align: center; width: 100%; margin: 20px auto; }
+
+.post-image-wrapper img { width: 90%; }
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+
+.post-preview { list-style: none; }
+
+.post-preview > a { color: black; }
+
+.post-preview > a:hover { text-decoration: none; color: #0085a1; }
+
+.post-preview .post-meta, .post .post-meta { color: gray; font-size: 18px; font-style: italic; margin-top: 0; }
+
+.post-header { margin-bottom: 30px; }
+
+.post-preview .post-title { margin-top: 30px; margin-bottom: 10px; }
+
+/* @media only screen and (min-width: 768px) { .post-preview .post-title { font-size: 36px; } } */
+.post-preview .post-excerpt { margin: 0; font-weight: 300; margin-bottom: 10px; }
+
+.project-thumbnail { padding: 10px; }
+
+.project-thumbnail img { width: 100%; }
+
+/*# sourceMappingURL=main.css.map */

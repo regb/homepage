@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Lifting Heroku to the Lift Web Framework</title>
+
+  
+  <meta name="description" content="Deploy the stateful Scala framework Lift on Heroku, and scale out." />
+
+
+
+<!-- facebook Open Graph Metadatas -->
+<meta property="fb:admins"  content="1145810187" />
+<meta property="fb:app_id"  content="529158857268335" />
+<meta property="og:site_name" content="Reg's homepage | Régis Blanc" />
+<meta property="og:locale" content="en_US" />
+
+
+  <meta property="og:type" content="article" />
+
+
+
+  <meta property="og:title" content="Lifting Heroku to the Lift Web Framework" />
+
+
+
+  <meta property="og:description" content="Deploy the stateful Scala framework Lift on Heroku, and scale out." />
+
+
+
+  <meta property="og:url" content="http://regblanc.com/blog/lift-on-heroku/" />
+
+
+
+  <meta property="og:image" content="http://regblanc.com/resources/heroku-feature.png" />
+
+
+
+  
+
+
+
+  
+    <meta property="article:tag" content="startup" />
+  
+    <meta property="article:tag" content="lift" />
+  
+    <meta property="article:tag" content="scala" />
+  
+
+
+<!-- not really sure if that's of any use, but probably can't hurt to integrate -->
+
+  <meta property="article:published_time" content="2015-07-15T03:27:08+02:00" />
+
+
+
+<!-- Twitter cards metadatas -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@regbla" />
+<meta name="twitter:creator" content="@regbla" />
+
+
+  <meta name="twitter:title" content="Lifting Heroku to the Lift Web Framework" />
+
+
+
+<meta name="twitter:url" content="http://regblanc.com/blog/lift-on-heroku/" />
+
+
+
+  <meta name="twitter:description" content="Deploy the stateful Scala framework Lift on Heroku, and scale out." />
+
+
+
+  <meta name="twitter:image" content="http://regblanc.com/resources/heroku-logo.png" />
+
+
+
+  <link rel="stylesheet" href="/libcss/bootstrap.min.css">
+  <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/libcss/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" 
+        href="http://regblanc.com/blog/lift-on-heroku/">
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+<!--
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/contact/">Contact</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/games/">Games | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/fish-escape/">Fish Escape | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/scalavator/">Scalavator | Game for Android, Web, and Windows</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/projects/">My Projects | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/rat-trap/">Rat Trap | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/winsmash/">WinSmash | Android Game</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Régis Blanc</a>
+        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="/projects/">My Projects</a></li>
+          <li ><a href="/blog/">Blog</a></li>
+          <li ><a href="/about/">About</a></li>
+          <li ><a href="/contact/">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+</header>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post">
+      
+        <header class="post-header">
+          <h1 class="post-title">Lifting Heroku to the Lift Web Framework</h1>
+          <p class="post-meta">Posted on Jul 15, 2015</p>
+        </header>
+      
+        <article class="post-content">
+          <p>I recently started working on a <a href="http://www.sprayhere.com">new project</a> and 
+decided to go with Scala and the <a href="http://liftweb.net">Lift framework</a> for the 
+backend.</p>
+
+<p>I like Lift a lot, having build a <a href="http://www.timestash.com">previous website</a>
+entirely using it. Since then, it became my “go to” standard for whenever I
+had to build something web-related.</p>
+
+<p>For this project, we had to build a mobile application and a backend server to
+share the data between the (hopefully) many clients. I was not too familiar
+with the best way to have mobile applications communicate with a server, but I
+decided to just jump in and chose the simplest solution that I knew:
+implementing an HTTP-based server and have the clients communicate with it
+using an HTTP library.</p>
+
+<p>I wanted to experiment with something new for the hosting. I used to work with
+dedicated machines or VPS, but that was a bit of a pain to maintain. I had
+heard a lot of good things about <a href="http://www.heroku.com">Heroku</a>, so I decided
+to give it a try.</p>
+
+<p>The great thing with Heroku is that, once setup, deploying is as simple as
+doing a <code class="highlighter-rouge">git push</code>.  However, all this simplicity comes to the price of
+flexibility. If you want to use Heroku, you have to build your application in a
+very specific way — the Heroku way. In particular, you can no longer organize
+your architecture around full computer boxes, but need to think of your
+application as a collection of different processes, independent of the rest of
+the system.</p>
+
+<p>That means two things. One, you can no longer rely on the local filesystem or
+memory being in an expected state accross several requests, and two, you will
+need to connect with several external services for tasks such as persistence.</p>
+
+<p>Essentially, Heroku forces you to build stateless applications. That is,
+applications that handle requests in a stateless manner, with no dependency on
+any previously completed requests. Concretely, that means we will not have a
+<code class="highlighter-rouge">login</code> request that sets session data on the server and remembers which user
+correctly logged in, but instead, each request that needs authentication will
+contain some sort of credentials to identify and authorize the client.</p>
+
+<p>Building a stateless application is very good when you need to scale
+horizontally. Since a server treats each request in a stateless way, it is
+straightforward to fire up additional copies of the same server and have a
+load-balancer dispatches the request to the least busy server. In fact, that is
+exactly what Heroku is doing, only that the dispatching is done randomly, which
+on average is pretty much the same. In theory, if you implement your backend
+properly with Heroku, you can scale up by just flipping a switch in the Heroku
+console.</p>
+
+<p>But Lift is relying on state. Sessions are combined with closures to handle
+ajax callbacks in a very convenient and efficient way. This is a powerful
+feature, but it means that a Lift server is not stateless, as the follow-up
+ajax requests will need to be handle by the same server that created the
+closures in the first place. There is a known solution around this problem:
+<em>sticky sessions</em>.  Sticky sessions are a configuration mode for load-balancer
+that simply make sure that all requests in the same session are always routed
+to the same server. That does not solve the issue of a server restart during a
+session, but in most cases this is a perfectly fine solution.</p>
+
+<p>Unfortunately, Heroku does not support sticky sessions. You have no control over
+the Heroku load-balancer, it simply routes each request independently and randomly to an
+instance of your application. Does it mean we cannot use Lift when hosting on Heroku?
+No, but it means we have to avoid the stateful features of Lift.</p>
+
+<p>In our case, we wanted to use Lift to build an HTTP API for a mobile client. Lift provides
+a <code class="highlighter-rouge">RestHelper</code> helper trait which facilitates the creation of web services. We start
+by defining some API endpoints, let’s take a user system API for example:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">UserAPI</span> <span class="k">extends</span> <span class="nc">RestHelper</span> <span class="o">{</span>
+  <span class="nf">serve</span><span class="o">(</span><span class="s">"api"</span> <span class="o">/</span> <span class="s">"users"</span> <span class="n">prefix</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">AsLong</span><span class="o">(</span><span class="n">id</span><span class="o">)</span> <span class="o">::</span> <span class="nc">Nil</span> <span class="nc">Get</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="o">???</span>
+    <span class="k">case</span> <span class="nc">AsLong</span><span class="o">(</span><span class="n">id</span><span class="o">)</span> <span class="o">::</span> <span class="nc">Nil</span> <span class="nc">JsonPut</span> <span class="n">json</span> <span class="k">=&gt;</span> <span class="o">???</span>
+  <span class="o">})</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>This defines two URLs for our API. The first one accepts a <code class="highlighter-rouge">GET</code> request and is
+supposed to return a resource representing the user represented by its <code class="highlighter-rouge">id</code>.
+The second one is meant to update the user based on a <code class="highlighter-rouge">json</code> resource object
+received as part of the request. The implementation of these endpoints are
+relatively simple but dependent on your system. Essentially, it is a couple
+simple database queries to get and update the data of the user. It is essential
+that those do not rely on session data provided by Lift (most of the <code class="highlighter-rouge">S</code> object).</p>
+
+<p>Next, we can setup <code class="highlighter-rouge">Boot.scala</code> in the following way:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nv">LiftRules</span><span class="o">.</span><span class="py">enableContainerSessions</span> <span class="k">=</span> <span class="kc">false</span>
+<span class="nv">LiftRules</span><span class="o">.</span><span class="py">statelessReqTest</span><span class="o">.</span><span class="py">append</span> <span class="o">{</span> <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="kc">true</span> <span class="o">}</span>
+
+<span class="nv">LiftRules</span><span class="o">.</span><span class="py">statelessDispatch</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="k">new</span> <span class="nc">UserAPI</span><span class="o">)</span></code></pre></figure>
+
+<p>This forces Lift to operate in stateless mode. It will even throw an exception
+if you have some code relying on session data. In the final statement, we
+append the <code class="highlighter-rouge">UserAPI</code> instance to the <code class="highlighter-rouge">statelessDispatch</code> list that Lift goes
+through before initializing session state when receiving a request. There is
+a similar <code class="highlighter-rouge">dispatch</code> list, but that one is run in stateful mode.</p>
+
+<p>It’s also possible to use snippets and templates to render HTML. It comes with
+the same limitation of not having access to session data. Additionally, all the
+ajax server-side functionnalities will not work as they rely on Scala closures
+stored in memory. But snippets and template are functional, and our
+<a href="http://www.sprayhere.com">website</a> is built using them, and hosted on Heroku as
+well.</p>
+
+<p>Configuration is also slightly different on Heroku. Heroku heavily uses
+environment variables to configure each application. This is how the database
+connection credentials are preferably communicated to the application. In
+contrast, Lift provides built-in support for <code class="highlighter-rouge">.props</code> file that contains
+properties used for configuration. In this project, we implemented a system
+that would check for a configuration variable in the environment variable
+first, and then default to the value found in the <code class="highlighter-rouge">.props</code> file. The
+possibility to set environment variables from the Heroku web interface makes it
+extremely painless to modify the configuration of the system.</p>
+
+<p><em>Edit on May 29, 2016:</em>
+If you want to check out the product we are building with Scala and Lift, we recently
+released <a href="http://www.sprayhere.com"><em>SprayHere</em></a>, a geo-localized platform to communicate
+with people around you. We are launching it locally, at EPFL in Lausanne. You can get
+the Android app in <a href="https://play.google.com/store/apps/details?id=com.sprayhere">Google Play</a>.</p>
+
+        </article>
+
+        <div class="share-page">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4">
+      <div class="social-media-share-lead">Share this on &rarr;</div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+    <ul class="social-media-share-list">
+
+      <li class="social-media-share-item social-media-share-twitter">
+        <a href="https://twitter.com/intent/tweet?text=Lifting Heroku to the Lift Web Framework&url=http://regblanc.com/blog/lift-on-heroku/&via=regbla&related=regbla"
+           rel="nofollow" target="_blank" title="Share on Twitter">
+          <i class="fa fa-twitter fa-1x"></i> Twitter
+        </a>
+      </li>
+
+      <li class="social-media-share-item social-media-share-fb">
+        <a href="https://facebook.com/sharer.php?u=http://regblanc.com/blog/lift-on-heroku/" rel="nofollow" 
+           target="_blank" title="Share on Facebook">
+          <i class="fa fa-facebook fa-1x"></i> Facebook
+        </a>
+      </li>
+
+    </ul>
+    </div>
+
+
+</div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <ul class="social-media-list">
+    <li class="social-media-item">
+      <a href="https://github.com/regb">
+        <i class="fa fa-github fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="https://twitter.com/regbla">
+        <i class="fa fa-twitter fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="http://instagram.com/regisbla">
+        <i class="fa fa-instagram fa-5x"></i>
+      </a>
+    </li>
+  </ul>
+
+  <p class="copyright text-muted">
+    Copyright © Régis Blanc
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/libjs/bootstrap.min.js"></script>
+
+</footer>
+
+
+  </body>
+
+</html>

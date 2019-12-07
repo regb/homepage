@@ -1,0 +1,1590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reg's homepage | Régis Blanc</title>
+    <description>Hey, I'm Régis, an entrepreneur and game developer. Here you  will find all sorts of stuff about my projects.
+</description>
+    <link>http://regblanc.com/</link>
+    <atom:link href="http://regblanc.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 07 Dec 2019 22:26:49 +0100</pubDate>
+    <lastBuildDate>Sat, 07 Dec 2019 22:26:49 +0100</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Fish Escape, a Remake Three Years in the Making</title>
+        <description>&lt;p&gt;About five years ago, I published &lt;a href=&quot;/games/rat-trap/&quot;&gt;Rat Trap&lt;/a&gt;, my first
+ever completed game.  It was a project that &lt;a href=&quot;/blog/building-an-android-game-with-scala-and-inkscape/&quot;&gt;taught me a lot about game
+development&lt;/a&gt;. I had had a
+few attempts at making games in the past, but it never worked out.  With Rat
+Trap, I finally made a complete game that I published on a real platform, the
+&lt;a href=&quot;https://play.google.com/store/apps/details?id=com.regblanc.rattrap&quot;&gt;Google Play
+Store&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Rat Trap was well received, reaching more than 5000 downloads on Google Play (I
+consider this a success, given how many games get less than 10 total
+downloads), and averaging around a rating of 4.5 out of 5. I’m particularly
+proud of the fact that many of these reviews are from complete strangers, and
+they seemed to enjoy the game a lot. Even many of the friends with whom I shared
+the game seemed to get somewhat addicted to it, not to please me, but truly
+because of the gameplay.&lt;/p&gt;
+
+&lt;p&gt;Of course, the game had very questionable graphics (it was all done by myself,
+a programmer), no sound, and a general lack of production value. I invested
+quite some time in polishing parts of the experience, such as making the
+gameplay as intuitive as possible, and easing the player into the game. But it
+was clear that the game was lacking in some significant areas to be truly
+successful.  However, the core gameplay seemed to stick quite well with most
+people, so I always thought that the game had potential, if I could make a much
+more polished and neat version.&lt;/p&gt;
+
+&lt;h4 id=&quot;the-genesis&quot;&gt;The Genesis&lt;/h4&gt;
+
+&lt;p&gt;Around three years ago, I met a long-term friend of mine for coffee. It was a
+general catch-up meeting, but somehow the discussion moved towards game
+development ideas. That friend was a freelance graphic designer, so he had a
+set of skills that was complementary to mine. We floated the idea that it would
+be cool if we were to work on a game together. By that time, I had
+self-published two small games, and I was exploring ideas for a next project.&lt;/p&gt;
+
+&lt;p&gt;At the end of this meeting, I was excited to work on that project. But at the
+time, I was quite busy with a number of other commitments. Besides, I had had a
+number of challenging experiences with side-projects in the past few years, so
+I thought that jumping into a new one based on a coffee chat might not be the
+best of ideas. So I thought, let’s sit on this for a while.&lt;/p&gt;
+
+&lt;p&gt;Additionally, waiting a bit was a good test to see if we were actually
+motivated by the project. Talking about how we are going to change the world is
+always a nice conversation topic, but when it comes to actually doing
+something, it’s a whole different story. It’s also fairly common to put in one
+or two days of work right after an interesting kick-off meeting, only for the
+motivation to die down eventually. By waiting some time and see if we still
+want to do this, and then starting to put in some work, I felt like we would
+have a more sustainable project.&lt;/p&gt;
+
+&lt;p&gt;As you might have guessed — otherwise I wouldn’t be writing this article —
+the motivation stayed and about one month later, we decided to meet again about
+the project and to start coming up with some concrete tasks. And just like
+that, &lt;em&gt;Fish Escape&lt;/em&gt; was born.&lt;/p&gt;
+
+&lt;p&gt;One ground rule we decided on early on, which I think was essential, was to be
+very clear on the work expectations towards each other. And it might not be
+what you would expect. We agreed that none of us should expect any work done
+from the other, under any fixed timeline. We agreed that there might be entire
+months when we wouldn’t be doing anything, and we shouldn’t feel bad about it.&lt;/p&gt;
+
+&lt;p&gt;Fundamentally, this was a way to prevent the classic bitter feeling when you
+are putting in a lot of work and you’re not seing the other reciprocate. This
+is probably one of the number one way a side-project falls apart, and I’ve
+witnessed it first hand from both sides. Essentially, this was meant to be a
+fun project, and it was to remain fun until the end.  It would be done when it
+would be done, and it would be done only if both of us wanted to work on it. I
+believe this principle might have helped us keep this project alive for the
+last three years.&lt;/p&gt;
+
+&lt;h4 id=&quot;keep-it-small-stupid&quot;&gt;Keep it Small, Stupid&lt;/h4&gt;
+
+&lt;p&gt;Now it was clear, we were going to make that game. It was time to work on
+design and scoping. I had already released two games before starting this
+project, so I had some experience in shipping games. My friend had never worked
+on a game before though, so there would be some learning curve there. I was
+well aware of the feature-creep trap, so I tried to limit the scope as much as
+possible.&lt;/p&gt;
+
+&lt;p&gt;And it was necessary. We started out with the idea of making a polished and
+professional version of my very first mobile game. That seemed like a good
+plan, as the original game would serve as a prototype that we would heavily
+polish. That would ensure a limited scope and at the same time that would let
+me address many of the limitations of the game. We would also target Android,
+since that is what my original game targeted, and this is what I have the most
+familiarity with.&lt;/p&gt;
+
+&lt;p&gt;But, at the time, I had a few other exciting prototypes. One of them was a
+mobile platformer with some innovative controls, and we started exploring ideas
+for that game. However this was way more ambitious than the original plan,
+would require a lot more content, a lot more programming, and generally a lot
+more stuff. Eventually we agreed to table this exciting project for later, and
+to focus on a first, small, easy game that we can release in a reasonable
+window of time, in order to test if we can work together. If it would prove to
+be a fruitful collaboration, we could revisit these other ideas later and work
+on them.&lt;/p&gt;
+
+&lt;p&gt;Despite this heavy emphasis on keeping the scope small, the game still took
+more than three years to complete. There are various reasons for that, for one,
+it’s just what it takes; good products take time to craft. But there were other
+reasons the project took that long. For one, we worked purely part time, and
+even though we never gave up on the project, there were long periods of time
+with no progress whatsoever.  Next, I insisted on using my own &lt;a href=&quot;https://github.com/regb/scala-game-library&quot;&gt;custom
+engine&lt;/a&gt;.  I just genuinely enjoy
+programming, and I believe in learning by experience, so I have been developing
+each on my game with my own engine that I keep improving over time. But that
+means I have been spending a lot of time re-inventing the wheel. There’s also a
+more pragmatic reason for that decision, which is that I want to use Scala for
+writing my game, and there’s not that many engines out there. And a final
+reason is that our experience in game development is still limited. We have
+been figuring things out along the way, and that has added a lot of time to the
+development.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-ground-up-redesign&quot;&gt;A Ground Up Redesign&lt;/h4&gt;
+
+&lt;p&gt;You can try the original &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.regblanc.rattrap&quot;&gt;Rat Trap game for
+Android&lt;/a&gt;.
+If you played &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.limetalesgames.fishescapelite&quot;&gt;Fish
+Escape&lt;/a&gt;,
+it will feel familiar. To some people, their first reaction is that it’s the
+same game. It’s fine, I am not getting upset by this. I know it took several
+years of work, and I know what went into it. A good product is the collection
+of thousands of small details. Fish Escape has these thousands more polished
+details compared to Rat Trap, and I am convinced that the experience is vastly
+superior. But if you just look at the overall gameplay, it will seem roughly
+similar.&lt;/p&gt;
+
+&lt;p&gt;For reference, here is one of the last levels of Rat Trap:&lt;/p&gt;
+
+&lt;div class=&quot;post-image-wrapper&quot;&gt;
+  
+    &lt;img src=&quot;/resources/rat-trap/screenshots/rat-trap-4.png&quot; alt=&quot;Screenshot of Rat Trap version 1.0&quot; /&gt;
+    
+  
+&lt;/div&gt;
+
+&lt;p&gt;And without further ado, one of the last levels in Fish Escape:&lt;/p&gt;
+
+&lt;div class=&quot;post-image-wrapper&quot;&gt;
+  
+    &lt;img src=&quot;/resources/fish-escape/screenshots/level-all-actions.png&quot; alt=&quot;Screenshot of Fish Escape&quot; /&gt;
+    
+  
+&lt;/div&gt;
+
+&lt;p&gt;There are obvious differences, such as the change of theme (from trapping a rat
+to trapping a penguin). We spent many months brainstorming on the best way to
+visually represent each element of the gameplay and each action.  I am very
+happy with how we were able to integrate the HUD into the background. By
+opposition, in Rat Trap it was simply slapped on top of the screen.&lt;/p&gt;
+
+&lt;p&gt;Another visual, but less obvious difference, is the layout of the hexagonal
+map. The game is designed for mobile, so our maps are at most 5x5, and we were
+trying to optimize the space on the screen. You can see on the Rat Trap
+screenshot that the map is pretty close to the edge on each side. Fish Escape
+has a more natural and spacious margin on both edges. it’s not random. It comes
+from the insight that phone screen are usually very tall, and that we have more
+vertical than horizontal space available. That led us to changing the layout of
+the map to align the tiles vertically instead of horizontally, which eventually
+saved half a tile on the width.&lt;/p&gt;
+
+&lt;p&gt;Then there were technical improvements. The most important, but not necessarly
+noticeable, is the penguin AI. The AI algorithm has been completely revamped,
+to make it much, much, smarter. In Rat Trap, the AI was based on a simple
+heuristics. It was a combination of a shortest path algorithm along with some
+bonuses to favor directions with several objectives. This worked well most of
+the time, until it did not. The annoying part is that some of the levels
+designed for Rat Trap had no solution, and only worked because of the
+particular heuristics used by the rat. The effect was that any improvement to
+the AI would force me to revisit and potentially redesign levels, or run the
+risk to make them infeasible.&lt;/p&gt;
+
+&lt;p&gt;In Fish Escape, I wanted to make the AI perfect. The goal was that if there was
+a winning strategy, it would take it and beat the player. I believed that would
+lead to a more satisfying experience for the player: they would be trying to
+solve a puzzle, not trick an algorithm. I have definitely heard feedback about
+how the rat made a mistake at X or Y move, and some players felt like they won
+because the AI made a mistake, not because they made the right choice. A better
+AI would fix this. And besides, a perfect AI would make sure that none of my
+level design would get obsolete. That said, making that perfect AI turned out
+to be a significant amount of work, and I had to make some compromise in order
+to make it work. But this is a story for another day.&lt;/p&gt;
+
+&lt;h4 id=&quot;monetization&quot;&gt;Monetization&lt;/h4&gt;
+
+&lt;p&gt;Although this was a fun side project for both of us, we were very serious about
+making money. From the get-go, we had the objective to make an extremely
+polished game, with the potential to earn some hard cash. After all, if we were
+to just complete a concept game, we could have released it two years ago. But
+we spent two extra years fleshing out and polishing countless edges because we
+wanted to offer a high-quality experience.&lt;/p&gt;
+
+&lt;p&gt;Very early on, we discussed about the best way to monetize the game. There are
+three classic monetization options: ad-supported, in-app purchases (IAP), and
+premium. We were not very fond of adding ads in our game, not for any sort of
+moral reason, but because that would have a direct impact on the player’s
+experience. Additionally, our game was not meant to be replayed forever, it was
+a concise experience with about a hundred hand-crafted levels, and once they
+are completed, there are no reason to keep playing the game. We believed that
+this was the right design for this game and did not want to implement specific
+mecanisms to get people to play longer (so that they could watch more ads). For
+similar reasons, we dismissed IAP.&lt;/p&gt;
+
+&lt;p&gt;That left us with the option of making a premium game. This was a very
+appealing option and that’s the most common approach taken by indies. This is
+also the most respected option for real games, as the majority (but not all of
+them) of free-to-play games tend to be seen as an unethical and quick cash grab
+(not saying they are, but I believe that’s how players tend to see them). In
+contrast, most (but again, not all of them) premium games are usually
+associated with a respectful player experience, pay once, get good value out of
+the game. Having a premium game should also help us get some attention from
+journalists, while trying to get press for a free game would be pretty
+challenging.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the mobile landscape for premium games is tough, very tough.
+There are a few noticeable exceptions (&lt;a href=&quot;http://ridiculousfishing.com/&quot;&gt;Ridiculous
+Fishing&lt;/a&gt;, &lt;a href=&quot;http://asherv.com/threes/&quot;&gt;Threes!&lt;/a&gt;,
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Monument_Valley_(video_game)&quot;&gt;Monument Valley&lt;/a&gt;,
+among others, come to mind), but overall this is not a market for premium game.
+That did still feel like the best fit for our game, and the future will tell us
+if this was a good choice. We would like to believe that it’s still possible to
+be making a living as a game developer by simply publishing good games and
+selling them at a one-time price point.&lt;/p&gt;
+
+&lt;h4 id=&quot;compromising-with-early-access&quot;&gt;Compromising with Early Access&lt;/h4&gt;
+
+&lt;p&gt;And here we are, three years into the development, getting closer and closer to
+the end. Although we never gave up on that project, there have been a lot of
+slowdowns and extended breaks. And we can start to feel some project’s fatigue.
+What’s worse, we are starting to lose faith in the premium model. We have this
+feeling that we will release the game and it will just go unnoticed.&lt;/p&gt;
+
+&lt;p&gt;And this is something we are willing to accept. This is our first game, and
+part of the objective is to put our studio on the map. Even if only a few
+hundred people buy the game, as long as they have a good experience and
+remember us, that’s mission accomplished. Maybe these hundred players will be
+waiting for our next game, and they might be telling their friend about it.
+Over time, if we manage to publish quality game after quality game, and if we
+keep respecting our players, this could snow-ball into an actual business. And
+even if it doesn’t, I will keep making games because I enjoy the activity.&lt;/p&gt;
+
+&lt;p&gt;Nevertheless, we have been looking for ways to promote the game. Currently, we
+have serious concerns over the rate of conversion from getting to the store
+page to actually buying the game.  Our graphics are nice, but they are not a
+selling point. We do not have a crazy, awe-inspiring, trailer that would
+convince people. And on top of that, we do have any serious marketing budget to
+reach a lot of players. But what we have is a strong core gameplay that sticks
+with players, and a very polished in-game experience. These are things that do
+not communicate well through our screenshots and videos, but that we think
+players will feel when they start playing.&lt;/p&gt;
+
+&lt;p&gt;So, as a way to exploit that, we have been strongly considering making a demo
+with a call to action at the end to buy the full game. That’s the old-school
+way of selling games, and as far as I’m concerned, it’s a totally fine way to
+go about it. However, it does not seem like a popular, let alone existing,
+approach today, especially on the app stores. The modern version of the demo is
+the in-game paywall in a free-to-play game, where you get the first N levels
+for free, and then have to pay a one-time fee to unlock the complete game.&lt;/p&gt;
+
+&lt;p&gt;In all honesty, that would be a decent model for Fish Escape. It gives the
+first levels away for free, let people try the game out, and if they like it,
+they can pay a one-off fee to unlock the whole game. Eventually, we didn’t go
+with that solution, and there are two reasons, none of them might be very good
+though. The first reason, is a technical limitation. As I mentioned before, the
+game is built on my own engine, and it does not support IAP. When I started
+looking into the Google Play API for this, it looked overly complicated and I
+lost motivation to implement it. One day I will, but this day is not today. The
+second, more sensible reason has to do with player’s expectation. When a player
+is faced with a paywall, there’s a tendency to get frustrated and lose trust
+against the game. How do I know, as a player, that this is not just the first
+of many paywalls, even though you’re telling it’s a one-time fee? People might
+also leave negative reviews because they were never planning to spend any money
+but then get access to only a few levels, thus they end up complaining about
+the lack of content. There are also players which hate IAP, and they are going
+to dismiss the game due to the mere fact that the store page displays that this
+game contains IAP. That’s a pity, because these are the players we hope to
+target, the players who are willing to spend a few bucks to get a proper game,
+without ads and IAP.&lt;/p&gt;
+
+&lt;p&gt;In order to address these concerns, we can look at the pre-IAP implementation
+of the paywall feature: using a Lite and a Pro version. That was a very
+widespread pattern, where an app would be split into a small lite version (the
+demo) and a paid version (the complete game).  These days, it’s very rare and
+almost all apps are using the IAP paywall method. I’m not sure why. I can see
+some advantages, like that having a single app is better for consolidation and
+it’s easier to manage.  But on the other hand you hit some of the problems I
+was discussing in the previous paragraph.&lt;/p&gt;
+
+&lt;p&gt;In the end, we’ve decided to go with the latter model. Technically, it was
+easier to put in place. And there was this strong need to have a clean version
+of the game, free of any ads or IAP, with an official, and final, displayed
+price. There would be no hidden fee, you buy the game, you get the full
+experience. The lite version would be there as a way to test the game before
+buying it. And it would play on the game’s strength which is that once you
+start playing, you get converted.&lt;/p&gt;
+
+&lt;p&gt;The last remaining question was about the scope of the lite version. Would this
+be a true old-school demo, or should we do something else? We considered
+several options, and decided to edge our bets. Essentially, we believe that
+there a large majority of players that are just never going to spend a single
+cent on mobile games. That’s a bit sad, but that’s probably true. These players
+might actually like our game, but there’s no point in giving them only 10
+levels, and on top of that we run the risk that they would just leave bad
+reviews due to the lack of content. We can offer a bit more content, maybe half
+of the complete game, which would still be several hours of playtime, and
+monetize it with ads.  That would make the lite version a game with a decent
+amount of content and supported by ads. For people that enjoys the game, they
+can go and buy the complete, ad-free version, as soon as they are convinced.
+For these who enjoy the game but do not want to spend money, they can enjoy a
+decent amount of content by accepting to see ads. Hopefully, in the end
+everyone get what they want.&lt;/p&gt;
+
+&lt;p&gt;As a closing note, there is one last factor that pushed us towards that model.
+I mentioned at the start of this section that we were starting to feel tired
+about the whole development process. At this point, it would just feel good to
+release something.  Unfortunately, the game still needs a good amount of
+polishing to reach the standards that we set out for. But it turns out that a
+lot of that polishing is related to the latest levels of the game.  This means
+that the lite version is fairly close to completion. And given that this is
+meant to be a lite and free version, we thought it was acceptable for it to not
+be as perfect as we want the final game to be. Bottom line is, we can, today,
+release the lite version. We can get it to the market, use it to gather
+feedback, while we work on finalizing the complete, premium version of the
+game. Hopefully we will get a boost of confidence by having released something,
+and we can start sharing it with more people.&lt;/p&gt;
+
+&lt;h4 id=&quot;whats-next&quot;&gt;What’s Next&lt;/h4&gt;
+
+&lt;p&gt;In the short term, &lt;em&gt;Fish Escape Lite&lt;/em&gt; is &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.limetalesgames.fishescapelite&quot;&gt;out and available for
+Android&lt;/a&gt;,
+This is a major milestone for &lt;a href=&quot;https://www.limetalesgames.com&quot;&gt;LimeTales&lt;/a&gt; —
+the indie studio we founded to publish this game. In the coming months, we will
+be polishing and finishing the premium version of &lt;em&gt;Fish Escape&lt;/em&gt; and release it
+as an ad-free, IAP-free, paid premium game on Android.&lt;/p&gt;
+
+&lt;p&gt;In the longer term, we hope that this is only the first of many games for our
+young game studio. We doubt that &lt;em&gt;Fish Escape&lt;/em&gt; will make enough money to
+sustain us full time on this enterprise. But assuming the game has a moderate
+success, we should be able to find the motivation to work on a new project
+following a similar part-time model.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Although next time, we hope it’s going to take less than three years…&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 07 Dec 2019 21:24:00 +0100</pubDate>
+        <link>http://regblanc.com/blog/fish-escape-three-years-in-the-making/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/fish-escape-three-years-in-the-making/</guid>
+        
+        <category>games</category>
+        
+        <category>gamedev</category>
+        
+        <category>scala</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Scala, the Small Parts</title>
+        <description>&lt;p&gt;In &lt;a href=&quot;/blog/less-is-more/&quot;&gt;Less is More&lt;/a&gt;, we discussed how
+Scala has a few, well-chosen, and independent features that combine in
+countless ways to provide the expressive features of Scala as we know it.
+However, the discussion remained mostly conceptual, with few examples. In this
+post, I want to highlight several more examples that will make the whole
+argument more concrete, so that you don’t need to take my word for it.&lt;/p&gt;
+
+&lt;p&gt;First, let us look again at at the &lt;code class=&quot;highlighter-rouge&quot;&gt;append&lt;/code&gt; method on an &lt;code class=&quot;highlighter-rouge&quot;&gt;IntList&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;IntList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is still used as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// l1 = []
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// l2 = [1]
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// l3 = [1, 2]
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;err&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;err&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Simple and no surprise, however a tiny bit verbose. In a language like Go, the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;append&lt;/code&gt; method can take an arbitrary number of elements in one call. In Scala,
+that would look like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Of course, the compiler will not accept such code with the above definition of
+&lt;code class=&quot;highlighter-rouge&quot;&gt;append&lt;/code&gt;. But there is a way to fix it, using the varargs syntax:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;IntList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A type &lt;code class=&quot;highlighter-rouge&quot;&gt;T*&lt;/code&gt; is essentially equivalent to &lt;code class=&quot;highlighter-rouge&quot;&gt;Seq[T]&lt;/code&gt; and is easy to use at the
+definition site. The caller is free to call the function with any number of
+argurments of type &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;, or in this case of integers: &lt;code class=&quot;highlighter-rouge&quot;&gt;l.append(1)&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;l.append(1,2)&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;l.append(1,2,3)&lt;/code&gt;. This is a syntax that makes sense when
+it is just as common to use the function with a single argument as it is to use
+it with two or three. Of course, if the function is always called with a long
+list of elements, it’s better to just define a function that takes a sequence
+as an argument. By itself, this is a fairly simple features, the compiler
+simply wraps the variable number of arguments into a basic Sequence
+datastructure.&lt;/p&gt;
+
+&lt;p&gt;Alright, time to introduce a new Scala feature: magic methods. There are a few
+method names that enable a special syntax for method invocation. For example,
+there is the setter syntax, &lt;code class=&quot;highlighter-rouge&quot;&gt;name_=&lt;/code&gt; which enables a lightweight getter and
+setter syntax for classes. Another common example is &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt;, which sorts of
+transforms the instances of the class into functions. Indeed, an instance of a
+class with an &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; method can be applied to a value, just like a function.
+Sequences are examples of classes with &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returns&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Here we used &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; as a function by applying it on &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, which essentially
+returned the second element of the sequence. The compiler implicitly rewrites
+all such function application as &lt;code class=&quot;highlighter-rouge&quot;&gt;s.apply(1)&lt;/code&gt;. These methods might seem magic,
+and they are, but there is just a small well-defined set of them, and they can
+be used to achieve very neat effects.&lt;/p&gt;
+
+&lt;p&gt;One such effect is when they are combined with companion objects. Companion
+objects are yet another convenient Scala feature. They can essentially be
+defined next to a class to provide some static methods. Back at our sequence
+example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We defined a &lt;code class=&quot;highlighter-rouge&quot;&gt;Seq&lt;/code&gt; object, which is a short-hand notation for a singleton
+object of an unnamed type that contains just the methods defined within that
+object. In the example above, it’s just the &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; method. You can then use
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Seq.apply(???)&lt;/code&gt; in any context. Notice the statement below, we have seen it
+before. We have used it as an intuitive way to create a sequence with three
+elements. At the time it might have looked like built-in syntax, but now you
+can see that it’s just a combination of a singleton object &lt;code class=&quot;highlighter-rouge&quot;&gt;Seq&lt;/code&gt; with an
+&lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; magic method that takes a variable number of arguments — three
+independently useful and well-defined features.&lt;/p&gt;
+
+&lt;p&gt;Let’s conclude this tour of Scala by looking at for-comprehensions. I will not
+go into the details of how for-comprehensions are desugared into &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;flatMap&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt;, as this would require to introduce all these methods.
+But you can find a comprehensive (no pun intended) discussion of this on the
+&lt;a href=&quot;https://docs.scala-lang.org/tutorials/FAQ/yield.html&quot;&gt;official Scala website&lt;/a&gt;.
+The key take-away is that any type can be made compatible with a for-notation,
+as long as it defines the proper methods.&lt;/p&gt;
+
+&lt;p&gt;I would like to look at one particularly popular for-notation:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;nf&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;At first glance, it looks like a totally new and magic notation. We know two
+standard ways of defining variables in scala, &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;, this notation
+looks like it’s introducing a third one.  And it does, but it’s a bit more
+subtle than that. It’s a special notation to bind each element of the list on
+the right-hand side, so more generally it will be written as &lt;code class=&quot;highlighter-rouge&quot;&gt;for(x &amp;lt;- xs)
+...&lt;/code&gt;, with &lt;code class=&quot;highlighter-rouge&quot;&gt;xs&lt;/code&gt; being a sequence. And in many ways, this is equivalent to
+&lt;code class=&quot;highlighter-rouge&quot;&gt;xs.foreach(x =&amp;gt; ...)&lt;/code&gt;. So here &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; is really some syntactic sugar to define
+a lambda function on top of a sequence. The reason for introducing this has to
+do with the powerful for-comprehension features that were mentioned above.&lt;/p&gt;
+
+&lt;p&gt;What about the &lt;code class=&quot;highlighter-rouge&quot;&gt;1 to 10&lt;/code&gt;? Well, remember infix notation? If you do, you would
+know that we are really looking at &lt;code class=&quot;highlighter-rouge&quot;&gt;1.to(10)&lt;/code&gt;. Does that look confusing? Well
+that might be because you got used to most other languages treating integers as
+some kind of built-in type, but that’s not how it works in Scala. In scala, an
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Int&lt;/code&gt; is just a regular type with its class definition (the details are
+slightly more messy, but let’s gloss over them for the sake of the argument):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;xs&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returns&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Well now we are fully equipped to rewrite the original for loop:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;nf&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;as:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;foreach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;which definitely feels less magical, but also definitely more ugly. No wonder
+Scala programmers will favor the former notation.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 20 Nov 2018 15:00:00 +0100</pubDate>
+        <link>http://regblanc.com/blog/scala-the-small-parts/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/scala-the-small-parts/</guid>
+        
+        <category>scala</category>
+        
+        <category>design</category>
+        
+        <category>library</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Less is More</title>
+        <description>&lt;p&gt;Scala has the reputation of being a complicated and bloated language. This
+impression comes from the large variety of libraries, architectures, and styles
+out there. Since developers have so many ways of using the language, the
+argument goes that the language is just an overly complicated mix of every
+programming languages features ever invented. This couldn’t possibly be further
+from the truth.&lt;/p&gt;
+
+&lt;p&gt;What is true is that Scala is complex. However this complexity is not coming
+from the language, it is just the inherent complexity in writing software.
+Complexity should also not be confused with complication. Saying that something
+is complicated carries a notion that the thing was made complicated for
+the sake of it. It could have been made simpler. Complexity is the nature of
+the thing, and it’s inherent to the depth of the problem.&lt;/p&gt;
+
+&lt;p&gt;Things can be basic or complex, but not both, and things can be simple or
+complicated, but not both. A basic problem should be ideally solved by a simple
+solution, however it is very common to introduce a complicated solution to a
+basic problem. A complex problem can rarely be solved by a simple tool,
+although when that happens, that’s usually the product of a genius. And some
+problems are just so complex that they require a complicated solution, but it’s
+never ideal. Scala is a tool which is not simple, but not complicated either,
+made to address a very complex domain.&lt;/p&gt;
+
+&lt;p&gt;But I disgress; the essence of the criticisms against Scala often boils down to
+its bloated amount of features. Scala does have quite a number of features,
+many of them coming from advanced research in programming languages, which
+makes it a hard and challenging language to learn. But hard and challenging
+does not mean in any way bad. VIM is maybe the best text editor ever invented
+(along with Emacs), but it is also one of the hardest to learn and to master.
+But the effort eventually pays off, for when one finally understands its design
+philosophy, they unlock an unbounded boost in productivity.&lt;/p&gt;
+
+&lt;p&gt;Scala has many features, but many of them are orthogonal to each other. What
+that means is that each feature brings a unique and necessary aspect to the
+language. Its design was actually carefully crafted so that only the minimal
+necessary set of features was added to the language. The expressiveness that
+people observe with Scala does not come from a large number of features, but
+from the powerful synergy among them. Each feature is individually clean and
+well-defined, and it can combine with every other features.&lt;/p&gt;
+
+&lt;p&gt;Let’s move this abstract discussion to concrete examples: Scala is an
+object-oriented language and as such has classes and methods. A method in Scala
+is nothing special, you define it as you would define a function, but within a
+class:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;IntList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The class represents an immutable list of integers and it has an append` method
+to return a new list with a new integer appended to the end of the list.  Let’s
+not focus on the implementation, to keep the example to the point. Now, the
+class can be used in the expected manner:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// l1 = []
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// l2 = [1]
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// l3 = [1, 2]
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;err&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;err&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Most object-oriented languages use a similar syntax for defining and calling
+methods. Scala has a syntactic rule where methods with a single parameter can
+be used in infix notation. Infix notation is a fancy mathematical term that you
+can use to flex at parties, but it simply means that the name is used between
+the receiver and the argument, without additional syntax, just like a
+mathematical operator. Using this rule, the above could alternatively be
+written as:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntList&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;append&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Not a huge difference, but some people might find the latter more pleasurable
+to read. It is a general rule that apply to all objects and all methods (as
+long as they have a single formal parameter). Not many Scala programmers would
+use this syntax in the above case, as it can make the code actually confusing,
+but it is a popular syntax when using higher-order functions:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;inc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;incr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;err&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;err&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Of course, one could also use the syntax &lt;code class=&quot;highlighter-rouge&quot;&gt;l4.map(incr)&lt;/code&gt; but it is somewhat of a
+convention to use the infix notation with higher-order functions as it tends to
+be more readable (perhaps due to the roots of the notation coming from the
+likes of Haskell and Caml). In more standard cases like the &lt;code class=&quot;highlighter-rouge&quot;&gt;append&lt;/code&gt; function,
+it is more natural and readable to use the more familiar and consistant
+&lt;code class=&quot;highlighter-rouge&quot;&gt;object.method(arg)&lt;/code&gt; syntax.&lt;/p&gt;
+
+&lt;p&gt;Let us look at another example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;plus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;plus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is a simple 2D vector and an example of how to use it. It’s very close to
+how we would write in a language like Java, except for the short constructor
+syntax. This is also the canonical motivating example for why operator
+overloading makes sense. Scala supports it, although as a consequence of
+another feature: flexible syntax for identifiers. In Scala, identifiers are
+very flexible and, in particular, they can contain any combination of standard
+symbols (although if they do, they cannot contain &lt;a href=&quot;https://www.scala-lang.org/files/archive/spec/2.11/02-identifiers-names-and-scopes.html&quot;&gt;any other
+characers&lt;/a&gt;).
+Taking advantage of that rule, the &lt;code class=&quot;highlighter-rouge&quot;&gt;plus&lt;/code&gt; method could be defined more
+naturally as:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The language treats &lt;code class=&quot;highlighter-rouge&quot;&gt;plus&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; in exactly the same way, so the way we use
+the vector remains the same:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.+(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;That is because &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; is just the name of the method and a method can be used
+with the &lt;code class=&quot;highlighter-rouge&quot;&gt;object.method(arg)&lt;/code&gt; syntax. Of course, here it makes sense to take
+advantage of the infix notation for methods, and we can actually write:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is where operator overloading shines: this reads exactly like the
+mathematical description and the intent could not be clearer.&lt;/p&gt;
+
+&lt;p&gt;We have just seen how two independent features — infix notation and flexible
+syntax for methods — combine elegantly to provide operator overloading. This
+is just one of many examples where Scala provides common and powerful features
+from two simpler and well-defined ones. But as this post is getting long, let
+me take a break there and come back &lt;a href=&quot;/blog/scala-the-small-parts/&quot;&gt;next time dissecting a few more
+examples&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 10 Nov 2018 18:00:00 +0100</pubDate>
+        <link>http://regblanc.com/blog/less-is-more/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/less-is-more/</guid>
+        
+        <category>scala</category>
+        
+        <category>design</category>
+        
+        <category>library</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Serum Vision is Superior to Brainstorm, Sometimes</title>
+        <description>&lt;p&gt;As we all know, blue is the best color in Magic, and the most fun to play. Ok, maybe
+not everybody will agree with the latter, but surely blue has had some of the most
+broken cards ever printed. It is also the most played color in Legacy. Part of it is due
+to the consistency that the blue cantrips bring.&lt;/p&gt;
+
+&lt;p&gt;Today I want to discuss the different blue cantrips that are commonly played in Modern and
+Legacy. I will limit the discussion to deck manipulation cantrips, as they are the most
+interesting ones. I will focus on the following cards:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Brainstorm&lt;/li&gt;
+  &lt;li&gt;Ponder&lt;/li&gt;
+  &lt;li&gt;Preordain&lt;/li&gt;
+  &lt;li&gt;Serum vision&lt;/li&gt;
+  &lt;li&gt;Sleight of hand&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img width=&quot;500&quot; src=&quot;/resources/mtg/cantrips-panel.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All of these serve essentially the same role, a cheap card that replaces itself while manipulating
+the library. So let’s look at the subtilities of each of them.&lt;/p&gt;
+
+&lt;h4 id=&quot;brainstorm&quot;&gt;Brainstorm&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;Brainstorm&lt;/em&gt; is commonly considered the best card in Legacy, and the best blue
+cantrip ever printed. It is definitely a very powerful spell. But without the
+proper support — a shuffle effect — &lt;em&gt;Brainstorm&lt;/em&gt; is actually rather weak.&lt;/p&gt;
+
+&lt;p&gt;Consider a regular limited deck, full of creatures and a couple removals. What
+would happen if you threw a random &lt;em&gt;Brainstorm&lt;/em&gt; in there. Suppose you get to play
+&lt;em&gt;Brainstorm&lt;/em&gt; on turn 1, you draw three cards and put back two. By turn 3, you
+redrew the two cards you put back, and you have access to the same cards you
+would have access to had you casted a &lt;em&gt;Peek&lt;/em&gt; on turn 1.  In fact, with &lt;em&gt;Peek&lt;/em&gt;
+you would actually have some relevant information on what your opponent is up
+to.&lt;/p&gt;
+
+&lt;p&gt;Have you actually accomplished anything by casting &lt;em&gt;Brainstorm&lt;/em&gt;? In fact, yes,
+you smoothed your turn 2 play. You were able to dig two cards deeper than if
+you had not cast anything on turn one, and so you get a small chance of having
+a better on-curve turn 2 play. However, this comes at the cost of tempo and
+spell density. Tempo is the most concerning thing, sometimes you just don’t
+have time to spend one mana to cast a spell that draws you into your next
+spell. For such a limited upside of smoothing your next turn play, you probably
+don’t want to put a card like that in your deck.&lt;/p&gt;
+
+&lt;p&gt;Among all the cantrips we consider here, &lt;em&gt;Brainstorm&lt;/em&gt; is the only one which is
+not able to truly manipulate the library. All it does, is to re-order the cards
+you have access to, but after two turns, you get back to the starting point.
+&lt;em&gt;Sleight of Hand&lt;/em&gt; on the other hand gives you the possibility to choose the
+best among two cards, and get rid of the other one, wich is a superior effect
+in the above situation.&lt;/p&gt;
+
+&lt;p&gt;But, when you get access to shuffle effects, &lt;em&gt;Brainstorm&lt;/em&gt; really shines. It can
+fix land-heavy hands and it can shuffle away dead cards. In some situation, it
+is straight up &lt;em&gt;Ancestral Recall&lt;/em&gt;. While all of the other blue cantrips can
+only give you access to one new card, &lt;em&gt;Brainstorm&lt;/em&gt; can totally transformed the
+texture of your hand with three new cards. This unique ability makes it clearly
+the best cantrip, but it is funny that the card on its own is actually the
+weakest of the 5.&lt;/p&gt;
+
+&lt;h4 id=&quot;ponder&quot;&gt;Ponder&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;Ponder&lt;/em&gt; is the cantrip that lets you look at the highest number of cards. You
+can see up to 4 different cards, so if you desperately need a specific card,
+this is your spell of choice. It also offers you the unique ability to shuffle
+your deck, which is not irrelevant in combination with a card like
+&lt;em&gt;Sensei’s Divining Top&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;On its own, &lt;em&gt;Ponder&lt;/em&gt; is a slightly better &lt;em&gt;Brainstorm&lt;/em&gt;. You get to look at the next
+three cards and organize them to smooth out your draw, which on turn 1 is basically
+the same as &lt;em&gt;Brainstorm&lt;/em&gt;. As with &lt;em&gt;Brainstorm&lt;/em&gt;, by turn 3 you have drawn all of the
+three cards and won’t profit anymore of the &lt;em&gt;Ponder&lt;/em&gt; effect. The extra ability to
+shuffle away the top three cards if they don’t fit well in your draw makes &lt;em&gt;Ponder&lt;/em&gt;
+the better card in this situation.&lt;/p&gt;
+
+&lt;p&gt;So, just casting &lt;em&gt;Ponder&lt;/em&gt; does not give you much card selection. You can decide
+you don’t like the top cards, and get a fresh draw, but if you like one of the
+three cards and want to keep it, you will have to keep all three of them. That
+is, unless you have a shuffle effect.  If you are able to shuffle your library
+after casting ponder and reorganizing the top, you essentially get to select
+the best card out of the top three, all of that for one single blue mana.
+Remember &lt;em&gt;Anticipate&lt;/em&gt;? Some people play that card in Modern. That is why
+casting &lt;em&gt;Ponder&lt;/em&gt; with a fetch land up is good. Of course, you don’t have to
+only take one of the card, you can also sequence the shuffle in order to take
+two of the cards.&lt;/p&gt;
+
+&lt;p&gt;Just like &lt;em&gt;Brainstorm&lt;/em&gt;, &lt;em&gt;Ponder&lt;/em&gt; truly shines in a deck full of fetch lands.
+This is what makes it the second most played cantrip in Legacy, and rightfully
+so.&lt;/p&gt;
+
+&lt;h4 id=&quot;preordain-and-serum-vision&quot;&gt;Preordain and Serum Vision&lt;/h4&gt;
+
+&lt;p&gt;Now we get to the two strongest cantrips in isolation. That’s probably why they
+were played heavily in standard, because they do not need shuffle effect to
+shine.&lt;/p&gt;
+
+&lt;p&gt;They are also doing very similar effect, in that they get to cantrip (draw a
+card) and scry 2. The only difference is the order in which these actions are
+done. &lt;em&gt;Preordain&lt;/em&gt; scries first, then draw, and &lt;em&gt;Serum Vision&lt;/em&gt; draws first then
+scries. This subtle difference leads to one being banned in Modern and the
+other one being played, rather reluctantly, in Modern.&lt;/p&gt;
+
+&lt;p&gt;Several Modern players have been complaining how &lt;em&gt;Serum Vision&lt;/em&gt; is terrible,
+but that it’s the only available cantrip in the format. Given that the next
+best option is &lt;em&gt;Sleight of Hand&lt;/em&gt;, it is clear that &lt;em&gt;Serum Vision&lt;/em&gt; is the best
+option available. It’s also cleary by design, as Wizards made it clear that
+they do not want a Modern format that look like Legacy. In all fairness, I
+think &lt;em&gt;Serum Vision&lt;/em&gt; is not as bad as that, and there are cases where it’s
+actually better than &lt;em&gt;Preordain&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s first consider the cards on their own. With &lt;em&gt;Serum Vision&lt;/em&gt;, you draw a
+random card, and then you set up your draw for the next one or two turns. With
+&lt;em&gt;Preordain&lt;/em&gt;, you get to set up your draw first, so you actually get the card
+that you want right away. That’s pretty powerful, and that makes &lt;em&gt;Preordain&lt;/em&gt;
+extremely good in a combo deck looking for a key combo piece. That’s also the
+main reason &lt;em&gt;Preordain&lt;/em&gt; is seen as so much better than &lt;em&gt;Serum Vision&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;But consider playing both cards on turn one. Let’s say you get to see one good
+and one bad card, with &lt;em&gt;Preordain&lt;/em&gt;, you remove the bad card, draw the good one,
+then next turn you draw a random card. With &lt;em&gt;Serum Vision&lt;/em&gt;, you draw the bad
+card, keep the good one on top for next turn, and get to choose if you want to
+keep the random card. It’s not hard to see that this is pretty much equivalent,
+swap the bad card with the random card, and you get the same effect. If you
+don’t get to use the card right away, both cards are mostly equivalent. In
+fact, &lt;em&gt;Serum Vision&lt;/em&gt; has some advantages here, because you get to draw first,
+you then have more information to choose what to do with your scry. As an
+example, say you are looking for exactly one copy of &lt;em&gt;X&lt;/em&gt;, not two, but one. Now
+suppose there are three &lt;em&gt;X&lt;/em&gt; on top of your deck. With &lt;em&gt;Preordain&lt;/em&gt;, you will
+keep one and bottom one, but next turn you will end up drawing the extra one,
+ending up with with a redundant copy. With &lt;em&gt;Serum Vision&lt;/em&gt;, you get to draw the
+first one right away, then see the two additional ones, and can take the
+decision to bottom them knowing that you already fount the one you needed. The
+extra information of drawing first was quite handy there.&lt;/p&gt;
+
+&lt;h4 id=&quot;sleight-of-hand&quot;&gt;Sleight of Hand&lt;/h4&gt;
+
+&lt;p&gt;There’s not much to say on &lt;em&gt;Sleight of Hand&lt;/em&gt;. It’s a fine cantrip, which is
+most of the time inferior to all the other discussed here. It has the same
+advantage as &lt;em&gt;Preordain&lt;/em&gt; over &lt;em&gt;Serum Vision&lt;/em&gt; that it gets to use the card right
+away. But the major drawback is that you are forced to choose exactly one card,
+which does not smooth your draw too much.&lt;/p&gt;
+
+&lt;p&gt;It’s fine for combo in Modern, but it will hardly find a place in anything
+else, and it cannot compete with the other cantrips in Legacy.&lt;/p&gt;
+
+&lt;h4 id=&quot;sequencing&quot;&gt;Sequencing&lt;/h4&gt;
+
+&lt;p&gt;To finish this article, I will go over a few tips&amp;amp;tricks of how to properly
+sequence your cantrips. It’s all based on the observation above, and once you
+get familiar with the strength of each cantrip, it should become second nature.&lt;/p&gt;
+
+&lt;p&gt;The most important, and usually easiest to mess up, element is to take into
+account your shuffle effects. Most commonly, these are your fetches. You should
+use them to the best of your ability to shuffle away cards that you do not want
+anymore, and more importantly you should avoid shuffling cards that you know
+you want.  The latter seems obvious, but it’s all too common to use a &lt;em&gt;Serum
+Vision&lt;/em&gt;, set the top two cards, only draw one and then realize you need to
+fetch a land because you need the mana. This is something that should be
+planned one or two turns in advance.&lt;/p&gt;
+
+&lt;p&gt;Regarding shuffling away cards that you do not want, there’s the obvious
+&lt;em&gt;Brainstorm&lt;/em&gt; and &lt;em&gt;Ponder&lt;/em&gt; play, where you shuffle away cards that you do not
+need anymore, or you combine &lt;em&gt;Ponder&lt;/em&gt; and shuffle to select one or two of the
+top three. Then there’s the less obvious case of keeping speculative cards on
+top with &lt;em&gt;Serum Vision&lt;/em&gt; or &lt;em&gt;Preordain&lt;/em&gt;, and decide later if you still want
+them.  You might for example leave a &lt;em&gt;removal&lt;/em&gt; on top of the deck, but then
+your opponent takes their first turn and go &lt;em&gt;Underground Sea&lt;/em&gt; into &lt;em&gt;Cabal
+Therapy&lt;/em&gt;. At this point, it’s pretty clear they are playing Storm and you will
+want to shuffle away this removal, if you can.&lt;/p&gt;
+
+&lt;p&gt;The last piece of advice with shuffling is to try to fetch first and use scries
+later.  Any card that you put under your deck won’t be drawn again in this
+game, until it’s shuffled back in. So if you know you don’t want these cards,
+you may want to try to sequence your shuffles first and only then your scries.
+This is also a common source of mistake, where people are going to fetch in
+order to thin their deck, but they already had three bad cards on the bottom.
+At this point, they are basically doing the opposite, by making bad draws more
+dense in the deck.&lt;/p&gt;
+
+&lt;p&gt;Apart from shuffling, the general advice follows the same insight as to why
+&lt;em&gt;Serum Vision&lt;/em&gt; is sometimes better than &lt;em&gt;Preordain&lt;/em&gt;. You should aim at getting
+more cards first, before you play cards with a lot of selection. It’s always
+good ot start with &lt;em&gt;Serum Vision&lt;/em&gt; on turn one, because you will need extra time
+to get to the next cards, which you usually have on turn one. As long as you
+have time, you should favor the cards that take more time to setup, such as
+&lt;em&gt;Ponder&lt;/em&gt;, where you might need two extra turn to draw all the cards. You should
+keep the &lt;em&gt;Brainstorm&lt;/em&gt; and &lt;em&gt;Preordain&lt;/em&gt; for the more explosive turns, where you
+need to get one answer and you need to play it right away.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 08 Feb 2017 08:45:00 +0100</pubDate>
+        <link>http://regblanc.com/blog/blue-cantrips-subtilities/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/blue-cantrips-subtilities/</guid>
+        
+        <category>mtg</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>The Murky Waters of the Google Play App Review Process</title>
+        <description>&lt;p&gt;They always say — building it is the easy part. I suppose this has some truth
+in it, but I would never have expected spending so much time to get my app
+passed the publishing process. I have been working a few hundreds of hours,
+during my free time, to complete my new game, and Google simply shattered all
+of that by rejecting my app from the Google Play Store.&lt;/p&gt;
+
+&lt;p&gt;To give a bit of background, I started developing games for Android about 2
+years ago. Not full time — I am currently working towards getting my PhD — so
+writing games is a fun hobby I have on the side. But lately, it got a lot less
+fun due to an annoying app review process from Google Play.&lt;/p&gt;
+
+&lt;p&gt;One of my objective when building games, besides having fun, is to learn as
+much as possible. I try to handle every aspect of the game creation myself. The
+end result is that it takes a lot of time to get a polished product, when you
+account for the hours spent programming (without any engine) and creating arts.
+My &lt;a href=&quot;/games/rat-trap/&quot;&gt;first game&lt;/a&gt; was released last year and was relatively
+well received. Not a runaway success by any means, but most people that
+actually tried the game were rather satisfied with it. That gave me motivation
+to work on new game projects.&lt;/p&gt;
+
+&lt;p&gt;So I kept building games for Android. In particular, I spent many hours
+polishing a new game: &lt;a href=&quot;/games/winsmash&quot;&gt;WinSmash&lt;/a&gt;. WinSmash is based on a very
+simple concept, but I spent a lot of time making it fun to play and adding
+features on top to get a relatively varied gameplay.&lt;/p&gt;
+
+&lt;p&gt;Even though I started building a few abstractions on top of the Android
+framework in the form of a
+&lt;a href=&quot;https://github.com/regb/scala-game-library&quot;&gt;Scala game library&lt;/a&gt;,
+I am still essentially dependent on the Android framework for my
+game. I cannot export it to iOS without significant extra work, and the game is
+just not suited for Desktop or console. What that means is that it is a big
+deal for me to be able to publish on Google Play, and unfortunately currently I
+am not.&lt;/p&gt;
+
+&lt;p&gt;As I was getting closer to release, I started publishing some alpha builds on
+the Play Store, so that some of my friends could test my game and provide some
+feedback.  The first build was successfully published, and alpha testers were
+able to download the game. I kept working for a while, and published another
+version, but this time, much to my surprise, the update got rejected. What was
+the reason? I received a short email saying that it violated the &lt;em&gt;disruptive
+ads&lt;/em&gt; policy.&lt;/p&gt;
+
+&lt;p&gt;Okay, that’s interesting. My first thought was that it was a mistake, as my
+application was only in alpha (not even public yet), and the only
+advertisements it contained was the testing version of
+&lt;a href=&quot;https://clients.adcolony.com/home&quot;&gt;AdColony&lt;/a&gt; (which displays short, 3 seconds,
+branding videos). So, I assumed some kind of bot had done a mistake, and I
+planned to fire an appeal. But first I had a quick look at the policy.&lt;/p&gt;
+
+&lt;p&gt;Here are the two paragraphs that refer to &lt;em&gt;disruptive ads&lt;/em&gt;, taken from the
+&lt;a href=&quot;https://play.google.com/about/monetization-ads/ads/disruptive/&quot;&gt;Policy Center&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ads should not be shown in a way that results in inadvertent clicks. Forcing a user to click an ad or submit personal information for advertising purposes before they can fully use an app is prohibited.&lt;/p&gt;
+
+  &lt;p&gt;Interstitial ads may only be displayed inside of the app serving them. If your app displays interstitial ads or other ads that interfere with normal use, they must be easily dismissable without penalty.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If I understand the first paragraph correctly, it is saying I should not place ads
+in my app in a way that might mislead users to click on them. In my app, one must quickly dismiss
+random windows that pop on the screen. Below are some screenshots to illustrate, or
+you can check out the &lt;a href=&quot;/games/winsmash/&quot;&gt;official page&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;div class=&quot;row list-screenshots&quot;&gt;
+  &lt;div class=&quot;col-md-4 col-screenshot&quot;&gt;
+    &lt;img class=&quot;screenshot&quot; src=&quot;/resources/winsmash/screenshots/winsmash1.png&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-md-4 col-screenshot&quot;&gt;
+    &lt;img class=&quot;screenshot&quot; src=&quot;/resources/winsmash/screenshots/winsmash2.png&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-md-4 col-screenshot&quot;&gt;
+    &lt;img class=&quot;screenshot&quot; src=&quot;/resources/winsmash/screenshots/winsmash3.png&quot; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, as you may have understood, the essence of the game is to close the windows/pop-ups
+as fast as possible. Some windows ask trick questions, and clicking on the wrong button
+might open up additional pop-ups, or even lose you the game. In the same spirit, I found
+it funny to integrate the classic &lt;q&gt;Rate it&lt;/q&gt; question as one such pop-up, and you can
+see it at the bottom of the middle screenshot, in the background. Clicking on &lt;q&gt;Rate it&lt;/q&gt;
+would send you to the game page, hardly something that could be considered as an advertisement,
+or I guess 99% of apps on Google Play should be banned.&lt;/p&gt;
+
+&lt;p&gt;In the third screenshot, you may have recognized a pop-up ad. Does it look harmful, or does it
+look kind of fake? You bet it is, I designed it myself to be an obvious parody of Internet pop-up
+ads. It should be painfully obvious that they do not advertise anything, so I sure hope that
+Google is not blocking my app because of that game element. So this pop-up ad is just like any
+of the other window — you need to close it. That one has a gray cross in a corner, and you just click
+on it to dimiss it. There is a small twist if you happen to fail and click on the actual pop-up:
+it fires a video advertisement. A regular interstitial advertisement, that the player can dismiss after
+a few seconds. I am reading, and re-reading the policy, but it says nothing about when to display
+interstitial ads, and since some of the top games in the Google Play Store don’t hesitate to show
+us interstititial ads between every game actions, that seems to be like a completely fair and reasonable
+mecanism.&lt;/p&gt;
+
+&lt;p&gt;Again, the policy states &lt;q&gt;Ads should not be shown in a way that results in inadvertent clicks&lt;/q&gt;, that
+clearly mentions ads, which in the case of my game is the video. The video is pretty standard, and in no
+way leads to inadvertent clicks. The pop-up fake ads in my game are &lt;em&gt;not&lt;/em&gt; ads, and it is totally fair to
+show them at any random position in the game.&lt;/p&gt;
+
+&lt;p&gt;The second paragraph of the policy refer to displaying ads outside of the application,
+which is clearly not something WinSmash does.&lt;/p&gt;
+
+&lt;p&gt;I tried to explain my case over an
+&lt;a href=&quot;https://support.google.com/googleplay/android-developer/answer/2477981?hl=en&quot;&gt;appeal&lt;/a&gt;,
+but that failed with essentially the same explanation as the original email. At
+that point, I was getting a bit pissed off, so I started looking for ways to
+contact a human directly and chat with him. But I wasn’t able to find any chat
+support, or phone number. I tried to send a support/feedback request (still
+waiting for an answer on that one), and also decided to reply directly to the
+response mail I got from the appeal. We exchanged about 8 emails (apparently
+with the appeal reviewer) on the matter, but that ultimately failed to
+reinstate my app. I won’t share the content of these emails, but the one thing
+that was clear to me in the end is that the reviewer kept refering to my
+in-game fake pop-up ads as true ads, which was really baffling to me.&lt;/p&gt;
+
+&lt;p&gt;I didn’t want to modify my game, I was proud of the behaviour of the different
+pop-ups, and punishing mistakes by playing interestitial ads seemed to be
+totally in the spirit of the game, fair to the player, and would be a clever
+monetization technique — a win-win situation. But I was tired of this fight,
+and just wanted to have my game out the door, so I decided to do the simplest thing that
+would solve the issue: I removed the video ads.&lt;/p&gt;
+
+&lt;p&gt;I still kept the fake pop-up ads, and clicking on them would just create additional
+windows to dismiss in the game, but I stopped playing any actual video ads. I don’t want
+to remove them as they give variations to the gameplay. I polished
+a few additional things and finally uploaded a new APK (still in alpha testing).
+I had to wait a few hours, to get a notification that, you guessed it, &lt;em&gt;Google rejected my
+app because it violates their &lt;strong&gt;disruptive ads&lt;/strong&gt; policy&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now I’m truly pissed off. I just cannot believe what I’m seing. I have
+explained to them many times that the pop-ups are just part of the game, I just
+don’t understand how one can mistake that for advertisement. My game does not
+contain any ads; my code does not even include dependencies to an ads network
+framework.&lt;/p&gt;
+
+&lt;p&gt;So now, I just don’t know what to do. Of course, I started a new appeal
+procedure, as rejecting that latest version makes absolutely no sense. I’m
+waiting for a decision on that one. I also published my game as a standalone
+APK. I wrote this article so there is a writen trace of how an app review
+process can go totally awry. I never developed for iOS, and I always thought
+that Android was a much more open platform, with an easier and better app
+review process. But after this, I’m seriously considering buying my first
+iPhone, and start developing my future games on iOS instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Update — July 27th 2016&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I’m happy to announce that, as of today, WinSmash has been approved and is
+currently live on
+&lt;a href=&quot;https://play.google.com/store/apps/details?id=com.regblanc.winsmash&quot;&gt;Google Play&lt;/a&gt;.
+Here is what happened. The second appeal also failed, following that, I seeked
+some help on
+&lt;a href=&quot;https://www.reddit.com/r/gamedev/comments/4uoc2z/google_play_rejected_my_game_for_ads_policy/&quot;&gt;reddit&lt;/a&gt;,
+where I got a lot of useful suggestions, ideas, and feedback. I made a new
+build, in which I changed a few things, such as removing some pop-ups redirecting
+to Google Play (for example, the &lt;em&gt;Rate it&lt;/em&gt; pop-up). I also added a couple
+disclaimers in the store listing, and as a tutorial window. I submitted that
+build for review to Google Play, and it magically got accepted. I cannot be
+sure what was the dicisive factor, but I’m happy to have my game available.
+I was able to promote the alpha version to production without any issue, and
+since then was also able to send and get approved a very light update.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 Jul 2016 03:27:08 +0200</pubDate>
+        <link>http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/</guid>
+        
+        <category>android</category>
+        
+        <category>game</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>The Looter Problem: Why you Should NOT Loot</title>
+        <description>&lt;p&gt;I’m a little bit late to the party, but it seems that the Magic community 
+has been discussing 
+&lt;a href=&quot;http://www.channelfireball.com/articles/lsvs-play-the-looter-problem/&quot;&gt;the looter problem&lt;/a&gt; 
+quite extensively lately. So here is my take on the question.&lt;/p&gt;
+
+&lt;p&gt;To recap, the question can be stated as, if you had the second best card of
+your deck in your hand, should you loot or not? The downside of looting here
+being that you might draw the actual best card in your deck and would have
+to discard the second best — bummer!&lt;/p&gt;
+
+&lt;p&gt;Assuming about 25 cards left in your deck, this is a 4% chance of drawing your
+best card and having to discard your second best.  But if that were to happen,
+would that really be that bad? After all, you are still improving your hand.
+This is the thing with looting, it always improves your hand, no matter what.&lt;/p&gt;
+
+&lt;p&gt;These are pretty much the arguments in favor of looting, you always improve your
+hand, it’s very unlikely to draw your best card, and you are getting 1 card
+closer to the best card in your deck.&lt;/p&gt;
+
+&lt;p&gt;However, I think this is an over-simplification of the problem, and I don’t buy
+it. The issue with this reasoning is that it only takes into account the immediate
+impact of looting. In the span of that one turn, yes, looting is the better
+play. But, if the game actually goes longer and you need to grind your opponent
+out, then you might wish you didn’t thin out good cards from your deck.&lt;/p&gt;
+
+&lt;p&gt;First, we need to realize that looting might actually make your hand weaker in
+some situations. Imagine the next cards in your library are a card of the same
+power level as the card you currently hold and then two lands. If you blindly
+loot, you will draw the other good card and you have to discard one of
+them. Next turn you draw the land, try to loot it away, and replace it
+with another land. You end the turn with one good card and one land.
+Alternatively, if you skip looting this turn, then next turn you draw your good
+card, skip looting again, and end the turn with the two strong cards in your
+hand. You are clearly better off by declining to use your looting ability.&lt;/p&gt;
+
+&lt;p&gt;The above is obviously a very specific scenario, but it serves to demonstrate
+that looting might not always improve your hand, if you take into account
+future turns. And in the end, this is not so uncommon. Does the situation
+fundamentally change if you replace the strong card by any spell in your deck?
+Not really, if you loot, you end up with one spell and one land, if you don’t,
+you have two spells. All it takes is for the following three cards in your
+library to be one spell and then two lands.&lt;/p&gt;
+
+&lt;p&gt;And there lies the main problem with the justification of looting in that
+situation, it does not take into account deck thinning. I know that deck
+thinning is often overrated, but it becomes a real thing over a long game with
+repetitive looting effects.&lt;/p&gt;
+
+&lt;p&gt;Again, we can take it to the extreme to see what would happen. Suppose we play
+such a long game that we get to draw all of our spells. If you were to loot
+every turn you have nothing to discard and already have one of your stronger
+spell in hand, then you would be milling some of your spells every now and
+then. When you get to the end of the game, you might have lost 5 to 10 spells,
+and would have had to fight with a smaller number of spells. On the other hand,
+if you wait to loot when you have something that is really dead, like an extra
+  land, then you will be able to play the game with the totality of your
+  spells, which will eventually turns into significant card advantage.&lt;/p&gt;
+
+&lt;p&gt;As a small aside, this kind of looting is very different from a self milling
+effect, and I am not stating that self milling is a negative effect. In most
+cases, self milling has no impact as the order of your library is truly random
+and you rarely end up milling yourself. The key difference with looting here,
+is that by looting over the course of several turns, you manage to turn all
+your dead cards into actual impactful cards, which gives you card advantage.
+Essentially, it is not a random milling effect, you choose which card goes to
+the graveyard. But you can waste part of that card advantage if you loot away
+actual impactful spells. If you don’t have access to that kind of card
+selection, a few self milling effect will not impact you, and if you have
+graveyard synergies they actually become a bonus.&lt;/p&gt;
+
+&lt;p&gt;I hope it is by now clear that if the game lasts long enough, you are not
+optimizing your win percentage by choosing to loot. I think the choice whether
+or not to loot is extremely complicated, and I would certainly not advise you
+to follow the heuristic “if you don’t have the best card of your deck in your
+hand, just loot”. The decision is dependent on the board, how good your deck
+will match the opposing deck in a long game, the density of spells left, the
+amount of time you have, and many more factors. The key to become a truly good
+Magic player is to be able to recognize all the subtilities involved in a
+decision, and to think beyond the short-term implications of a play.&lt;/p&gt;
+
+&lt;p&gt;To answer the original question, if I had the second best card of my deck in my
+hand, without extra information I would advise not to loot. I don’t think you
+accomplish much by looting, as it is very likely that you will be just milling
+the top card of your deck, and in the rare case you actually draw the best card
+in your deck, it is not at all clear that you end up in a better shape by
+having to discard a strong card. Waiting one turn and making sure you can start
+filtering out dead draws seems like a better plan to me.&lt;/p&gt;
+
+&lt;p&gt;That said, there are situations where I would decide to loot. If I absolutely
+need to get to a better card than what I have in hand, or if it is clear that
+the game is gonna end in 1 or 2 turns, I think you are giving yourself better
+chances of winning by just seeing more cards.&lt;/p&gt;
+
+&lt;p&gt;It also depends on the quality of the cards in your hand and deck. If you hold
+an average spell, and there is a card in your deck that is so much better than
+the rest, then you probably want to loot, even if that means you will have to
+discard actual spells. If, on the other hand, your deck is full of average
+spells, then you may want to not loot and just go for raw long term card
+advantage by preserving every single spell in your deck.&lt;/p&gt;
+
+&lt;p&gt;I hope I manage to convince you that the looter problem is not straightforward
+and has many intricacies. My answer to the problem as discussed in the community
+would be “do not loot!”, but I can certainly understand people that choose to
+loot. But please, don’t just loot because “it always improves your hand”, there
+is so much more involved.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Jun 2016 10:45:00 +0200</pubDate>
+        <link>http://regblanc.com/blog/the-looter-problem-why-you-should-not-loot/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/the-looter-problem-why-you-should-not-loot/</guid>
+        
+        <category>mtg</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Building an Android Game with Scala and Inkscape</title>
+        <description>&lt;p&gt;This is probably not a secret for anyone, but I am a big fan of the 
+&lt;a href=&quot;http://scala-lang.org&quot;&gt;Scala programming language&lt;/a&gt;. I’ve been taught 
+functional programming first in Scala, and since them I’ve  never looked back. 
+So when I decided to get into Android game development, choosing Scala was 
+a no-brainer.&lt;/p&gt;
+
+&lt;p&gt;I had modest goals for this project. First, I wanted to learn more about
+the Android framework, and in particular its graphics primitives. Second, I
+wanted to get started with writing games. In particular, I set the rule of not
+using an engine or any third-party library, my learning objectives was to see
+how a game is made just from the basic 2D drawing primitives. Finally, I wanted
+to build something fun, hopefully.&lt;/p&gt;
+
+&lt;p&gt;I had a few ideas of games, but, for my first game ever, I had
+to be reasonable and pick something simple. Since I was targeting Android, I
+aimed at a design that would be touchscreen-friendly. My brother told me about a
+&lt;a href=&quot;http://www.gamedesign.jp/flash/chatnoir/chatnoir.html&quot;&gt;puzzle flash game&lt;/a&gt; that
+was pretty entertaining and addictive, and I was sold. The game was simple to play
+and would work great on a mobile device. It was also relatively basic,
+with no real-time needs, a discrete tile-map, and no physics and collisions. It
+seemed like a perfect way to get my hands dirty with game programming.&lt;/p&gt;
+
+&lt;p&gt;I decided that in my version of the game, the goal would be to protect a
+delicious cheese from an evil rat. Each turn, the player can place a rat trap
+on the map, blocking the path of the rat towards the exit that leads to the
+cheese. The player wins if the rat is totally trapped, and loses if the rat
+reaches the borders of the map.&lt;/p&gt;
+
+&lt;p&gt;I started implementing the basic functionalities of the game. It was a simple
+game, but it still had a few algorithmic thingies. In particular, I had to
+implement a basic AI for the rat. I represented the tilemap as a graph with one
+node per tile, edges between adjacent tiles, and reduced the path finding to 
+a shortest path problem from the rat to an exit node. Tiles with traps were marked
+as blocked, and the shortest path algorithm was searching a path through open nodes.
+For the record, I used the 
+&lt;a href=&quot;http://jonasboner.com/real-world-scala-dependency-injection-di/&quot;&gt;cake pattern&lt;/a&gt;
+to represent the graph. The graph seemed to fit nicely into the use case decribed
+in &lt;a href=&quot;http://lampwww.epfl.ch/~odersky/papers/ScalableComponent.pdf&quot;&gt;this paper&lt;/a&gt;.
+I know it may seem overkill, and now that I think about it, it clearly is.&lt;/p&gt;
+
+&lt;p&gt;Ok, I have a working game, but it was still missing something.. ah right,
+graphics. Unfortunately, I didn’t know how to draw, and I wasn’t interested in
+buying (or stealing) art on the web.  I could have asked a designer friend, but
+it was my game and I wanted to do it myself. So, I learnt myself a
+&lt;a href=&quot;https://www.gimp.org/&quot;&gt;GIMP&lt;/a&gt; for Great Good, and started drawing the different
+elements of my game. Finally, after quite a bit of struggle, I got to version
+0.1 of Rat Trap:&lt;/p&gt;
+
+&lt;div class=&quot;post-image-wrapper&quot;&gt;
+  
+    &lt;img src=&quot;/resources/rat-trap/screenshots/rat-trap-v0.1.png&quot; alt=&quot;Screenshot of Rat Trap version 0.1&quot; /&gt;
+    
+  
+&lt;/div&gt;
+
+&lt;p&gt;It doesn’t look that pretty, but back then I was quite proud of it. There was
+one fixed-size map, randomly generated (that is, a few traps randomly
+positioned on the map), and you had to prevent the rat from exiting the map and
+reaching the delicious cheese.&lt;/p&gt;
+
+&lt;p&gt;I released that version — my first Android game! After getting some feedback,
+positive from friends, a bit more negative from strangers, I worked on an improved
+version. The core gameplay was relatively addictive, and I had a few ideas of
+how to integrate additional features to make the puzzle element richer. Additionally,
+I decided to add levels, in order to ease user’s progression.&lt;/p&gt;
+
+&lt;p&gt;As expected, I had made quite a few mistakes on that original version, one of
+them being to draw my art using raster graphics. I decided to redo all the art
+of the game, this time using a vector graphics editor. I would still be manipulating
+bitmap in the code, but having the source of the art in vectorial form would make it
+much easier to edit and animate before exporting to a raster image. I picked up
+&lt;a href=&quot;https://inkscape.org&quot;&gt;Inkscape&lt;/a&gt;, which is a truly great software.
+Combining Inkscape with some more programming, I eventually completed version 1.0 of
+Rat Trap:&lt;/p&gt;
+
+&lt;div class=&quot;post-image-wrapper&quot;&gt;
+  
+    &lt;img src=&quot;/resources/rat-trap/screenshots/rat-trap-4.png&quot; alt=&quot;Screenshot of Rat Trap version 1.0&quot; /&gt;
+    
+  
+&lt;/div&gt;
+
+&lt;p&gt;As you can see, there are now many more elements on the game screen. I expanded
+the game with a few additional kind of actions, such as using fake cheese to
+lure the rat or using a hammer to stun it for one turn. Also, there is now real
+cheese on the board. I drew each of the actions, buttons, cheeses, as well as
+the rat, in Inkscape.  Having everything as a vector is very convenient to
+support multiple DPI, since one can simply rescale all the sprites to make them
+the right size for the different screen densities.&lt;/p&gt;
+
+&lt;p&gt;On the coding side, the extensions fit nicely into my original graph
+representation.  Instead of marking each border node as &lt;em&gt;goal&lt;/em&gt; in the graph, I
+could now just mark the few nodes that contained cheeses, and still use the
+shortest path algorithm. The tunnel mecanisms was implemented by simply adding
+additional edges between tunnel tiles. I had to create a level description
+language and a parser.  Ideally I should have developed a level editor as well,
+but I went for the quick and dirty solution and used VIM as my level editor.
+The level description is a very simple, homebrew, plain text format.&lt;/p&gt;
+
+&lt;p&gt;Rat Trap is available on &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.regblanc.rattrap&quot;&gt;Google Play&lt;/a&gt;.
+I just released the latest version a few days ago. If you do try it, I would
+very much like to hear feedback from you!  I really enjoyed programming and
+designing this game, and I’m looking forward to making other games in the future!&lt;/p&gt;
+</description>
+        <pubDate>Fri, 30 Oct 2015 02:27:08 +0100</pubDate>
+        <link>http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/</guid>
+        
+        <category>games</category>
+        
+        <category>scala</category>
+        
+        <category>rat-trap</category>
+        
+        
+        <category>Technology</category>
+        
+        <category>Games</category>
+        
+      </item>
+    
+      <item>
+        <title>Lifting Heroku to the Lift Web Framework</title>
+        <description>&lt;p&gt;I recently started working on a &lt;a href=&quot;http://www.sprayhere.com&quot;&gt;new project&lt;/a&gt; and 
+decided to go with Scala and the &lt;a href=&quot;http://liftweb.net&quot;&gt;Lift framework&lt;/a&gt; for the 
+backend.&lt;/p&gt;
+
+&lt;p&gt;I like Lift a lot, having build a &lt;a href=&quot;http://www.timestash.com&quot;&gt;previous website&lt;/a&gt;
+entirely using it. Since then, it became my “go to” standard for whenever I
+had to build something web-related.&lt;/p&gt;
+
+&lt;p&gt;For this project, we had to build a mobile application and a backend server to
+share the data between the (hopefully) many clients. I was not too familiar
+with the best way to have mobile applications communicate with a server, but I
+decided to just jump in and chose the simplest solution that I knew:
+implementing an HTTP-based server and have the clients communicate with it
+using an HTTP library.&lt;/p&gt;
+
+&lt;p&gt;I wanted to experiment with something new for the hosting. I used to work with
+dedicated machines or VPS, but that was a bit of a pain to maintain. I had
+heard a lot of good things about &lt;a href=&quot;http://www.heroku.com&quot;&gt;Heroku&lt;/a&gt;, so I decided
+to give it a try.&lt;/p&gt;
+
+&lt;p&gt;The great thing with Heroku is that, once setup, deploying is as simple as
+doing a &lt;code class=&quot;highlighter-rouge&quot;&gt;git push&lt;/code&gt;.  However, all this simplicity comes to the price of
+flexibility. If you want to use Heroku, you have to build your application in a
+very specific way — the Heroku way. In particular, you can no longer organize
+your architecture around full computer boxes, but need to think of your
+application as a collection of different processes, independent of the rest of
+the system.&lt;/p&gt;
+
+&lt;p&gt;That means two things. One, you can no longer rely on the local filesystem or
+memory being in an expected state accross several requests, and two, you will
+need to connect with several external services for tasks such as persistence.&lt;/p&gt;
+
+&lt;p&gt;Essentially, Heroku forces you to build stateless applications. That is,
+applications that handle requests in a stateless manner, with no dependency on
+any previously completed requests. Concretely, that means we will not have a
+&lt;code class=&quot;highlighter-rouge&quot;&gt;login&lt;/code&gt; request that sets session data on the server and remembers which user
+correctly logged in, but instead, each request that needs authentication will
+contain some sort of credentials to identify and authorize the client.&lt;/p&gt;
+
+&lt;p&gt;Building a stateless application is very good when you need to scale
+horizontally. Since a server treats each request in a stateless way, it is
+straightforward to fire up additional copies of the same server and have a
+load-balancer dispatches the request to the least busy server. In fact, that is
+exactly what Heroku is doing, only that the dispatching is done randomly, which
+on average is pretty much the same. In theory, if you implement your backend
+properly with Heroku, you can scale up by just flipping a switch in the Heroku
+console.&lt;/p&gt;
+
+&lt;p&gt;But Lift is relying on state. Sessions are combined with closures to handle
+ajax callbacks in a very convenient and efficient way. This is a powerful
+feature, but it means that a Lift server is not stateless, as the follow-up
+ajax requests will need to be handle by the same server that created the
+closures in the first place. There is a known solution around this problem:
+&lt;em&gt;sticky sessions&lt;/em&gt;.  Sticky sessions are a configuration mode for load-balancer
+that simply make sure that all requests in the same session are always routed
+to the same server. That does not solve the issue of a server restart during a
+session, but in most cases this is a perfectly fine solution.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, Heroku does not support sticky sessions. You have no control over
+the Heroku load-balancer, it simply routes each request independently and randomly to an
+instance of your application. Does it mean we cannot use Lift when hosting on Heroku?
+No, but it means we have to avoid the stateful features of Lift.&lt;/p&gt;
+
+&lt;p&gt;In our case, we wanted to use Lift to build an HTTP API for a mobile client. Lift provides
+a &lt;code class=&quot;highlighter-rouge&quot;&gt;RestHelper&lt;/code&gt; helper trait which facilitates the creation of web services. We start
+by defining some API endpoints, let’s take a user system API for example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserAPI&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RestHelper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;serve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;api&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;users&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Nil&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Get&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Nil&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JsonPut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This defines two URLs for our API. The first one accepts a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request and is
+supposed to return a resource representing the user represented by its &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;.
+The second one is meant to update the user based on a &lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; resource object
+received as part of the request. The implementation of these endpoints are
+relatively simple but dependent on your system. Essentially, it is a couple
+simple database queries to get and update the data of the user. It is essential
+that those do not rely on session data provided by Lift (most of the &lt;code class=&quot;highlighter-rouge&quot;&gt;S&lt;/code&gt; object).&lt;/p&gt;
+
+&lt;p&gt;Next, we can setup &lt;code class=&quot;highlighter-rouge&quot;&gt;Boot.scala&lt;/code&gt; in the following way:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;nv&quot;&gt;LiftRules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;enableContainerSessions&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LiftRules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;statelessReqTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;LiftRules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;statelessDispatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserAPI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This forces Lift to operate in stateless mode. It will even throw an exception
+if you have some code relying on session data. In the final statement, we
+append the &lt;code class=&quot;highlighter-rouge&quot;&gt;UserAPI&lt;/code&gt; instance to the &lt;code class=&quot;highlighter-rouge&quot;&gt;statelessDispatch&lt;/code&gt; list that Lift goes
+through before initializing session state when receiving a request. There is
+a similar &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch&lt;/code&gt; list, but that one is run in stateful mode.&lt;/p&gt;
+
+&lt;p&gt;It’s also possible to use snippets and templates to render HTML. It comes with
+the same limitation of not having access to session data. Additionally, all the
+ajax server-side functionnalities will not work as they rely on Scala closures
+stored in memory. But snippets and template are functional, and our
+&lt;a href=&quot;http://www.sprayhere.com&quot;&gt;website&lt;/a&gt; is built using them, and hosted on Heroku as
+well.&lt;/p&gt;
+
+&lt;p&gt;Configuration is also slightly different on Heroku. Heroku heavily uses
+environment variables to configure each application. This is how the database
+connection credentials are preferably communicated to the application. In
+contrast, Lift provides built-in support for &lt;code class=&quot;highlighter-rouge&quot;&gt;.props&lt;/code&gt; file that contains
+properties used for configuration. In this project, we implemented a system
+that would check for a configuration variable in the environment variable
+first, and then default to the value found in the &lt;code class=&quot;highlighter-rouge&quot;&gt;.props&lt;/code&gt; file. The
+possibility to set environment variables from the Heroku web interface makes it
+extremely painless to modify the configuration of the system.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Edit on May 29, 2016:&lt;/em&gt;
+If you want to check out the product we are building with Scala and Lift, we recently
+released &lt;a href=&quot;http://www.sprayhere.com&quot;&gt;&lt;em&gt;SprayHere&lt;/em&gt;&lt;/a&gt;, a geo-localized platform to communicate
+with people around you. We are launching it locally, at EPFL in Lausanne. You can get
+the Android app in &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.sprayhere&quot;&gt;Google Play&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 15 Jul 2015 03:27:08 +0200</pubDate>
+        <link>http://regblanc.com/blog/lift-on-heroku/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/lift-on-heroku/</guid>
+        
+        <category>startup</category>
+        
+        <category>lift</category>
+        
+        <category>scala</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Revamping TimeStash</title>
+        <description>&lt;p&gt;This is a follow-up to 
+&lt;a href=&quot;/blog/launching-a-social-network-for-nostalgic-feelings/&quot;&gt;an earlier post&lt;/a&gt; 
+about launching the social network &lt;a href=&quot;http://www.timestash.com&quot;&gt;TimeStash&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Last time, we left off when we launched TimeStash in Mexico. Over the past few
+months, we unfortunately witnessed interest for TimeStash dropping
+significantly. We were able to get a lot of attention in the days following
+our launch, but unfortunately our product wasn’t strong enough to retain
+the users.&lt;/p&gt;
+
+&lt;p&gt;So it is time to reflect on why our launch utlimately failed and what to do
+about it now.&lt;/p&gt;
+
+&lt;p&gt;One thing we quickly noticed through interactions with users and people that
+got introduced to TimeStash, was that the purpose of the product wasn’t very
+clear. This is something that should have been apparent to us way before we
+launched, as we were never able to exactly pinpoint the core selling point.&lt;/p&gt;
+
+&lt;p&gt;I think we got lost into building something way more complicated than we needed
+to.  Instead of building a small MVP around the core idea of retrieving and
+storing memories, we immediately aimed at building the final product. The
+product we ended up designing was kind of a monster. It had so many
+un-necessary features to feel “professional” and complete. It had friends,
+private messages, and a way to share and associate friends with your personal
+memories. If I were to redo it today, I would scrap the whole social sharing
+experience and focus on building a working product to store personal memories
+first.&lt;/p&gt;
+
+&lt;p&gt;I am not saying that being able to share memories is a bad feature, but I
+believe we should have started small and find product fit before piling up
+additional stuff on top of it.&lt;/p&gt;
+
+&lt;p&gt;However, since our product is already built with all the social experience, we
+are not going to unmake it. We should instead focus on making it easier to use
+and understand.&lt;/p&gt;
+
+&lt;p&gt;We came up with a long list of things that need to be done. The most essential
+being the introduction of a good interactive tutorial. The first login for a
+new user of TimeStash is quite rough. Lots of different options, and not a
+clear direction of where to go. We hope to introduce the main features of
+TimeStash with a short and interactive tutorial that would lead that user
+through collecting her first memories and finding her friends on the website.&lt;/p&gt;
+
+&lt;p&gt;Adding a tutorial is a somewhat easy task, we just need to put an extra
+features on top of what we have. But we also need to review the existing
+functionalities. For example, the landing page, while quite appealing, does not
+seem to correctly communicate the essence of TimeStash.&lt;/p&gt;
+
+&lt;div class=&quot;post-image-wrapper&quot;&gt;
+  
+    &lt;img src=&quot;/img/timestash-v1-landing.jpg&quot; alt=&quot;Screenshot of the landing page of TimeStash&quot; /&gt;
+    
+  
+    &lt;p class=&quot;post-image-caption&quot;&gt;TimeStash - landing page&lt;/p&gt;
+  
+&lt;/div&gt;
+
+&lt;p&gt;We are planning to design a new landing page, as visual as the current one, but
+with a clear description of TimeStash and what tasks it can help you
+accomplish. Hopefully, once people register for an account, they will have a
+better idea of what to expect in the website.&lt;/p&gt;
+
+&lt;p&gt;There are other things we will have to change. The navigation bar should be
+simplified a bit, as well as the concept of stories attached to memories. There
+are still a few bugs that I will try to hunt down. Finally, some elements need
+more polishing, and we will take this opportunity to do just that.&lt;/p&gt;
+
+&lt;p&gt;All in all, a lot of work is waiting for us in the coming months. But if we
+manage to pull it off, it should be a significant step-up for TimeStash. We
+hope to be ready for a fresh start during Summer, with a more successful
+launch this time.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Jan 2015 02:27:08 +0100</pubDate>
+        <link>http://regblanc.com/blog/revamping-timestash/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/revamping-timestash/</guid>
+        
+        <category>timestash</category>
+        
+        <category>startup</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Launching a Social Network for Nostalgic Feelings</title>
+        <description>&lt;p&gt;These last few weeks have been very exciting. I took some time off my PhD to 
+focus on launching our new startup &lt;a href=&quot;https://www.timestash.com&quot;&gt;&lt;em&gt;TimeStash&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I have been working part-time on TimeStash since beginning of 2013. I am taking
+care of the full stack: database, system administration, backend programming
+and front-end programming. My colleagues are dealing with the business aspects
+of the project and are designing the user experience.&lt;/p&gt;
+
+&lt;p&gt;TimeStash is a platform to retrieve, store, and organize all your memories.  It
+is also designed to be a social experience, where you can share souvenirs with
+your friends. One of the core feature of TimeStash is a sort of time machine,
+where you can navigate through the years and browse the public memories at the
+time.&lt;/p&gt;
+
+&lt;div class=&quot;post-image-wrapper&quot;&gt;
+  
+    &lt;img src=&quot;/img/timestash-v1-livestash.png&quot; alt=&quot;Screenshot of the LiveStash&quot; /&gt;
+    
+  
+    &lt;p class=&quot;post-image-caption&quot;&gt;TimeStash - the livestash&lt;/p&gt;
+  
+&lt;/div&gt;
+
+&lt;p&gt;We had developed and refined TimeStash for close to two years, so we were
+confident that the product was ready for prime time. We knew that we still had
+some issues, such as not being mobile-friendly. However, the website had grown
+quite complex, and unfortunately wasn’t designed with mobile experience in
+mind. At that point, it was just too much work to redesign the website to make
+it reactive. So the plan was to grab the desktop users, and confirm that there
+was a market for our product. Only then, we would start to invest resource in
+a mobile version.&lt;/p&gt;
+
+&lt;p&gt;We launched TimeStash in Mexico City. Why so far from Switzerland? Two reasons.
+Our CEO had very good contacts in Mexico, and we thought that the conditions
+there were ideal to test our concept before going for a bigger market like the
+United States.&lt;/p&gt;
+
+&lt;p&gt;I wasn’t directly involved in the logistics of the launch. I am just the tech
+guy and just had to make sure the website wouldn’t crash. The reason I mention this
+is to make it clear that I have no merit in how the launch was handled. But I have
+to say, what was accomplished there is a true miracle. I can’t go too much
+into details as some of this information is still confidential, but I will try to
+give an overview of what we did and what response we got.&lt;/p&gt;
+
+&lt;p&gt;We were able to negociate a deal with a famous, triple-platinum, Mexican band to
+become our brand ambassadors and actually perform at our
+&lt;a href=&quot;https://www.youtube.com/watch?v=e7GxItaySOg&quot;&gt;launch event&lt;/a&gt;. We booked a venue
+in a club in Mexico City, invited the local press as well as some local celebrities. 
+This was a great lesson for me. You don’t need to be rich or famous to organize that
+kind of things. It’s possible to make it happen with a few connections and a
+lot of business acumen.&lt;/p&gt;
+
+&lt;p&gt;Thanks to this event, we got a lot of
+&lt;a href=&quot;http://www.forbes.com.mx/timestash-una-red-social-para-viajar-en-el-tiempo/&quot;&gt;press coverage&lt;/a&gt;.
+We even got about 30 seconds of national television! Those 30 seconds came close to
+actually bringing down the website. I was watching the server and the analytics, and I
+must say I had never seen anything like that before. That was a bit scary, but also
+exciting.&lt;/p&gt;
+
+&lt;p&gt;In terms of actual numbers, Google Analytics tells us that we received about 5,000
+new sessions the day following the launch. It went down a bit, and then
+spiked again after the TV apparition. All together, we got close to 30,000
+unique visitors during the month of August. I am releasing a
+&lt;a href=&quot;/img/timestash-v1-analytics.png&quot;&gt;screenshot&lt;/a&gt; taken from Google Analytics. Please note
+that I am only showing the new users segments.&lt;/p&gt;
+
+&lt;p&gt;So I believe we were quite successful in bringing people to our website. The
+next question is how many of them ended up creating an account?  Actually,
+quite a lot. We are very close to 10,000 users now on TimeStash, only a couple
+hundred of them are friends, family, or contacts. In the end, about a third of
+the visitors ended up creating an account. Of course, creating an account is
+not the end of the road, we still need those users to actually use TimeStash.
+But that story is for a &lt;a href=&quot;/blog/revamping-timestash/&quot;&gt;future article&lt;/a&gt;…&lt;/p&gt;
+</description>
+        <pubDate>Thu, 18 Sep 2014 03:27:08 +0200</pubDate>
+        <link>http://regblanc.com/blog/launching-a-social-network-for-nostalgic-feelings/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/launching-a-social-network-for-nostalgic-feelings/</guid>
+        
+        <category>timestash</category>
+        
+        <category>startup</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

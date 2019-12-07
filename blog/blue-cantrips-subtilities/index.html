@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Serum Vision is Superior to Brainstorm, Sometimes</title>
+
+  
+  <!-- for some stupid reason, I cannot convert '\n' to ' ', (using replace filter) 
+  and when I do a strip_newlines filter, all lines are collapsed into one, with
+  missing spaces if there was only a \n as separator. That means, the excerp
+  (first paragraph) should be writen with a space before each newline character
+  -->
+  <meta name="description" content="As we all know, blue is the best color in Magic, and the most fun to play. Ok, maybenot everybody will agree with the latter, but surely blue has had some of..." />
+
+
+
+<!-- facebook Open Graph Metadatas -->
+<meta property="fb:admins"  content="1145810187" />
+<meta property="fb:app_id"  content="529158857268335" />
+<meta property="og:site_name" content="Reg's homepage | Régis Blanc" />
+<meta property="og:locale" content="en_US" />
+
+
+  <meta property="og:type" content="article" />
+
+
+
+  <meta property="og:title" content="Serum Vision is Superior to Brainstorm, Sometimes" />
+
+
+
+  <meta property="og:description" content="As we all know, blue is the best color in Magic, and the most fun to play. Ok, maybenot everybody will agree with the latter, but surely blue has had some of..." />
+
+
+
+  <meta property="og:url" content="http://regblanc.com/blog/blue-cantrips-subtilities/" />
+
+
+
+  <meta property="og:image" content="http://regblanc.com/resources/mtg/cantrips-wide.png" />
+
+
+
+  
+
+
+
+  
+    <meta property="article:tag" content="mtg" />
+  
+
+
+<!-- not really sure if that's of any use, but probably can't hurt to integrate -->
+
+  <meta property="article:published_time" content="2017-02-08T08:45:00+01:00" />
+
+
+
+<!-- Twitter cards metadatas -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@regbla" />
+<meta name="twitter:creator" content="@regbla" />
+
+
+  <meta name="twitter:title" content="Serum Vision is Superior to Brainstorm, Sometimes" />
+
+
+
+<meta name="twitter:url" content="http://regblanc.com/blog/blue-cantrips-subtilities/" />
+
+
+
+  <meta name="twitter:description" content="As we all know, blue is the best color in Magic, and the most fun to play. Ok, maybenot everybody will agree with the latter, but surely blue has had some of..." />
+
+
+
+  <meta name="twitter:image" content="http://regblanc.com/resources/mtg/cantrips-square.png" />
+
+
+
+  <link rel="stylesheet" href="/libcss/bootstrap.min.css">
+  <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/libcss/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" 
+        href="http://regblanc.com/blog/blue-cantrips-subtilities/">
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+<!--
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/contact/">Contact</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/games/">Games | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/fish-escape/">Fish Escape | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/scalavator/">Scalavator | Game for Android, Web, and Windows</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/projects/">My Projects | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/rat-trap/">Rat Trap | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/winsmash/">WinSmash | Android Game</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Régis Blanc</a>
+        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="/projects/">My Projects</a></li>
+          <li ><a href="/blog/">Blog</a></li>
+          <li ><a href="/about/">About</a></li>
+          <li ><a href="/contact/">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+</header>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post">
+      
+        <header class="post-header">
+          <h1 class="post-title">Serum Vision is Superior to Brainstorm, Sometimes</h1>
+          <p class="post-meta">Posted on Feb 8, 2017</p>
+        </header>
+      
+        <article class="post-content">
+          <p>As we all know, blue is the best color in Magic, and the most fun to play. Ok, maybe
+not everybody will agree with the latter, but surely blue has had some of the most
+broken cards ever printed. It is also the most played color in Legacy. Part of it is due
+to the consistency that the blue cantrips bring.</p>
+
+<p>Today I want to discuss the different blue cantrips that are commonly played in Modern and
+Legacy. I will limit the discussion to deck manipulation cantrips, as they are the most
+interesting ones. I will focus on the following cards:</p>
+
+<ul>
+  <li>Brainstorm</li>
+  <li>Ponder</li>
+  <li>Preordain</li>
+  <li>Serum vision</li>
+  <li>Sleight of hand</li>
+</ul>
+
+<p><img width="500" src="/resources/mtg/cantrips-panel.png" /></p>
+
+<p>All of these serve essentially the same role, a cheap card that replaces itself while manipulating
+the library. So let’s look at the subtilities of each of them.</p>
+
+<h4 id="brainstorm">Brainstorm</h4>
+
+<p><em>Brainstorm</em> is commonly considered the best card in Legacy, and the best blue
+cantrip ever printed. It is definitely a very powerful spell. But without the
+proper support — a shuffle effect — <em>Brainstorm</em> is actually rather weak.</p>
+
+<p>Consider a regular limited deck, full of creatures and a couple removals. What
+would happen if you threw a random <em>Brainstorm</em> in there. Suppose you get to play
+<em>Brainstorm</em> on turn 1, you draw three cards and put back two. By turn 3, you
+redrew the two cards you put back, and you have access to the same cards you
+would have access to had you casted a <em>Peek</em> on turn 1.  In fact, with <em>Peek</em>
+you would actually have some relevant information on what your opponent is up
+to.</p>
+
+<p>Have you actually accomplished anything by casting <em>Brainstorm</em>? In fact, yes,
+you smoothed your turn 2 play. You were able to dig two cards deeper than if
+you had not cast anything on turn one, and so you get a small chance of having
+a better on-curve turn 2 play. However, this comes at the cost of tempo and
+spell density. Tempo is the most concerning thing, sometimes you just don’t
+have time to spend one mana to cast a spell that draws you into your next
+spell. For such a limited upside of smoothing your next turn play, you probably
+don’t want to put a card like that in your deck.</p>
+
+<p>Among all the cantrips we consider here, <em>Brainstorm</em> is the only one which is
+not able to truly manipulate the library. All it does, is to re-order the cards
+you have access to, but after two turns, you get back to the starting point.
+<em>Sleight of Hand</em> on the other hand gives you the possibility to choose the
+best among two cards, and get rid of the other one, wich is a superior effect
+in the above situation.</p>
+
+<p>But, when you get access to shuffle effects, <em>Brainstorm</em> really shines. It can
+fix land-heavy hands and it can shuffle away dead cards. In some situation, it
+is straight up <em>Ancestral Recall</em>. While all of the other blue cantrips can
+only give you access to one new card, <em>Brainstorm</em> can totally transformed the
+texture of your hand with three new cards. This unique ability makes it clearly
+the best cantrip, but it is funny that the card on its own is actually the
+weakest of the 5.</p>
+
+<h4 id="ponder">Ponder</h4>
+
+<p><em>Ponder</em> is the cantrip that lets you look at the highest number of cards. You
+can see up to 4 different cards, so if you desperately need a specific card,
+this is your spell of choice. It also offers you the unique ability to shuffle
+your deck, which is not irrelevant in combination with a card like
+<em>Sensei’s Divining Top</em>.</p>
+
+<p>On its own, <em>Ponder</em> is a slightly better <em>Brainstorm</em>. You get to look at the next
+three cards and organize them to smooth out your draw, which on turn 1 is basically
+the same as <em>Brainstorm</em>. As with <em>Brainstorm</em>, by turn 3 you have drawn all of the
+three cards and won’t profit anymore of the <em>Ponder</em> effect. The extra ability to
+shuffle away the top three cards if they don’t fit well in your draw makes <em>Ponder</em>
+the better card in this situation.</p>
+
+<p>So, just casting <em>Ponder</em> does not give you much card selection. You can decide
+you don’t like the top cards, and get a fresh draw, but if you like one of the
+three cards and want to keep it, you will have to keep all three of them. That
+is, unless you have a shuffle effect.  If you are able to shuffle your library
+after casting ponder and reorganizing the top, you essentially get to select
+the best card out of the top three, all of that for one single blue mana.
+Remember <em>Anticipate</em>? Some people play that card in Modern. That is why
+casting <em>Ponder</em> with a fetch land up is good. Of course, you don’t have to
+only take one of the card, you can also sequence the shuffle in order to take
+two of the cards.</p>
+
+<p>Just like <em>Brainstorm</em>, <em>Ponder</em> truly shines in a deck full of fetch lands.
+This is what makes it the second most played cantrip in Legacy, and rightfully
+so.</p>
+
+<h4 id="preordain-and-serum-vision">Preordain and Serum Vision</h4>
+
+<p>Now we get to the two strongest cantrips in isolation. That’s probably why they
+were played heavily in standard, because they do not need shuffle effect to
+shine.</p>
+
+<p>They are also doing very similar effect, in that they get to cantrip (draw a
+card) and scry 2. The only difference is the order in which these actions are
+done. <em>Preordain</em> scries first, then draw, and <em>Serum Vision</em> draws first then
+scries. This subtle difference leads to one being banned in Modern and the
+other one being played, rather reluctantly, in Modern.</p>
+
+<p>Several Modern players have been complaining how <em>Serum Vision</em> is terrible,
+but that it’s the only available cantrip in the format. Given that the next
+best option is <em>Sleight of Hand</em>, it is clear that <em>Serum Vision</em> is the best
+option available. It’s also cleary by design, as Wizards made it clear that
+they do not want a Modern format that look like Legacy. In all fairness, I
+think <em>Serum Vision</em> is not as bad as that, and there are cases where it’s
+actually better than <em>Preordain</em>.</p>
+
+<p>Let’s first consider the cards on their own. With <em>Serum Vision</em>, you draw a
+random card, and then you set up your draw for the next one or two turns. With
+<em>Preordain</em>, you get to set up your draw first, so you actually get the card
+that you want right away. That’s pretty powerful, and that makes <em>Preordain</em>
+extremely good in a combo deck looking for a key combo piece. That’s also the
+main reason <em>Preordain</em> is seen as so much better than <em>Serum Vision</em>.</p>
+
+<p>But consider playing both cards on turn one. Let’s say you get to see one good
+and one bad card, with <em>Preordain</em>, you remove the bad card, draw the good one,
+then next turn you draw a random card. With <em>Serum Vision</em>, you draw the bad
+card, keep the good one on top for next turn, and get to choose if you want to
+keep the random card. It’s not hard to see that this is pretty much equivalent,
+swap the bad card with the random card, and you get the same effect. If you
+don’t get to use the card right away, both cards are mostly equivalent. In
+fact, <em>Serum Vision</em> has some advantages here, because you get to draw first,
+you then have more information to choose what to do with your scry. As an
+example, say you are looking for exactly one copy of <em>X</em>, not two, but one. Now
+suppose there are three <em>X</em> on top of your deck. With <em>Preordain</em>, you will
+keep one and bottom one, but next turn you will end up drawing the extra one,
+ending up with with a redundant copy. With <em>Serum Vision</em>, you get to draw the
+first one right away, then see the two additional ones, and can take the
+decision to bottom them knowing that you already fount the one you needed. The
+extra information of drawing first was quite handy there.</p>
+
+<h4 id="sleight-of-hand">Sleight of Hand</h4>
+
+<p>There’s not much to say on <em>Sleight of Hand</em>. It’s a fine cantrip, which is
+most of the time inferior to all the other discussed here. It has the same
+advantage as <em>Preordain</em> over <em>Serum Vision</em> that it gets to use the card right
+away. But the major drawback is that you are forced to choose exactly one card,
+which does not smooth your draw too much.</p>
+
+<p>It’s fine for combo in Modern, but it will hardly find a place in anything
+else, and it cannot compete with the other cantrips in Legacy.</p>
+
+<h4 id="sequencing">Sequencing</h4>
+
+<p>To finish this article, I will go over a few tips&amp;tricks of how to properly
+sequence your cantrips. It’s all based on the observation above, and once you
+get familiar with the strength of each cantrip, it should become second nature.</p>
+
+<p>The most important, and usually easiest to mess up, element is to take into
+account your shuffle effects. Most commonly, these are your fetches. You should
+use them to the best of your ability to shuffle away cards that you do not want
+anymore, and more importantly you should avoid shuffling cards that you know
+you want.  The latter seems obvious, but it’s all too common to use a <em>Serum
+Vision</em>, set the top two cards, only draw one and then realize you need to
+fetch a land because you need the mana. This is something that should be
+planned one or two turns in advance.</p>
+
+<p>Regarding shuffling away cards that you do not want, there’s the obvious
+<em>Brainstorm</em> and <em>Ponder</em> play, where you shuffle away cards that you do not
+need anymore, or you combine <em>Ponder</em> and shuffle to select one or two of the
+top three. Then there’s the less obvious case of keeping speculative cards on
+top with <em>Serum Vision</em> or <em>Preordain</em>, and decide later if you still want
+them.  You might for example leave a <em>removal</em> on top of the deck, but then
+your opponent takes their first turn and go <em>Underground Sea</em> into <em>Cabal
+Therapy</em>. At this point, it’s pretty clear they are playing Storm and you will
+want to shuffle away this removal, if you can.</p>
+
+<p>The last piece of advice with shuffling is to try to fetch first and use scries
+later.  Any card that you put under your deck won’t be drawn again in this
+game, until it’s shuffled back in. So if you know you don’t want these cards,
+you may want to try to sequence your shuffles first and only then your scries.
+This is also a common source of mistake, where people are going to fetch in
+order to thin their deck, but they already had three bad cards on the bottom.
+At this point, they are basically doing the opposite, by making bad draws more
+dense in the deck.</p>
+
+<p>Apart from shuffling, the general advice follows the same insight as to why
+<em>Serum Vision</em> is sometimes better than <em>Preordain</em>. You should aim at getting
+more cards first, before you play cards with a lot of selection. It’s always
+good ot start with <em>Serum Vision</em> on turn one, because you will need extra time
+to get to the next cards, which you usually have on turn one. As long as you
+have time, you should favor the cards that take more time to setup, such as
+<em>Ponder</em>, where you might need two extra turn to draw all the cards. You should
+keep the <em>Brainstorm</em> and <em>Preordain</em> for the more explosive turns, where you
+need to get one answer and you need to play it right away.</p>
+
+        </article>
+
+        <div class="share-page">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4">
+      <div class="social-media-share-lead">Share this on &rarr;</div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+    <ul class="social-media-share-list">
+
+      <li class="social-media-share-item social-media-share-twitter">
+        <a href="https://twitter.com/intent/tweet?text=Serum Vision is Superior to Brainstorm, Sometimes&url=http://regblanc.com/blog/blue-cantrips-subtilities/&via=regbla&related=regbla"
+           rel="nofollow" target="_blank" title="Share on Twitter">
+          <i class="fa fa-twitter fa-1x"></i> Twitter
+        </a>
+      </li>
+
+      <li class="social-media-share-item social-media-share-fb">
+        <a href="https://facebook.com/sharer.php?u=http://regblanc.com/blog/blue-cantrips-subtilities/" rel="nofollow" 
+           target="_blank" title="Share on Facebook">
+          <i class="fa fa-facebook fa-1x"></i> Facebook
+        </a>
+      </li>
+
+    </ul>
+    </div>
+
+
+</div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <ul class="social-media-list">
+    <li class="social-media-item">
+      <a href="https://github.com/regb">
+        <i class="fa fa-github fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="https://twitter.com/regbla">
+        <i class="fa fa-twitter fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="http://instagram.com/regisbla">
+        <i class="fa fa-instagram fa-5x"></i>
+      </a>
+    </li>
+  </ul>
+
+  <p class="copyright text-muted">
+    Copyright © Régis Blanc
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/libjs/bootstrap.min.js"></script>
+
+</footer>
+
+
+  </body>
+
+</html>

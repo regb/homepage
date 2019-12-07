@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Building an Android Game with Scala and Inkscape</title>
+
+  
+  <meta name="description" content="How I used Scala, Inkscape, and Gimp to create an Android mobile game from scratch." />
+
+
+
+<!-- facebook Open Graph Metadatas -->
+<meta property="fb:admins"  content="1145810187" />
+<meta property="fb:app_id"  content="529158857268335" />
+<meta property="og:site_name" content="Reg's homepage | Régis Blanc" />
+<meta property="og:locale" content="en_US" />
+
+
+  <meta property="og:type" content="article" />
+
+
+
+  <meta property="og:title" content="Building an Android Game with Scala and Inkscape" />
+
+
+
+  <meta property="og:description" content="How I created a complete Android game, with the help of Scala." />
+
+
+
+  <meta property="og:url" content="http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/" />
+
+
+
+  <meta property="og:image" content="http://regblanc.com/resources/rat-trap/rat-trap-feature.png" />
+
+
+
+  
+    <meta property="article:section" content="Technology" />
+  
+
+
+
+  
+    <meta property="article:tag" content="games" />
+  
+    <meta property="article:tag" content="scala" />
+  
+    <meta property="article:tag" content="rat-trap" />
+  
+
+
+<!-- not really sure if that's of any use, but probably can't hurt to integrate -->
+
+  <meta property="article:published_time" content="2015-10-30T02:27:08+01:00" />
+
+
+
+<!-- Twitter cards metadatas -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@regbla" />
+<meta name="twitter:creator" content="@regbla" />
+
+
+  <meta name="twitter:title" content="Building an Android Game with Scala and Inkscape" />
+
+
+
+<meta name="twitter:url" content="http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/" />
+
+
+
+  <meta name="twitter:description" content="How I created a complete Android game, with the help of Scala." />
+
+
+
+  <meta name="twitter:image" content="http://regblanc.com/resources/rat-trap/rat-trap-logo.png" />
+
+
+
+  <link rel="stylesheet" href="/libcss/bootstrap.min.css">
+  <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/libcss/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" 
+        href="http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/">
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+<!--
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/contact/">Contact</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/games/">Games | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/fish-escape/">Fish Escape | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/scalavator/">Scalavator | Game for Android, Web, and Windows</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/projects/">My Projects | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/rat-trap/">Rat Trap | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/winsmash/">WinSmash | Android Game</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Régis Blanc</a>
+        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="/projects/">My Projects</a></li>
+          <li ><a href="/blog/">Blog</a></li>
+          <li ><a href="/about/">About</a></li>
+          <li ><a href="/contact/">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+</header>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post">
+      
+        <header class="post-header">
+          <h1 class="post-title">Building an Android Game with Scala and Inkscape</h1>
+          <p class="post-meta">Posted on Oct 30, 2015</p>
+        </header>
+      
+        <article class="post-content">
+          <p>This is probably not a secret for anyone, but I am a big fan of the 
+<a href="http://scala-lang.org">Scala programming language</a>. I’ve been taught 
+functional programming first in Scala, and since them I’ve  never looked back. 
+So when I decided to get into Android game development, choosing Scala was 
+a no-brainer.</p>
+
+<p>I had modest goals for this project. First, I wanted to learn more about
+the Android framework, and in particular its graphics primitives. Second, I
+wanted to get started with writing games. In particular, I set the rule of not
+using an engine or any third-party library, my learning objectives was to see
+how a game is made just from the basic 2D drawing primitives. Finally, I wanted
+to build something fun, hopefully.</p>
+
+<p>I had a few ideas of games, but, for my first game ever, I had
+to be reasonable and pick something simple. Since I was targeting Android, I
+aimed at a design that would be touchscreen-friendly. My brother told me about a
+<a href="http://www.gamedesign.jp/flash/chatnoir/chatnoir.html">puzzle flash game</a> that
+was pretty entertaining and addictive, and I was sold. The game was simple to play
+and would work great on a mobile device. It was also relatively basic,
+with no real-time needs, a discrete tile-map, and no physics and collisions. It
+seemed like a perfect way to get my hands dirty with game programming.</p>
+
+<p>I decided that in my version of the game, the goal would be to protect a
+delicious cheese from an evil rat. Each turn, the player can place a rat trap
+on the map, blocking the path of the rat towards the exit that leads to the
+cheese. The player wins if the rat is totally trapped, and loses if the rat
+reaches the borders of the map.</p>
+
+<p>I started implementing the basic functionalities of the game. It was a simple
+game, but it still had a few algorithmic thingies. In particular, I had to
+implement a basic AI for the rat. I represented the tilemap as a graph with one
+node per tile, edges between adjacent tiles, and reduced the path finding to 
+a shortest path problem from the rat to an exit node. Tiles with traps were marked
+as blocked, and the shortest path algorithm was searching a path through open nodes.
+For the record, I used the 
+<a href="http://jonasboner.com/real-world-scala-dependency-injection-di/">cake pattern</a>
+to represent the graph. The graph seemed to fit nicely into the use case decribed
+in <a href="http://lampwww.epfl.ch/~odersky/papers/ScalableComponent.pdf">this paper</a>.
+I know it may seem overkill, and now that I think about it, it clearly is.</p>
+
+<p>Ok, I have a working game, but it was still missing something.. ah right,
+graphics. Unfortunately, I didn’t know how to draw, and I wasn’t interested in
+buying (or stealing) art on the web.  I could have asked a designer friend, but
+it was my game and I wanted to do it myself. So, I learnt myself a
+<a href="https://www.gimp.org/">GIMP</a> for Great Good, and started drawing the different
+elements of my game. Finally, after quite a bit of struggle, I got to version
+0.1 of Rat Trap:</p>
+
+<div class="post-image-wrapper">
+  
+    <img src="/resources/rat-trap/screenshots/rat-trap-v0.1.png" alt="Screenshot of Rat Trap version 0.1" />
+    
+  
+</div>
+
+<p>It doesn’t look that pretty, but back then I was quite proud of it. There was
+one fixed-size map, randomly generated (that is, a few traps randomly
+positioned on the map), and you had to prevent the rat from exiting the map and
+reaching the delicious cheese.</p>
+
+<p>I released that version — my first Android game! After getting some feedback,
+positive from friends, a bit more negative from strangers, I worked on an improved
+version. The core gameplay was relatively addictive, and I had a few ideas of
+how to integrate additional features to make the puzzle element richer. Additionally,
+I decided to add levels, in order to ease user’s progression.</p>
+
+<p>As expected, I had made quite a few mistakes on that original version, one of
+them being to draw my art using raster graphics. I decided to redo all the art
+of the game, this time using a vector graphics editor. I would still be manipulating
+bitmap in the code, but having the source of the art in vectorial form would make it
+much easier to edit and animate before exporting to a raster image. I picked up
+<a href="https://inkscape.org">Inkscape</a>, which is a truly great software.
+Combining Inkscape with some more programming, I eventually completed version 1.0 of
+Rat Trap:</p>
+
+<div class="post-image-wrapper">
+  
+    <img src="/resources/rat-trap/screenshots/rat-trap-4.png" alt="Screenshot of Rat Trap version 1.0" />
+    
+  
+</div>
+
+<p>As you can see, there are now many more elements on the game screen. I expanded
+the game with a few additional kind of actions, such as using fake cheese to
+lure the rat or using a hammer to stun it for one turn. Also, there is now real
+cheese on the board. I drew each of the actions, buttons, cheeses, as well as
+the rat, in Inkscape.  Having everything as a vector is very convenient to
+support multiple DPI, since one can simply rescale all the sprites to make them
+the right size for the different screen densities.</p>
+
+<p>On the coding side, the extensions fit nicely into my original graph
+representation.  Instead of marking each border node as <em>goal</em> in the graph, I
+could now just mark the few nodes that contained cheeses, and still use the
+shortest path algorithm. The tunnel mecanisms was implemented by simply adding
+additional edges between tunnel tiles. I had to create a level description
+language and a parser.  Ideally I should have developed a level editor as well,
+but I went for the quick and dirty solution and used VIM as my level editor.
+The level description is a very simple, homebrew, plain text format.</p>
+
+<p>Rat Trap is available on <a href="https://play.google.com/store/apps/details?id=com.regblanc.rattrap">Google Play</a>.
+I just released the latest version a few days ago. If you do try it, I would
+very much like to hear feedback from you!  I really enjoyed programming and
+designing this game, and I’m looking forward to making other games in the future!</p>
+
+        </article>
+
+        <div class="share-page">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4">
+      <div class="social-media-share-lead">Share this on &rarr;</div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+    <ul class="social-media-share-list">
+
+      <li class="social-media-share-item social-media-share-twitter">
+        <a href="https://twitter.com/intent/tweet?text=Building an Android Game with Scala and Inkscape&url=http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/&via=regbla&related=regbla"
+           rel="nofollow" target="_blank" title="Share on Twitter">
+          <i class="fa fa-twitter fa-1x"></i> Twitter
+        </a>
+      </li>
+
+      <li class="social-media-share-item social-media-share-fb">
+        <a href="https://facebook.com/sharer.php?u=http://regblanc.com/blog/building-an-android-game-with-scala-and-inkscape/" rel="nofollow" 
+           target="_blank" title="Share on Facebook">
+          <i class="fa fa-facebook fa-1x"></i> Facebook
+        </a>
+      </li>
+
+    </ul>
+    </div>
+
+
+</div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <ul class="social-media-list">
+    <li class="social-media-item">
+      <a href="https://github.com/regb">
+        <i class="fa fa-github fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="https://twitter.com/regbla">
+        <i class="fa fa-twitter fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="http://instagram.com/regisbla">
+        <i class="fa fa-instagram fa-5x"></i>
+      </a>
+    </li>
+  </ul>
+
+  <p class="copyright text-muted">
+    Copyright © Régis Blanc
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/libjs/bootstrap.min.js"></script>
+
+</footer>
+
+
+  </body>
+
+</html>

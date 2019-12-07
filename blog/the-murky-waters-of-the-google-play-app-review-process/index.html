@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Murky Waters of the Google Play App Review Process</title>
+
+  
+  <meta name="description" content="Google Play blocked my game due to Ads Policy violation. Turns out my game does not contain any ads" />
+
+
+
+<!-- facebook Open Graph Metadatas -->
+<meta property="fb:admins"  content="1145810187" />
+<meta property="fb:app_id"  content="529158857268335" />
+<meta property="og:site_name" content="Reg's homepage | Régis Blanc" />
+<meta property="og:locale" content="en_US" />
+
+
+  <meta property="og:type" content="article" />
+
+
+
+  <meta property="og:title" content="The Murky Waters of the Google Play App Review Process" />
+
+
+
+  <meta property="og:description" content="Google Play blocked my game due to Ads Policy violation. Turns out my game does not contain any ads" />
+
+
+
+  <meta property="og:url" content="http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/" />
+
+
+
+  <meta property="og:image" content="http://regblanc.com/resources/winsmash/feature.png" />
+
+
+
+  
+
+
+
+  
+    <meta property="article:tag" content="android" />
+  
+    <meta property="article:tag" content="game" />
+  
+
+
+<!-- not really sure if that's of any use, but probably can't hurt to integrate -->
+
+  <meta property="article:published_time" content="2016-07-24T03:27:08+02:00" />
+
+
+
+<!-- Twitter cards metadatas -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@regbla" />
+<meta name="twitter:creator" content="@regbla" />
+
+
+  <meta name="twitter:title" content="The Murky Waters of the Google Play App Review Process" />
+
+
+
+<meta name="twitter:url" content="http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/" />
+
+
+
+  <meta name="twitter:description" content="Google Play blocked my game due to Ads Policy violation. Turns out my game does not contain any ads" />
+
+
+
+  <meta name="twitter:image" content="http://regblanc.com/resources/winsmash/logo.png" />
+
+
+
+  <link rel="stylesheet" href="/libcss/bootstrap.min.css">
+  <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/libcss/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" 
+        href="http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/">
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+<!--
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/contact/">Contact</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/games/">Games | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/fish-escape/">Fish Escape | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/scalavator/">Scalavator | Game for Android, Web, and Windows</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/projects/">My Projects | Régis Blanc</a>
+          
+        
+          
+          <a class="page-link" href="/games/rat-trap/">Rat Trap | Android Game</a>
+          
+        
+          
+          <a class="page-link" href="/games/winsmash/">WinSmash | Android Game</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Régis Blanc</a>
+        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="/projects/">My Projects</a></li>
+          <li ><a href="/blog/">Blog</a></li>
+          <li ><a href="/about/">About</a></li>
+          <li ><a href="/contact/">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+</header>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post">
+      
+        <header class="post-header">
+          <h1 class="post-title">The Murky Waters of the Google Play App Review Process</h1>
+          <p class="post-meta">Posted on Jul 24, 2016</p>
+        </header>
+      
+        <article class="post-content">
+          <p>They always say — building it is the easy part. I suppose this has some truth
+in it, but I would never have expected spending so much time to get my app
+passed the publishing process. I have been working a few hundreds of hours,
+during my free time, to complete my new game, and Google simply shattered all
+of that by rejecting my app from the Google Play Store.</p>
+
+<p>To give a bit of background, I started developing games for Android about 2
+years ago. Not full time — I am currently working towards getting my PhD — so
+writing games is a fun hobby I have on the side. But lately, it got a lot less
+fun due to an annoying app review process from Google Play.</p>
+
+<p>One of my objective when building games, besides having fun, is to learn as
+much as possible. I try to handle every aspect of the game creation myself. The
+end result is that it takes a lot of time to get a polished product, when you
+account for the hours spent programming (without any engine) and creating arts.
+My <a href="/games/rat-trap/">first game</a> was released last year and was relatively
+well received. Not a runaway success by any means, but most people that
+actually tried the game were rather satisfied with it. That gave me motivation
+to work on new game projects.</p>
+
+<p>So I kept building games for Android. In particular, I spent many hours
+polishing a new game: <a href="/games/winsmash">WinSmash</a>. WinSmash is based on a very
+simple concept, but I spent a lot of time making it fun to play and adding
+features on top to get a relatively varied gameplay.</p>
+
+<p>Even though I started building a few abstractions on top of the Android
+framework in the form of a
+<a href="https://github.com/regb/scala-game-library">Scala game library</a>,
+I am still essentially dependent on the Android framework for my
+game. I cannot export it to iOS without significant extra work, and the game is
+just not suited for Desktop or console. What that means is that it is a big
+deal for me to be able to publish on Google Play, and unfortunately currently I
+am not.</p>
+
+<p>As I was getting closer to release, I started publishing some alpha builds on
+the Play Store, so that some of my friends could test my game and provide some
+feedback.  The first build was successfully published, and alpha testers were
+able to download the game. I kept working for a while, and published another
+version, but this time, much to my surprise, the update got rejected. What was
+the reason? I received a short email saying that it violated the <em>disruptive
+ads</em> policy.</p>
+
+<p>Okay, that’s interesting. My first thought was that it was a mistake, as my
+application was only in alpha (not even public yet), and the only
+advertisements it contained was the testing version of
+<a href="https://clients.adcolony.com/home">AdColony</a> (which displays short, 3 seconds,
+branding videos). So, I assumed some kind of bot had done a mistake, and I
+planned to fire an appeal. But first I had a quick look at the policy.</p>
+
+<p>Here are the two paragraphs that refer to <em>disruptive ads</em>, taken from the
+<a href="https://play.google.com/about/monetization-ads/ads/disruptive/">Policy Center</a>:</p>
+
+<blockquote>
+  <p>Ads should not be shown in a way that results in inadvertent clicks. Forcing a user to click an ad or submit personal information for advertising purposes before they can fully use an app is prohibited.</p>
+
+  <p>Interstitial ads may only be displayed inside of the app serving them. If your app displays interstitial ads or other ads that interfere with normal use, they must be easily dismissable without penalty.</p>
+</blockquote>
+
+<p>If I understand the first paragraph correctly, it is saying I should not place ads
+in my app in a way that might mislead users to click on them. In my app, one must quickly dismiss
+random windows that pop on the screen. Below are some screenshots to illustrate, or
+you can check out the <a href="/games/winsmash/">official page</a> for more details.</p>
+
+<div class="row list-screenshots">
+  <div class="col-md-4 col-screenshot">
+    <img class="screenshot" src="/resources/winsmash/screenshots/winsmash1.png" />
+  </div>
+  <div class="col-md-4 col-screenshot">
+    <img class="screenshot" src="/resources/winsmash/screenshots/winsmash2.png" />
+  </div>
+  <div class="col-md-4 col-screenshot">
+    <img class="screenshot" src="/resources/winsmash/screenshots/winsmash3.png" />
+  </div>
+</div>
+
+<p>Now, as you may have understood, the essence of the game is to close the windows/pop-ups
+as fast as possible. Some windows ask trick questions, and clicking on the wrong button
+might open up additional pop-ups, or even lose you the game. In the same spirit, I found
+it funny to integrate the classic <q>Rate it</q> question as one such pop-up, and you can
+see it at the bottom of the middle screenshot, in the background. Clicking on <q>Rate it</q>
+would send you to the game page, hardly something that could be considered as an advertisement,
+or I guess 99% of apps on Google Play should be banned.</p>
+
+<p>In the third screenshot, you may have recognized a pop-up ad. Does it look harmful, or does it
+look kind of fake? You bet it is, I designed it myself to be an obvious parody of Internet pop-up
+ads. It should be painfully obvious that they do not advertise anything, so I sure hope that
+Google is not blocking my app because of that game element. So this pop-up ad is just like any
+of the other window — you need to close it. That one has a gray cross in a corner, and you just click
+on it to dimiss it. There is a small twist if you happen to fail and click on the actual pop-up:
+it fires a video advertisement. A regular interstitial advertisement, that the player can dismiss after
+a few seconds. I am reading, and re-reading the policy, but it says nothing about when to display
+interstitial ads, and since some of the top games in the Google Play Store don’t hesitate to show
+us interstititial ads between every game actions, that seems to be like a completely fair and reasonable
+mecanism.</p>
+
+<p>Again, the policy states <q>Ads should not be shown in a way that results in inadvertent clicks</q>, that
+clearly mentions ads, which in the case of my game is the video. The video is pretty standard, and in no
+way leads to inadvertent clicks. The pop-up fake ads in my game are <em>not</em> ads, and it is totally fair to
+show them at any random position in the game.</p>
+
+<p>The second paragraph of the policy refer to displaying ads outside of the application,
+which is clearly not something WinSmash does.</p>
+
+<p>I tried to explain my case over an
+<a href="https://support.google.com/googleplay/android-developer/answer/2477981?hl=en">appeal</a>,
+but that failed with essentially the same explanation as the original email. At
+that point, I was getting a bit pissed off, so I started looking for ways to
+contact a human directly and chat with him. But I wasn’t able to find any chat
+support, or phone number. I tried to send a support/feedback request (still
+waiting for an answer on that one), and also decided to reply directly to the
+response mail I got from the appeal. We exchanged about 8 emails (apparently
+with the appeal reviewer) on the matter, but that ultimately failed to
+reinstate my app. I won’t share the content of these emails, but the one thing
+that was clear to me in the end is that the reviewer kept refering to my
+in-game fake pop-up ads as true ads, which was really baffling to me.</p>
+
+<p>I didn’t want to modify my game, I was proud of the behaviour of the different
+pop-ups, and punishing mistakes by playing interestitial ads seemed to be
+totally in the spirit of the game, fair to the player, and would be a clever
+monetization technique — a win-win situation. But I was tired of this fight,
+and just wanted to have my game out the door, so I decided to do the simplest thing that
+would solve the issue: I removed the video ads.</p>
+
+<p>I still kept the fake pop-up ads, and clicking on them would just create additional
+windows to dismiss in the game, but I stopped playing any actual video ads. I don’t want
+to remove them as they give variations to the gameplay. I polished
+a few additional things and finally uploaded a new APK (still in alpha testing).
+I had to wait a few hours, to get a notification that, you guessed it, <em>Google rejected my
+app because it violates their <strong>disruptive ads</strong> policy</em>.</p>
+
+<p>Now I’m truly pissed off. I just cannot believe what I’m seing. I have
+explained to them many times that the pop-ups are just part of the game, I just
+don’t understand how one can mistake that for advertisement. My game does not
+contain any ads; my code does not even include dependencies to an ads network
+framework.</p>
+
+<p>So now, I just don’t know what to do. Of course, I started a new appeal
+procedure, as rejecting that latest version makes absolutely no sense. I’m
+waiting for a decision on that one. I also published my game as a standalone
+APK. I wrote this article so there is a writen trace of how an app review
+process can go totally awry. I never developed for iOS, and I always thought
+that Android was a much more open platform, with an easier and better app
+review process. But after this, I’m seriously considering buying my first
+iPhone, and start developing my future games on iOS instead.</p>
+
+<p><em>Update — July 27th 2016</em></p>
+
+<p>I’m happy to announce that, as of today, WinSmash has been approved and is
+currently live on
+<a href="https://play.google.com/store/apps/details?id=com.regblanc.winsmash">Google Play</a>.
+Here is what happened. The second appeal also failed, following that, I seeked
+some help on
+<a href="https://www.reddit.com/r/gamedev/comments/4uoc2z/google_play_rejected_my_game_for_ads_policy/">reddit</a>,
+where I got a lot of useful suggestions, ideas, and feedback. I made a new
+build, in which I changed a few things, such as removing some pop-ups redirecting
+to Google Play (for example, the <em>Rate it</em> pop-up). I also added a couple
+disclaimers in the store listing, and as a tutorial window. I submitted that
+build for review to Google Play, and it magically got accepted. I cannot be
+sure what was the dicisive factor, but I’m happy to have my game available.
+I was able to promote the alpha version to production without any issue, and
+since then was also able to send and get approved a very light update.</p>
+
+        </article>
+
+        <div class="share-page">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4">
+      <div class="social-media-share-lead">Share this on &rarr;</div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+    <ul class="social-media-share-list">
+
+      <li class="social-media-share-item social-media-share-twitter">
+        <a href="https://twitter.com/intent/tweet?text=The Murky Waters of the Google Play App Review Process&url=http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/&via=regbla&related=regbla"
+           rel="nofollow" target="_blank" title="Share on Twitter">
+          <i class="fa fa-twitter fa-1x"></i> Twitter
+        </a>
+      </li>
+
+      <li class="social-media-share-item social-media-share-fb">
+        <a href="https://facebook.com/sharer.php?u=http://regblanc.com/blog/the-murky-waters-of-the-google-play-app-review-process/" rel="nofollow" 
+           target="_blank" title="Share on Facebook">
+          <i class="fa fa-facebook fa-1x"></i> Facebook
+        </a>
+      </li>
+
+    </ul>
+    </div>
+
+
+</div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="site-footer">
+
+  <ul class="social-media-list">
+    <li class="social-media-item">
+      <a href="https://github.com/regb">
+        <i class="fa fa-github fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="https://twitter.com/regbla">
+        <i class="fa fa-twitter fa-5x"></i>
+      </a>
+    </li>
+    <li class="social-media-item">
+      <a href="http://instagram.com/regisbla">
+        <i class="fa fa-instagram fa-5x"></i>
+      </a>
+    </li>
+  </ul>
+
+  <p class="copyright text-muted">
+    Copyright © Régis Blanc
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/libjs/bootstrap.min.js"></script>
+
+</footer>
+
+
+  </body>
+
+</html>
