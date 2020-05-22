@@ -5,7 +5,24 @@
 <body>
   <canvas id="my_canvas"></canvas>
 
-  <!-- Include Scala.js compiled code -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+
+  <script>
+	var firebaseConfig = {
+	        apiKey: "AIzaSyADoRl5DhtomO8TmO4BnXz-zP9_-DihH78",
+	        authDomain: "fish-escape.firebaseapp.com",
+	        databaseURL: "https://fish-escape.firebaseio.com",
+	        projectId: "fish-escape",
+	        storageBucket: "fish-escape.appspot.com",
+	        messagingSenderId: "556466102011",
+	        appId: "1:556466102011:web:20219016bf6d33b1d69a5e",
+	        measurementId: "G-VQW6BW8ZMW"
+	};
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
+  </script>
+
   <script type="text/javascript" src="icetrap.js"></script>
 
 </body>
