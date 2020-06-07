@@ -6,9 +6,504 @@
 </description>
     <link>http://regblanc.com/</link>
     <atom:link href="http://regblanc.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 May 2020 23:42:09 +0200</pubDate>
-    <lastBuildDate>Sat, 23 May 2020 23:42:09 +0200</lastBuildDate>
+    <pubDate>Sun, 07 Jun 2020 23:53:57 +0200</pubDate>
+    <lastBuildDate>Sun, 07 Jun 2020 23:53:57 +0200</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Cross-Platform Game Development in Scala, Natively</title>
+        <description>&lt;p&gt;The Scala ecosystem offers a unique opportunity to do cross-platform game
+development with full access to the native API of each platform. And I’m not
+talking about making an HTML5 game with Scala.js and wraping it in web views
+to run everywhere, I’m talking true native compilation by leveraging the
+various platforms on which Scala runs, that is the JVM, Scala.js, and
+Scala Native. With all these platforms, a game can be written once, and then
+compiled:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On the JVM, for a desktop game with AWT or Swing&lt;/li&gt;
+  &lt;li&gt;On Android, still on the JVM but using the Android SDK&lt;/li&gt;
+  &lt;li&gt;With Scala.js, to target the web and HTML5&lt;/li&gt;
+  &lt;li&gt;With Scala Native, to target iOS, or the destkop again for
+   a purely native game running on Linux, Windows, and MacOS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While the above sounds plausible in theory, how do we go about it? Let’s
+go through a small example of how we can write such a game.&lt;/p&gt;
+
+&lt;p&gt;We will be using an experimental game engine that I have been developing for
+Scala — &lt;a href=&quot;https://github.com/regb/scala-game-library&quot;&gt;SGL&lt;/a&gt;.  SGL was developed
+for enabling the above workflow and for taking advantage of the incredible
+Scala ecosystem. The library provides a layer of abstraction on top of all the
+primitives a game will need, and it provides backends implementing this
+interface to target each platform using their respective native API.&lt;/p&gt;
+
+&lt;p&gt;Some concrete examples: SGL provides an HTML5 backend, which implements the core
+abstraction APIs in Scala.js, with the standard web technologies, and compiled
+with the Scala.js compiler.  Similarly, we use the regular JVM compiler
+combined with &lt;a href=&quot;https://github.com/scala-android/sbt-android&quot;&gt;sbt-android&lt;/a&gt; to
+provide a backend for Android. And there are more backends for other platforms,
+including a Scala Native backends to compile native games.&lt;/p&gt;
+
+&lt;p&gt;Alright, that’s enough background for now, let’s build a cross-platform game.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-the-environment&quot;&gt;Setting up the Environment&lt;/h2&gt;
+
+&lt;h4 id=&quot;software-you-need-to-install&quot;&gt;Software you Need to Install&lt;/h4&gt;
+
+&lt;p&gt;This has been tested in Linux, but it should work on OS X and maybe (just
+maybe) Windows. The instructions are for Linux though (although they should
+work the same on OS X). You will need SBT and git, which are most likely
+installed already if you’re a Scala developer. If you just
+want to try the JVM desktop and the HTML backends, you can move to &lt;a href=&quot;#publish-sgl&quot;&gt;setting up
+SGL&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to try out the Android backend, you might need to install a local
+Android SDK (following an official Android tutorial). For the Native backend,
+you will need to follow &lt;a href=&quot;https://scala-native.readthedocs.io/en/v0.3.9-docs/user/setup.html#installing-clang-and-runtime-dependencies&quot;&gt;the official Scala Native
+setup&lt;/a&gt;,
+and in addittion you need the dev libraries of OpenGL, SDL2, and SDL2-image. On
+Ubuntu, you would do this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get install libsdl2-dev libsdl2-image-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;publish-sgl&quot;&gt;Publishing SGL locally&lt;/h4&gt;
+
+&lt;p&gt;As SGL is still experimental, we need to build it locally. That’s not very hard
+though, so just run the following commands:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git@github.com:regb/scala-game-library.git
+cd scala-game-library
+git checkout 43c2011e49cf3f1798e94118cf117dfd1fa15ece
+sbt publishLocal
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;checkout&lt;/code&gt; step is meant to synchronize with the commit when this tutorial
+was written, but you can try to use HEAD, although there might be slight
+variations. The &lt;code class=&quot;highlighter-rouge&quot;&gt;publishLocal&lt;/code&gt; command will build the library and publish the
+Maven artifact locally (with version &lt;code class=&quot;highlighter-rouge&quot;&gt;0.0.1&lt;/code&gt;), it will take a bit of time.
+While this is going on, you can move on to the next section and start preparing
+the game.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-a-window-on-the-screen&quot;&gt;Getting a Window on the Screen&lt;/h2&gt;
+
+&lt;p&gt;Now we can get started on writing our game. We’ll call the game Scalavator.
+Let’s go into a fresh and clean directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir scalavator
+cd scalavator
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here’s our &lt;code class=&quot;highlighter-rouge&quot;&gt;build.sbt&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sbtcrossproject.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crossProject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CrossType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;commonSettings&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;scalaVersion&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2.12.11&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;scalacOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-unchecked&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-deprecation&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-feature&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;scalaNativeVer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2.11.8&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;core&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;crossProject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;JSPlatform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JVMPlatform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NativePlatform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;crossType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;CrossType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Pure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./core&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commonSettings&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;scalavator-core&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;libraryDependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.regblanc.sgl&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%%%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sgl-core&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;nativeSettings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scalaVersion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scalaNativeVer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;coreJVM&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;jvm&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;coreJS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;js&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;coreNative&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;native&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;desktop&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./desktop&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commonSettings&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;scalavator-desktop&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;libraryDependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.regblanc.sgl&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sgl-desktop-awt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fork&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;dependsOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coreJVM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This will need a few SBT plugins to work, so add this to the &lt;code class=&quot;highlighter-rouge&quot;&gt;project/plugins.sbt&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;nf&quot;&gt;addSbtPlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.portable-scala&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sbt-scalajs-crossproject&quot;&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;addSbtPlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.portable-scala&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sbt-scala-native-crossproject&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;addSbtPlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.scala-js&quot;&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sbt-scalajs&quot;&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;addSbtPlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.scala-native&quot;&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sbt-scala-native&quot;&lt;/span&gt;              &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.3.9&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And just to be on the safe side, you may want to specify the SBT version in
+&lt;code class=&quot;highlighter-rouge&quot;&gt;project/build.properties&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;nv&quot;&gt;sbt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;What we did above is we added the Scala.js and Scala Native plugins and we
+defined two projects, one cross-platform &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt; project that can be compiled
+for JVM, Scala.js, and Scala Native, and one &lt;code class=&quot;highlighter-rouge&quot;&gt;desktop&lt;/code&gt; project for the desktop
+JVM version of the game. We are not using Scala.js or Scala Native yet, but
+that will come later.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt; project is where all our game code will go. This is where we will
+use the SGL core API to implement an entire game. This project depends on the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sgl-core&lt;/code&gt; artifact, which provides the API, without concrete implementation.
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt; project cannot run by itself, we need a project that provides a
+backend implementation for some platform, and we do that with the &lt;code class=&quot;highlighter-rouge&quot;&gt;desktop&lt;/code&gt;
+project, which will simply contain a &lt;code class=&quot;highlighter-rouge&quot;&gt;Main&lt;/code&gt; object that links in the proper
+backend implementation, in that case the &lt;code class=&quot;highlighter-rouge&quot;&gt;sgl-desktop-awt&lt;/code&gt; artifact.&lt;/p&gt;
+
+&lt;p&gt;Let’s add our first &lt;code class=&quot;highlighter-rouge&quot;&gt;GameScreen&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;core/src/main/scala/ScalavatorGame.scala&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.regblanc.scalavator&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;core&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl._&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScalavatorGame&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;this:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GraphicsProvider&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;InputProvider&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;WindowProvider&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SystemProvider&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameStateComponent&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainScreen&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameScreen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;main-screen&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Graphics.Canvas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;startingScreen&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GameScreen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainScreen&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;That’s all the code we need for our game implementation. Let’s explain a bit.
+There’s a top-level trait, &lt;code class=&quot;highlighter-rouge&quot;&gt;ScalavatorGame&lt;/code&gt;, with some dependencies defined as
+&lt;code class=&quot;highlighter-rouge&quot;&gt;this: ... with ... =&amp;gt;&lt;/code&gt;. this is a pattern invented in the old days of Scala,
+called the &lt;a href=&quot;http://jonasboner.com/real-world-scala-dependency-injection-di/&quot;&gt;cake
+pattern&lt;/a&gt;, and
+it’s a way to do typesafe, compile-time, no-framework, dependency injection.
+You can read up on the cake pattern if you want, but the way to understand this
+code is that we are declaring a module with some dependencies that will need to
+be injected later (in the Main class). By declaring these dependencies, we can
+implement our game using the API of SGL (these are provided by
+&lt;code class=&quot;highlighter-rouge&quot;&gt;GraphicsProvider&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;WindowProvider&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;SystemProvider&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;InputProvider&lt;/code&gt;, and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;GameScreenComponent&lt;/code&gt;). You can think of this list of dependencies as a list of
+package imports, but since we do not know statically the implementation, we
+instead use this cake pattern to inject them.&lt;/p&gt;
+
+&lt;p&gt;The actual game implementation takes place inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;ScalavatorGame&lt;/code&gt; module.
+The basic building blocks of SGL are &lt;code class=&quot;highlighter-rouge&quot;&gt;GameScreen&lt;/code&gt; (provided by the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;GameScreenComponent&lt;/code&gt;), and they are meant to abstract self-contained parts
+of the game. Typically you would have a Menu screen, a map screen, a settings
+screen, etc. It’s up to you to choose how to connect screens together. Here
+we just use a single screen to keep things simple.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;GameScreen&lt;/code&gt; must implement three functions, &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;update&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;render&lt;/code&gt;.
+Name is mostly for debugging, so just give it a unique name. Then &lt;code class=&quot;highlighter-rouge&quot;&gt;update&lt;/code&gt; and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;render&lt;/code&gt; are automatically called in the main game loop, and they provides
+hooks to do what game loop usually do. For &lt;code class=&quot;highlighter-rouge&quot;&gt;update&lt;/code&gt;, that means you simulate
+the world according to the delta time, and for &lt;code class=&quot;highlighter-rouge&quot;&gt;render&lt;/code&gt;, you use the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Graphics.Canvas&lt;/code&gt; to render the world on the screen. The &lt;code class=&quot;highlighter-rouge&quot;&gt;Graphics.Canvas&lt;/code&gt; is
+one of these abstract APIs that are provided by the &lt;code class=&quot;highlighter-rouge&quot;&gt;GraphicsProvider&lt;/code&gt; and
+which will become a concrete native object depending on the platform.&lt;/p&gt;
+
+&lt;p&gt;Finally we override the &lt;code class=&quot;highlighter-rouge&quot;&gt;startingScreen&lt;/code&gt; method, which is a top-level method
+that needs to be provided by your game. The game loop will automatically
+instantiate the first screen using this method, and will start running it
+through the &lt;code class=&quot;highlighter-rouge&quot;&gt;update&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;render&lt;/code&gt; loop. This is essentially the entry point into
+the game.&lt;/p&gt;
+
+&lt;p&gt;Now we have a game that compiles and does nothing. But we still cannot run it
+because the game is missing a concrete platform implementation. So we will add
+a &lt;code class=&quot;highlighter-rouge&quot;&gt;Main&lt;/code&gt; class in &lt;code class=&quot;highlighter-rouge&quot;&gt;desktop/src/main/scala/Main.scala&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.regblanc.scalavator&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;desktop&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;core.ScalavatorGame&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl.awt.AWTApp&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl.awt.util.VerboseStdOutLoggingProvider&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScalavatorGame&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AWTApp&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VerboseStdOutLoggingProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;frameDimension&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;650&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you can see, the main object doesn’t do much. It basically links in the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;AWTApp&lt;/code&gt; implementation (which is the AWT JVM platform implementation of the
+SGL core API) with our abstract &lt;code class=&quot;highlighter-rouge&quot;&gt;ScalavatorGame&lt;/code&gt; that we implemented. This
+does not look like much, but this is where the magic happens. The &lt;code class=&quot;highlighter-rouge&quot;&gt;AWTApp&lt;/code&gt; is
+a complete implementation of the API exported by SGL through the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;GraphicsProvider&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;InputProvider&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;WindowProvider&lt;/code&gt;, and so on. The &lt;code class=&quot;highlighter-rouge&quot;&gt;AWTApp&lt;/code&gt;
+implements all these modules with the AWT framework on the JVM, and by
+injecting these when declaring our main class, we are creating a concrete
+instance of our game ready to run on the JVM on our desktop computer.&lt;/p&gt;
+
+&lt;p&gt;There’s one additional provider that is linke din, the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;VerboseStdOutLoggingProvider&lt;/code&gt;, which is required to implement logging.  The
+main object can also override some properties of &lt;code class=&quot;highlighter-rouge&quot;&gt;AWTApp&lt;/code&gt;, in that case it sets
+the window size with &lt;code class=&quot;highlighter-rouge&quot;&gt;frameDimension&lt;/code&gt;. Our game will be playable on mobile so
+we will target a typical portrait resolution.&lt;/p&gt;
+
+&lt;p&gt;Now we can run our game! Just type the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sbt desktop/run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You should get a blank window on the screen.&lt;/p&gt;
+
+&lt;h2 id=&quot;drawing-on-the-screen&quot;&gt;Drawing on the Screen&lt;/h2&gt;
+
+&lt;p&gt;Now we technically have a game, but we can all agree it’s a bit boring. Let’s
+make it a bit more exciting. Let’s get some character on the screen, using some
+placeholder shapes for starters:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl.geometry._&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainScreen&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameScreen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;characterWidth&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;characterHeight&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterPosition&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt;
+      &lt;span class=&quot;nc&quot;&gt;Point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Window&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterWidth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Window&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Graphics.Canvas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;drawColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Graphics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;White&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;drawRect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;characterPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;characterPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterWidth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Graphics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;defaultPaint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;withColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Graphics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Green&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We imported the &lt;code class=&quot;highlighter-rouge&quot;&gt;sgl.geometry._&lt;/code&gt; package which provides a few basic geometric
+classes (&lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Vec&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Rect&lt;/code&gt;, etc). Now is a good time to explain the
+coordinates system of the screen. The origin (0, 0) is on the top left,
+the x axis expands on the right and the y axis expands towards the bottom.&lt;/p&gt;
+
+&lt;p&gt;We want to define our character position on the bottom center. For reasons that
+will become apparent later, we use the bottom-left of the character as the
+coordinates for the character position. You can access the total available
+screen dimensions with &lt;code class=&quot;highlighter-rouge&quot;&gt;Window.width&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Window.height&lt;/code&gt;, so we use these to
+position it in the center at the bottom of the screen.&lt;/p&gt;
+
+&lt;p&gt;Then we render this character on the screen using a simple green rectangle. We
+also draw a white background. Go ahead and run the game now, it should render a 
+white background with a green rectangle at the bottom-center.&lt;/p&gt;
+
+&lt;h2 id=&quot;moving-a-character-on-the-screen&quot;&gt;Moving a Character on the Screen&lt;/h2&gt;
+
+&lt;p&gt;Now let’s add some movement to our character. The game we are building is
+inspired by Doodle jump, we are trying to jump from platform to platform and go
+as high as possible. So let’s listen for user inputs and jump when appropriate.
+As we are planning to make this game playable on mobile, we will just look for
+a click event on the screen instead of using keyboard keys like the space bar.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainScreen&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameScreen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterVelocity&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Gravity&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;430&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleInput&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ev&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Input.InputEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ev&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;TouchUpEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;MouseUpEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;MouseButtons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;characterVelocity&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;320&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;setEventProcessor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handleInput&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;characterPosition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;characterVelocity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1000f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;characterVelocity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Gravity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1000f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;nf&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;characterPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;toInt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Window&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;characterVelocity&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A few notes on what we added. We defined a constant &lt;code class=&quot;highlighter-rouge&quot;&gt;Gravity&lt;/code&gt; which a vector
+force pointing downward (hence positive because the y-axis is pointing downward). We add a &lt;code class=&quot;highlighter-rouge&quot;&gt;characterVelocity&lt;/code&gt; variable to track the current velocity of the
+character. On an &lt;code class=&quot;highlighter-rouge&quot;&gt;up&lt;/code&gt; event (either mouse or touch), we set the velocity to
+push the character up. On each &lt;code class=&quot;highlighter-rouge&quot;&gt;update&lt;/code&gt; call, we update the character position,
+and then apply the gravity force to the velocity, until we are back to the
+bottom of the screen where we stop.&lt;/p&gt;
+
+&lt;p&gt;This demonstrates the API provided by the &lt;code class=&quot;highlighter-rouge&quot;&gt;InputProvider&lt;/code&gt;, in particular you
+can set (at initialization of the screen) an event processor, which will be
+called on each &lt;code class=&quot;highlighter-rouge&quot;&gt;Input.InputEvent&lt;/code&gt;. You can pattern match on the large number
+of inputs, and act accordingly. We also see a typical use of the &lt;code class=&quot;highlighter-rouge&quot;&gt;update&lt;/code&gt;
+method to simulate the physics of the game world.&lt;/p&gt;
+
+&lt;p&gt;Now you can &lt;code class=&quot;highlighter-rouge&quot;&gt;sbt desktop/run&lt;/code&gt; and click on the screen to jump around. The game
+is slightly more interesting, now, so let’s see how we can port it to other
+platforms.&lt;/p&gt;
+
+&lt;h2 id=&quot;porting-our-game-to-the-web&quot;&gt;Porting our Game to the Web&lt;/h2&gt;
+
+&lt;p&gt;Now comes the fun part. We implemented a (tiny) game using an abstract API, and
+we have been running it conveniently from our SBT session with a simple run
+command. The reason it has been so smooth is that the &lt;code class=&quot;highlighter-rouge&quot;&gt;desktop&lt;/code&gt; backend is
+using the standard Java AWT API for windowing, rendering, and inputs, and it
+just works out of the box without any external dependencies. But SGL provides
+backends for other platforms, which require a bit more setup, but also open
+up opportunities for publishing your game.&lt;/p&gt;
+
+&lt;p&gt;Let’s first make a web version of the game. Let’s append a new project to our
+&lt;code class=&quot;highlighter-rouge&quot;&gt;build.sbt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;html5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./html5&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;enablePlugins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ScalaJSPlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commonSettings&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;scalavator-html5&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;libraryDependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.regblanc.sgl&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%%%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sgl-html5&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;scalaJSUseMainModuleInitializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;dependsOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coreJS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is a new &lt;code class=&quot;highlighter-rouge&quot;&gt;html5&lt;/code&gt; project, which is a Scala.js project and depends on the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sgl-html5&lt;/code&gt; artifact, which provides the scala.js implementation of the SGL
+core APIs. We need a Main class for instantiating the game on the platform, so
+add this file &lt;code class=&quot;highlighter-rouge&quot;&gt;html5/src/main/scala/Main.scala&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.regblanc.scalavator&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;html5&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;core.ScalavatorGame&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl.html5._&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl.html5.themes.FixedWindowTheme&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sgl.html5.util._&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScalavatorGame&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Html5App&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Html5VerboseConsoleLoggingProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;GameCanvasID&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;scalavator_canvas&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;theme&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FixedWindowTheme&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;frameSize&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;400&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;650&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This code is very similar to the &lt;code class=&quot;highlighter-rouge&quot;&gt;desktop&lt;/code&gt; Main object, but instead it links in
+the &lt;code class=&quot;highlighter-rouge&quot;&gt;Html5App&lt;/code&gt; implementation of SGL. It has a slightly different configuration,
+because the settings you can control for a web app are different than for a
+desktop app. In particular, you have to set the &lt;code class=&quot;highlighter-rouge&quot;&gt;GameCanvasID&lt;/code&gt;, which is the
+id of an HTML canvas tag that will be used to render the game. You have to
+provide the &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; shell in which the game will run, so you have total
+freedom to place the canvas whenever you want. Here for convenience, we used
+an &lt;code class=&quot;highlighter-rouge&quot;&gt;FixedWindowTheme&lt;/code&gt;, which is a prebuilt theme that makes it convenient to
+get full-page app. The theme will automatically sets a bunch of style and
+positions on the HTML page, so it can be convenient to get started quickly.
+With that theme, you can just use a bare &lt;code class=&quot;highlighter-rouge&quot;&gt;html5/index.html&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;scalavator_canvas&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;scalavator.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now all that you need is to compile your game as a Javascript file and
+move it next to the &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sbt html5/fastOptJS
+cp html5/target/scala-2.12/scalavator-html5-fastopt.js html5/scalavator.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you can just browse your local filesystem from your browser, and when
+you visit the &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file, you should see your game. As said above, you
+have total flexibility on how you want to embed your game in your webpage. By
+setting the theme to &lt;code class=&quot;highlighter-rouge&quot;&gt;NoTheme&lt;/code&gt;, you could for example embed the game in a
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;canvas&amp;gt;&lt;/code&gt; tag that you include in an online tutorial, just like this:&lt;/p&gt;
+
+&lt;canvas id=&quot;scalavator_canvas_1&quot; width=&quot;400&quot; height=&quot;550&quot; style=&quot;display: block; margin: auto; border: 1px solid black;&quot;&gt;&lt;/canvas&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/resources/scalavator/tutorial/scalavator1.js&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;porting-our-game-to-scala-native&quot;&gt;Porting our Game to Scala Native&lt;/h2&gt;
+
+&lt;p&gt;Assuming you have a working Scala Native setup, and you installed OpenGL, SDL2,
+and SDL2 image, this should &lt;em&gt;just work&lt;/em&gt;. Let’s add the &lt;code class=&quot;highlighter-rouge&quot;&gt;native&lt;/code&gt; project to our
+&lt;code class=&quot;highlighter-rouge&quot;&gt;build.sbt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./native&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;enablePlugins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ScalaNativePlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commonSettings&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scalaVersion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scalaNativeVer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;scalavator-native&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;libraryDependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.regblanc.sgl&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%%%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;sgl-desktop-native&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// This only works on Linux, if you are running on Mac you
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// need these linking options instead:
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//    nativeLinkingOptions ++= Seq(&quot;-framework&quot;, &quot;OpenGL&quot;)
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;nativeLinkingOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-lGL&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;dependsOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coreNative&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The only tricky part is that Scala Native requires Scala 2.11, which is done by
+overriding the &lt;code class=&quot;highlighter-rouge&quot;&gt;scalaVersion&lt;/code&gt; above. We did the same when we added the &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt;
+project with a native-only settings. With this, our code will need to be
+compatible with both Scala 2.11 and Scala 2.12, at least until Scala Native
+supports 2.12.&lt;/p&gt;
+
+&lt;p&gt;You should be able to run a native version of the game with&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sbt native/run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;But,  I hear you say, it looks just like the JVM version, what proves me it’s
+actually running natively? On more convincing way to run it is to do just link
+the binary:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sbt native/nativeLink
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then to actually run the binary directly:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./native/target/scala-2.11/scalavator-native-out
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;recap&quot;&gt;Recap&lt;/h2&gt;
+
+&lt;p&gt;Let’s see where we are at. We have created 4 projects, a shared &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt; project,
+and three implementation of this project for three platforms (awt, web, and
+native). Now typically we would work hard on our &lt;code class=&quot;highlighter-rouge&quot;&gt;core&lt;/code&gt; project to make a great
+game, test it along the way with the convenient &lt;code class=&quot;highlighter-rouge&quot;&gt;desktop/run&lt;/code&gt; which is fast and
+runs directly in your SBT session, and every now and then you could make
+release build for your target platform.&lt;/p&gt;
+
+&lt;p&gt;Now that the platforms are configured, you do not need to touch them, except
+for adding new ones. You can just work on the core module, test it with
+desktop, and eventually deploy it to your platform of choice. This workflows
+really pays off when you start targeting mobile platforms, like Android and
+iOS, where the release process (even for a debug version) is quite slow and
+cumbersome.&lt;/p&gt;
+
+&lt;p&gt;Let’s take a break here. The current state of our game is equivalent to the
+&lt;a href=&quot;https://github.com/regb/sgl-starter-project&quot;&gt;SGL starter project&lt;/a&gt; so if
+you have been reading without actually writing code, you can clone this
+project and try it out now. You can also start from there for any SGL-related
+project.&lt;/p&gt;
+
+&lt;p&gt;In a follow-up post, we will expand our game by using many more features of
+SGL. We will also show how to build the game for Android and iOS.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 07 Jun 2020 16:00:00 +0200</pubDate>
+        <link>http://regblanc.com/blog/cross-platform-game-development-in-scala-natively/</link>
+        <guid isPermaLink="true">http://regblanc.com/blog/cross-platform-game-development-in-scala-natively/</guid>
+        
+        <category>scala-library</category>
+        
+        <category>gamedev</category>
+        
+        
+      </item>
     
       <item>
         <title>Fish Escape, a Remake Three Years in the Making</title>
@@ -1491,93 +1986,6 @@ launch this time.&lt;/p&gt;
         <pubDate>Sat, 10 Jan 2015 02:27:08 +0100</pubDate>
         <link>http://regblanc.com/blog/revamping-timestash/</link>
         <guid isPermaLink="true">http://regblanc.com/blog/revamping-timestash/</guid>
-        
-        <category>timestash</category>
-        
-        <category>startup</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Launching a Social Network for Nostalgic Feelings</title>
-        <description>&lt;p&gt;These last few weeks have been very exciting. I took some time off my PhD to 
-focus on launching our new startup &lt;a href=&quot;https://www.timestash.com&quot;&gt;&lt;em&gt;TimeStash&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I have been working part-time on TimeStash since beginning of 2013. I am taking
-care of the full stack: database, system administration, backend programming
-and front-end programming. My colleagues are dealing with the business aspects
-of the project and are designing the user experience.&lt;/p&gt;
-
-&lt;p&gt;TimeStash is a platform to retrieve, store, and organize all your memories.  It
-is also designed to be a social experience, where you can share souvenirs with
-your friends. One of the core feature of TimeStash is a sort of time machine,
-where you can navigate through the years and browse the public memories at the
-time.&lt;/p&gt;
-
-&lt;div class=&quot;post-image-wrapper&quot;&gt;
-  
-    &lt;img src=&quot;/img/timestash-v1-livestash.png&quot; alt=&quot;Screenshot of the LiveStash&quot; /&gt;
-    
-  
-    &lt;p class=&quot;post-image-caption&quot;&gt;TimeStash - the livestash&lt;/p&gt;
-  
-&lt;/div&gt;
-
-&lt;p&gt;We had developed and refined TimeStash for close to two years, so we were
-confident that the product was ready for prime time. We knew that we still had
-some issues, such as not being mobile-friendly. However, the website had grown
-quite complex, and unfortunately wasn’t designed with mobile experience in
-mind. At that point, it was just too much work to redesign the website to make
-it reactive. So the plan was to grab the desktop users, and confirm that there
-was a market for our product. Only then, we would start to invest resource in
-a mobile version.&lt;/p&gt;
-
-&lt;p&gt;We launched TimeStash in Mexico City. Why so far from Switzerland? Two reasons.
-Our CEO had very good contacts in Mexico, and we thought that the conditions
-there were ideal to test our concept before going for a bigger market like the
-United States.&lt;/p&gt;
-
-&lt;p&gt;I wasn’t directly involved in the logistics of the launch. I am just the tech
-guy and just had to make sure the website wouldn’t crash. The reason I mention this
-is to make it clear that I have no merit in how the launch was handled. But I have
-to say, what was accomplished there is a true miracle. I can’t go too much
-into details as some of this information is still confidential, but I will try to
-give an overview of what we did and what response we got.&lt;/p&gt;
-
-&lt;p&gt;We were able to negociate a deal with a famous, triple-platinum, Mexican band to
-become our brand ambassadors and actually perform at our
-&lt;a href=&quot;https://www.youtube.com/watch?v=e7GxItaySOg&quot;&gt;launch event&lt;/a&gt;. We booked a venue
-in a club in Mexico City, invited the local press as well as some local celebrities. 
-This was a great lesson for me. You don’t need to be rich or famous to organize that
-kind of things. It’s possible to make it happen with a few connections and a
-lot of business acumen.&lt;/p&gt;
-
-&lt;p&gt;Thanks to this event, we got a lot of
-&lt;a href=&quot;http://www.forbes.com.mx/timestash-una-red-social-para-viajar-en-el-tiempo/&quot;&gt;press coverage&lt;/a&gt;.
-We even got about 30 seconds of national television! Those 30 seconds came close to
-actually bringing down the website. I was watching the server and the analytics, and I
-must say I had never seen anything like that before. That was a bit scary, but also
-exciting.&lt;/p&gt;
-
-&lt;p&gt;In terms of actual numbers, Google Analytics tells us that we received about 5,000
-new sessions the day following the launch. It went down a bit, and then
-spiked again after the TV apparition. All together, we got close to 30,000
-unique visitors during the month of August. I am releasing a
-&lt;a href=&quot;/img/timestash-v1-analytics.png&quot;&gt;screenshot&lt;/a&gt; taken from Google Analytics. Please note
-that I am only showing the new users segments.&lt;/p&gt;
-
-&lt;p&gt;So I believe we were quite successful in bringing people to our website. The
-next question is how many of them ended up creating an account?  Actually,
-quite a lot. We are very close to 10,000 users now on TimeStash, only a couple
-hundred of them are friends, family, or contacts. In the end, about a third of
-the visitors ended up creating an account. Of course, creating an account is
-not the end of the road, we still need those users to actually use TimeStash.
-But that story is for a &lt;a href=&quot;/blog/revamping-timestash/&quot;&gt;future article&lt;/a&gt;…&lt;/p&gt;
-</description>
-        <pubDate>Thu, 18 Sep 2014 03:27:08 +0200</pubDate>
-        <link>http://regblanc.com/blog/launching-a-social-network-for-nostalgic-feelings/</link>
-        <guid isPermaLink="true">http://regblanc.com/blog/launching-a-social-network-for-nostalgic-feelings/</guid>
         
         <category>timestash</category>
         
