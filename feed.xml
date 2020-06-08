@@ -6,8 +6,8 @@
 </description>
     <link>http://regblanc.com/</link>
     <atom:link href="http://regblanc.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Jun 2020 23:53:57 +0200</pubDate>
-    <lastBuildDate>Sun, 07 Jun 2020 23:53:57 +0200</lastBuildDate>
+    <pubDate>Mon, 08 Jun 2020 12:14:22 +0200</pubDate>
+    <lastBuildDate>Mon, 08 Jun 2020 12:14:22 +0200</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -507,8 +507,8 @@ SGL. We will also show how to build the game for Android and iOS.&lt;/p&gt;
     
       <item>
         <title>Fish Escape, a Remake Three Years in the Making</title>
-        <description>&lt;p&gt;About five years ago, I published &lt;a href=&quot;/games/rat-trap/&quot;&gt;Rat Trap&lt;/a&gt;, my first
-ever completed game.  It was a project that &lt;a href=&quot;/blog/building-an-android-game-with-scala-and-inkscape/&quot;&gt;taught me a lot about game
+        <description>&lt;p&gt;About five years ago, I published &lt;a href=&quot;/games/rat-trap/&quot;&gt;Rat Trap&lt;/a&gt;, my first ever
+completed game.  It was a project that &lt;a href=&quot;/blog/building-an-android-game-with-scala-and-inkscape/&quot;&gt;taught me a lot about game
 development&lt;/a&gt;. I had had a
 few attempts at making games in the past, but it never worked out.  With Rat
 Trap, I finally made a complete game that I published on a real platform, the
@@ -835,11 +835,13 @@ and we can start sharing it with more people.&lt;/p&gt;
 &lt;h4 id=&quot;whats-next&quot;&gt;What’s Next&lt;/h4&gt;
 
 &lt;p&gt;In the short term, &lt;em&gt;Fish Escape Lite&lt;/em&gt; is &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.limetalesgames.fishescapelite&quot;&gt;out and available for
-Android&lt;/a&gt;,
-This is a major milestone for &lt;a href=&quot;https://www.limetalesgames.com&quot;&gt;LimeTales&lt;/a&gt; —
-the indie studio we founded to publish this game. In the coming months, we will
-be polishing and finishing the premium version of &lt;em&gt;Fish Escape&lt;/em&gt; and release it
-as an ad-free, IAP-free, paid premium game on Android.&lt;/p&gt;
+Android&lt;/a&gt;
+(2020 edit: and now for
+&lt;a href=&quot;https://apps.apple.com/us/app/fish-escape-lite/id1515164224&quot;&gt;iOS&lt;/a&gt;), This is a
+major milestone for &lt;a href=&quot;https://www.limetalesgames.com&quot;&gt;LimeTales&lt;/a&gt; — the indie
+studio we founded to publish this game. In the coming months, we will be
+polishing and finishing the premium version of &lt;em&gt;Fish Escape&lt;/em&gt; and release it as
+an ad-free, IAP-free, paid premium game on Android.&lt;/p&gt;
 
 &lt;p&gt;In the longer term, we hope that this is only the first of many games for our
 young game studio. We doubt that &lt;em&gt;Fish Escape&lt;/em&gt; will make enough money to
