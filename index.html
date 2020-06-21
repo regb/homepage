@@ -9,8 +9,12 @@
   <title>Reg's homepage | Régis Blanc</title>
 
   
-  <meta name="description" content="Hey, I'm Régis, an entrepreneur and game developer. Here you  will find all sorts of stuff about my projects.
-" />
+  <!-- for some stupid reason, I cannot convert '\n' to ' ', (using replace filter) 
+  and when I do a strip_newlines filter, all lines are collapsed into one, with
+  missing spaces if there was only a \n as separator. That means, the excerp
+  (first paragraph) should be writen with a space before each newline character
+  -->
+  <meta name="description" content="Hey there, I'm Régis, a Scala developer that loves to work on cooltechnology. This website showcases some of the projects I am &mdash; or havebeen &mdash; wo..." />
 
 
 
@@ -29,8 +33,7 @@
 
 
 
-  <meta property="og:description" content="Hey, I'm Régis, an entrepreneur and game developer. Here you  will find all sorts of stuff about my projects.
-" />
+  <meta property="og:description" content="Hey there, I'm Régis, a Scala developer that loves to work on cooltechnology. This website showcases some of the projects I am &mdash; or havebeen &mdash; wo..." />
 
 
 
@@ -63,8 +66,7 @@
 
 
 
-  <meta name="twitter:description" content="Hey, I'm Régis, an entrepreneur and game developer. Here you  will find all sorts of stuff about my projects.
-" />
+  <meta name="twitter:description" content="Hey there, I'm Régis, a Scala developer that loves to work on cooltechnology. This website showcases some of the projects I am &mdash; or havebeen &mdash; wo..." />
 
 
 
@@ -76,6 +78,8 @@
   <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/libcss/font-awesome.min.css">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+
 
   <link rel="canonical" 
         href="http://regblanc.com/">

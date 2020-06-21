@@ -85,6 +85,8 @@
   <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/libcss/font-awesome.min.css">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+
 
   <link rel="canonical" 
         href="http://regblanc.com/blog/scala-the-small-parts/">
@@ -209,7 +211,7 @@ However, the discussion remained mostly conceptual, with few examples. In this
 post, I want to highlight several more examples that will make the whole
 argument more concrete, so that you don’t need to take my word for it.</p>
 
-<p>First, let us look again at at the <code class="highlighter-rouge">append</code> method on an <code class="highlighter-rouge">IntList</code>.</p>
+<p>First, let us look again at at the <code class="language-plaintext highlighter-rouge">append</code> method on an <code class="language-plaintext highlighter-rouge">IntList</code>.</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">IntList</span> <span class="o">{</span>
   <span class="k">def</span> <span class="nf">append</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntList</span> <span class="o">=</span> <span class="o">???</span>
@@ -217,29 +219,29 @@ argument more concrete, so that you don’t need to take my word for it.</p>
 
 <p>This is still used as follows:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span>  <span class="c1">// l1 = []
-</span><span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="nv">l1</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// l2 = [1]
-</span><span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="nv">l2</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// l3 = [1, 2]
-</span><span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="nv">l3</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">//</span> <span class="n">l4</span> <span class="k">=</span> <span class="o">[</span><span class="err">1</span>, <span class="err">2</span>, <span class="err">3</span><span class="o">]</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span>  <span class="c1">// l1 = []</span>
+<span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="nv">l1</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// l2 = [1]</span>
+<span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="nv">l2</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// l3 = [1, 2]</span>
+<span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="nv">l3</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="c1">// l4 = [1, 2, 3]</span></code></pre></figure>
 
 <p>Simple and no surprise, however a tiny bit verbose. In a language like Go, the
-<code class="highlighter-rouge">append</code> method can take an arbitrary number of elements in one call. In Scala,
+<code class="language-plaintext highlighter-rouge">append</code> method can take an arbitrary number of elements in one call. In Scala,
 that would look like this:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span> 
 <span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="nv">l1</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span></code></pre></figure>
 
 <p>Of course, the compiler will not accept such code with the above definition of
-<code class="highlighter-rouge">append</code>. But there is a way to fix it, using the varargs syntax:</p>
+<code class="language-plaintext highlighter-rouge">append</code>. But there is a way to fix it, using the varargs syntax:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">IntList</span> <span class="o">{</span>
   <span class="k">def</span> <span class="nf">append</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">Int*</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntList</span> <span class="o">=</span> <span class="o">???</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>A type <code class="highlighter-rouge">T*</code> is essentially equivalent to <code class="highlighter-rouge">Seq[T]</code> and is easy to use at the
+<p>A type <code class="language-plaintext highlighter-rouge">T*</code> is essentially equivalent to <code class="language-plaintext highlighter-rouge">Seq[T]</code> and is easy to use at the
 definition site. The caller is free to call the function with any number of
-argurments of type <code class="highlighter-rouge">T</code>, or in this case of integers: <code class="highlighter-rouge">l.append(1)</code>,
-<code class="highlighter-rouge">l.append(1,2)</code>, or <code class="highlighter-rouge">l.append(1,2,3)</code>. This is a syntax that makes sense when
+argurments of type <code class="language-plaintext highlighter-rouge">T</code>, or in this case of integers: <code class="language-plaintext highlighter-rouge">l.append(1)</code>,
+<code class="language-plaintext highlighter-rouge">l.append(1,2)</code>, or <code class="language-plaintext highlighter-rouge">l.append(1,2,3)</code>. This is a syntax that makes sense when
 it is just as common to use the function with a single argument as it is to use
 it with two or three. Of course, if the function is always called with a long
 list of elements, it’s better to just define a function that takes a sequence
@@ -249,21 +251,21 @@ datastructure.</p>
 
 <p>Alright, time to introduce a new Scala feature: magic methods. There are a few
 method names that enable a special syntax for method invocation. For example,
-there is the setter syntax, <code class="highlighter-rouge">name_=</code> which enables a lightweight getter and
-setter syntax for classes. Another common example is <code class="highlighter-rouge">apply</code>, which sorts of
+there is the setter syntax, <code class="language-plaintext highlighter-rouge">name_=</code> which enables a lightweight getter and
+setter syntax for classes. Another common example is <code class="language-plaintext highlighter-rouge">apply</code>, which sorts of
 transforms the instances of the class into functions. Indeed, an instance of a
-class with an <code class="highlighter-rouge">apply</code> method can be applied to a value, just like a function.
-Sequences are examples of classes with <code class="highlighter-rouge">apply</code> method:</p>
+class with an <code class="language-plaintext highlighter-rouge">apply</code> method can be applied to a value, just like a function.
+Sequences are examples of classes with <code class="language-plaintext highlighter-rouge">apply</code> method:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">trait</span> <span class="nc">Seq</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="o">???</span>
 <span class="o">}</span>
 <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
-<span class="nf">s</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">//</span> <span class="n">returns</span> <span class="mi">2</span></code></pre></figure>
+<span class="nf">s</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// returns 2</span></code></pre></figure>
 
-<p>Here we used <code class="highlighter-rouge">s</code> as a function by applying it on <code class="highlighter-rouge">1</code>, which essentially
+<p>Here we used <code class="language-plaintext highlighter-rouge">s</code> as a function by applying it on <code class="language-plaintext highlighter-rouge">1</code>, which essentially
 returned the second element of the sequence. The compiler implicitly rewrites
-all such function application as <code class="highlighter-rouge">s.apply(1)</code>. These methods might seem magic,
+all such function application as <code class="language-plaintext highlighter-rouge">s.apply(1)</code>. These methods might seem magic,
 and they are, but there is just a small well-defined set of them, and they can
 be used to achieve very neat effects.</p>
 
@@ -278,19 +280,19 @@ example:</p>
 <span class="o">}</span>
 <span class="k">val</span> <span class="nv">s</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span></code></pre></figure>
 
-<p>We defined a <code class="highlighter-rouge">Seq</code> object, which is a short-hand notation for a singleton
+<p>We defined a <code class="language-plaintext highlighter-rouge">Seq</code> object, which is a short-hand notation for a singleton
 object of an unnamed type that contains just the methods defined within that
-object. In the example above, it’s just the <code class="highlighter-rouge">apply</code> method. You can then use
-<code class="highlighter-rouge">Seq.apply(???)</code> in any context. Notice the statement below, we have seen it
+object. In the example above, it’s just the <code class="language-plaintext highlighter-rouge">apply</code> method. You can then use
+<code class="language-plaintext highlighter-rouge">Seq.apply(???)</code> in any context. Notice the statement below, we have seen it
 before. We have used it as an intuitive way to create a sequence with three
 elements. At the time it might have looked like built-in syntax, but now you
-can see that it’s just a combination of a singleton object <code class="highlighter-rouge">Seq</code> with an
-<code class="highlighter-rouge">apply</code> magic method that takes a variable number of arguments — three
+can see that it’s just a combination of a singleton object <code class="language-plaintext highlighter-rouge">Seq</code> with an
+<code class="language-plaintext highlighter-rouge">apply</code> magic method that takes a variable number of arguments — three
 independently useful and well-defined features.</p>
 
 <p>Let’s conclude this tour of Scala by looking at for-comprehensions. I will not
-go into the details of how for-comprehensions are desugared into <code class="highlighter-rouge">map</code>,
-<code class="highlighter-rouge">flatMap</code>, and <code class="highlighter-rouge">filter</code>, as this would require to introduce all these methods.
+go into the details of how for-comprehensions are desugared into <code class="language-plaintext highlighter-rouge">map</code>,
+<code class="language-plaintext highlighter-rouge">flatMap</code>, and <code class="language-plaintext highlighter-rouge">filter</code>, as this would require to introduce all these methods.
 But you can find a comprehensive (no pun intended) discussion of this on the
 <a href="https://docs.scala-lang.org/tutorials/FAQ/yield.html">official Scala website</a>.
 The key take-away is that any type can be made compatible with a for-notation,
@@ -302,26 +304,26 @@ as long as it defines the proper methods.</p>
   <span class="nf">println</span><span class="o">(</span><span class="n">i</span><span class="o">)</span></code></pre></figure>
 
 <p>At first glance, it looks like a totally new and magic notation. We know two
-standard ways of defining variables in scala, <code class="highlighter-rouge">val</code> and <code class="highlighter-rouge">var</code>, this notation
+standard ways of defining variables in scala, <code class="language-plaintext highlighter-rouge">val</code> and <code class="language-plaintext highlighter-rouge">var</code>, this notation
 looks like it’s introducing a third one.  And it does, but it’s a bit more
 subtle than that. It’s a special notation to bind each element of the list on
-the right-hand side, so more generally it will be written as <code class="highlighter-rouge">for(x &lt;- xs)
-...</code>, with <code class="highlighter-rouge">xs</code> being a sequence. And in many ways, this is equivalent to
-<code class="highlighter-rouge">xs.foreach(x =&gt; ...)</code>. So here <code class="highlighter-rouge">for</code> is really some syntactic sugar to define
+the right-hand side, so more generally it will be written as <code class="language-plaintext highlighter-rouge">for(x &lt;- xs)
+...</code>, with <code class="language-plaintext highlighter-rouge">xs</code> being a sequence. And in many ways, this is equivalent to
+<code class="language-plaintext highlighter-rouge">xs.foreach(x =&gt; ...)</code>. So here <code class="language-plaintext highlighter-rouge">for</code> is really some syntactic sugar to define
 a lambda function on top of a sequence. The reason for introducing this has to
 do with the powerful for-comprehension features that were mentioned above.</p>
 
-<p>What about the <code class="highlighter-rouge">1 to 10</code>? Well, remember infix notation? If you do, you would
-know that we are really looking at <code class="highlighter-rouge">1.to(10)</code>. Does that look confusing? Well
+<p>What about the <code class="language-plaintext highlighter-rouge">1 to 10</code>? Well, remember infix notation? If you do, you would
+know that we are really looking at <code class="language-plaintext highlighter-rouge">1.to(10)</code>. Does that look confusing? Well
 that might be because you got used to most other languages treating integers as
 some kind of built-in type, but that’s not how it works in Scala. In scala, an
-<code class="highlighter-rouge">Int</code> is just a regular type with its class definition (the details are
+<code class="language-plaintext highlighter-rouge">Int</code> is just a regular type with its class definition (the details are
 slightly more messy, but let’s gloss over them for the sake of the argument):</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">Int</span> <span class="o">{</span>
   <span class="k">def</span> <span class="nf">to</span><span class="o">(</span><span class="n">u</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
 <span class="o">}</span>
-<span class="k">val</span> <span class="nv">xs</span> <span class="k">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">5</span> <span class="o">//</span> <span class="n">returns</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">)</span></code></pre></figure>
+<span class="k">val</span> <span class="nv">xs</span> <span class="k">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">5</span> <span class="c1">// returns Seq(1,2,3,4,5)</span></code></pre></figure>
 
 <p>Well now we are fully equipped to rewrite the original for loop:</p>
 

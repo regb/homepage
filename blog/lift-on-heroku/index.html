@@ -85,6 +85,8 @@
   <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/libcss/font-awesome.min.css">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+
 
   <link rel="canonical" 
         href="http://regblanc.com/blog/lift-on-heroku/">
@@ -223,7 +225,7 @@ heard a lot of good things about <a href="http://www.heroku.com">Heroku</a>, so 
 to give it a try.</p>
 
 <p>The great thing with Heroku is that, once setup, deploying is as simple as
-doing a <code class="highlighter-rouge">git push</code>.  However, all this simplicity comes to the price of
+doing a <code class="language-plaintext highlighter-rouge">git push</code>.  However, all this simplicity comes to the price of
 flexibility. If you want to use Heroku, you have to build your application in a
 very specific way — the Heroku way. In particular, you can no longer organize
 your architecture around full computer boxes, but need to think of your
@@ -237,7 +239,7 @@ need to connect with several external services for tasks such as persistence.</p
 <p>Essentially, Heroku forces you to build stateless applications. That is,
 applications that handle requests in a stateless manner, with no dependency on
 any previously completed requests. Concretely, that means we will not have a
-<code class="highlighter-rouge">login</code> request that sets session data on the server and remembers which user
+<code class="language-plaintext highlighter-rouge">login</code> request that sets session data on the server and remembers which user
 correctly logged in, but instead, each request that needs authentication will
 contain some sort of credentials to identify and authorize the client.</p>
 
@@ -266,7 +268,7 @@ instance of your application. Does it mean we cannot use Lift when hosting on He
 No, but it means we have to avoid the stateful features of Lift.</p>
 
 <p>In our case, we wanted to use Lift to build an HTTP API for a mobile client. Lift provides
-a <code class="highlighter-rouge">RestHelper</code> helper trait which facilitates the creation of web services. We start
+a <code class="language-plaintext highlighter-rouge">RestHelper</code> helper trait which facilitates the creation of web services. We start
 by defining some API endpoints, let’s take a user system API for example:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">UserAPI</span> <span class="k">extends</span> <span class="nc">RestHelper</span> <span class="o">{</span>
@@ -276,15 +278,15 @@ by defining some API endpoints, let’s take a user system API for example:</p>
   <span class="o">})</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>This defines two URLs for our API. The first one accepts a <code class="highlighter-rouge">GET</code> request and is
-supposed to return a resource representing the user represented by its <code class="highlighter-rouge">id</code>.
-The second one is meant to update the user based on a <code class="highlighter-rouge">json</code> resource object
+<p>This defines two URLs for our API. The first one accepts a <code class="language-plaintext highlighter-rouge">GET</code> request and is
+supposed to return a resource representing the user represented by its <code class="language-plaintext highlighter-rouge">id</code>.
+The second one is meant to update the user based on a <code class="language-plaintext highlighter-rouge">json</code> resource object
 received as part of the request. The implementation of these endpoints are
 relatively simple but dependent on your system. Essentially, it is a couple
 simple database queries to get and update the data of the user. It is essential
-that those do not rely on session data provided by Lift (most of the <code class="highlighter-rouge">S</code> object).</p>
+that those do not rely on session data provided by Lift (most of the <code class="language-plaintext highlighter-rouge">S</code> object).</p>
 
-<p>Next, we can setup <code class="highlighter-rouge">Boot.scala</code> in the following way:</p>
+<p>Next, we can setup <code class="language-plaintext highlighter-rouge">Boot.scala</code> in the following way:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nv">LiftRules</span><span class="o">.</span><span class="py">enableContainerSessions</span> <span class="k">=</span> <span class="kc">false</span>
 <span class="nv">LiftRules</span><span class="o">.</span><span class="py">statelessReqTest</span><span class="o">.</span><span class="py">append</span> <span class="o">{</span> <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="kc">true</span> <span class="o">}</span>
@@ -293,9 +295,9 @@ that those do not rely on session data provided by Lift (most of the <code class
 
 <p>This forces Lift to operate in stateless mode. It will even throw an exception
 if you have some code relying on session data. In the final statement, we
-append the <code class="highlighter-rouge">UserAPI</code> instance to the <code class="highlighter-rouge">statelessDispatch</code> list that Lift goes
+append the <code class="language-plaintext highlighter-rouge">UserAPI</code> instance to the <code class="language-plaintext highlighter-rouge">statelessDispatch</code> list that Lift goes
 through before initializing session state when receiving a request. There is
-a similar <code class="highlighter-rouge">dispatch</code> list, but that one is run in stateful mode.</p>
+a similar <code class="language-plaintext highlighter-rouge">dispatch</code> list, but that one is run in stateful mode.</p>
 
 <p>It’s also possible to use snippets and templates to render HTML. It comes with
 the same limitation of not having access to session data. Additionally, all the
@@ -307,10 +309,10 @@ well.</p>
 <p>Configuration is also slightly different on Heroku. Heroku heavily uses
 environment variables to configure each application. This is how the database
 connection credentials are preferably communicated to the application. In
-contrast, Lift provides built-in support for <code class="highlighter-rouge">.props</code> file that contains
+contrast, Lift provides built-in support for <code class="language-plaintext highlighter-rouge">.props</code> file that contains
 properties used for configuration. In this project, we implemented a system
 that would check for a configuration variable in the environment variable
-first, and then default to the value found in the <code class="highlighter-rouge">.props</code> file. The
+first, and then default to the value found in the <code class="language-plaintext highlighter-rouge">.props</code> file. The
 possibility to set environment variables from the Heroku web interface makes it
 extremely painless to modify the configuration of the system.</p>
 

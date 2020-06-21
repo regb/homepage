@@ -83,6 +83,8 @@
   <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/libcss/font-awesome.min.css">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+
 
   <link rel="canonical" 
         href="http://regblanc.com/blog/cross-platform-game-development-in-scala-natively/">
@@ -253,7 +255,7 @@ setup</a>,
 and in addittion you need the dev libraries of OpenGL, SDL2, and SDL2-image. On
 Ubuntu, you would do this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install libsdl2-dev libsdl2-image-dev
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install libsdl2-dev libsdl2-image-dev
 </code></pre></div></div>
 
 <h4 id="publish-sgl">Publishing SGL locally</h4>
@@ -261,16 +263,16 @@ Ubuntu, you would do this:</p>
 <p>As SGL is still experimental, we need to build it locally. That’s not very hard
 though, so just run the following commands:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:regb/scala-game-library.git
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:regb/scala-game-library.git
 cd scala-game-library
-git checkout 43c2011e49cf3f1798e94118cf117dfd1fa15ece
+git checkout a9bc044e98555777ac96a956638bd6ab55949570
 sbt publishLocal
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">checkout</code> step is meant to synchronize with the commit when this tutorial
+<p>The <code class="language-plaintext highlighter-rouge">checkout</code> step is meant to synchronize with the commit when this tutorial
 was written, but you can try to use HEAD, although there might be slight
-variations. The <code class="highlighter-rouge">publishLocal</code> command will build the library and publish the
-Maven artifact locally (with version <code class="highlighter-rouge">0.0.1</code>), it will take a bit of time.
+variations. The <code class="language-plaintext highlighter-rouge">publishLocal</code> command will build the library and publish the
+Maven artifact locally (with version <code class="language-plaintext highlighter-rouge">0.0.1</code>), it will take a bit of time.
 While this is going on, you can move on to the next section and start preparing
 the game.</p>
 
@@ -279,13 +281,13 @@ the game.</p>
 <p>Now we can get started on writing our game. We’ll call the game Scalavator.
 Let’s go into a fresh and clean directory:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir scalavator
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir scalavator
 cd scalavator
 </code></pre></div></div>
 
-<p>Here’s our <code class="highlighter-rouge">build.sbt</code> file:</p>
+<p>Here’s our <code class="language-plaintext highlighter-rouge">build.sbt</code> file:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">import</span> <span class="nn">sbtcrossproject.</span><span class="o">{</span><span class="n">crossProject</span><span class="o">,</span> <span class="nc">CrossType</span><span class="o">}</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">sbtcrossproject.</span><span class="o">{</span><span class="n">crossProject</span><span class="o">,</span> <span class="nc">CrossType</span><span class="o">}</span>
 
 <span class="k">lazy</span> <span class="k">val</span> <span class="nv">commonSettings</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
   <span class="n">version</span>        <span class="o">:=</span> <span class="s">"1.0"</span><span class="o">,</span>
@@ -314,37 +316,40 @@ cd scalavator
     <span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"com.regblanc.sgl"</span> <span class="o">%%</span> <span class="s">"sgl-desktop-awt"</span> <span class="o">%</span> <span class="s">"0.0.1"</span><span class="o">,</span>
     <span class="n">fork</span> <span class="n">in</span> <span class="n">run</span> <span class="o">:=</span> <span class="kc">true</span><span class="o">,</span>
   <span class="o">)</span>
-  <span class="o">.</span><span class="py">dependsOn</span><span class="o">(</span><span class="n">coreJVM</span><span class="o">)</span></code></pre></figure>
+  <span class="o">.</span><span class="py">dependsOn</span><span class="o">(</span><span class="n">coreJVM</span><span class="o">)</span>
+</code></pre></div></div>
 
-<p>This will need a few SBT plugins to work, so add this to the <code class="highlighter-rouge">project/plugins.sbt</code> file:</p>
+<p>This will need a few SBT plugins to work, so add this to the <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code> file:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.portable-scala"</span> <span class="o">%</span> <span class="s">"sbt-scalajs-crossproject"</span>      <span class="o">%</span> <span class="s">"1.0.0"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.portable-scala"</span> <span class="o">%</span> <span class="s">"sbt-scalajs-crossproject"</span>      <span class="o">%</span> <span class="s">"1.0.0"</span><span class="o">)</span>
 <span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.portable-scala"</span> <span class="o">%</span> <span class="s">"sbt-scala-native-crossproject"</span> <span class="o">%</span> <span class="s">"1.0.0"</span><span class="o">)</span>
 <span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.scala-js"</span>       <span class="o">%</span> <span class="s">"sbt-scalajs"</span>                   <span class="o">%</span> <span class="s">"1.0.1"</span><span class="o">)</span>
-<span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.scala-native"</span>   <span class="o">%</span> <span class="s">"sbt-scala-native"</span>              <span class="o">%</span> <span class="s">"0.3.9"</span><span class="o">)</span></code></pre></figure>
+<span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.scala-native"</span>   <span class="o">%</span> <span class="s">"sbt-scala-native"</span>              <span class="o">%</span> <span class="s">"0.3.9"</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>And just to be on the safe side, you may want to specify the SBT version in
-<code class="highlighter-rouge">project/build.properties</code>:</p>
+<code class="language-plaintext highlighter-rouge">project/build.properties</code>:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nv">sbt</span><span class="o">.</span><span class="py">version</span><span class="k">=</span><span class="mf">1.3</span><span class="o">.</span><span class="mi">7</span></code></pre></figure>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">sbt</span><span class="o">.</span><span class="py">version</span><span class="k">=</span><span class="mf">1.3</span><span class="o">.</span><span class="mi">7</span>
+</code></pre></div></div>
 
 <p>What we did above is we added the Scala.js and Scala Native plugins and we
-defined two projects, one cross-platform <code class="highlighter-rouge">core</code> project that can be compiled
-for JVM, Scala.js, and Scala Native, and one <code class="highlighter-rouge">desktop</code> project for the desktop
+defined two projects, one cross-platform <code class="language-plaintext highlighter-rouge">core</code> project that can be compiled
+for JVM, Scala.js, and Scala Native, and one <code class="language-plaintext highlighter-rouge">desktop</code> project for the desktop
 JVM version of the game. We are not using Scala.js or Scala Native yet, but
 that will come later.</p>
 
-<p>The <code class="highlighter-rouge">core</code> project is where all our game code will go. This is where we will
+<p>The <code class="language-plaintext highlighter-rouge">core</code> project is where all our game code will go. This is where we will
 use the SGL core API to implement an entire game. This project depends on the
-<code class="highlighter-rouge">sgl-core</code> artifact, which provides the API, without concrete implementation.
-The <code class="highlighter-rouge">core</code> project cannot run by itself, we need a project that provides a
-backend implementation for some platform, and we do that with the <code class="highlighter-rouge">desktop</code>
-project, which will simply contain a <code class="highlighter-rouge">Main</code> object that links in the proper
-backend implementation, in that case the <code class="highlighter-rouge">sgl-desktop-awt</code> artifact.</p>
+<code class="language-plaintext highlighter-rouge">sgl-core</code> artifact, which provides the API, without concrete implementation.
+The <code class="language-plaintext highlighter-rouge">core</code> project cannot run by itself, we need a project that provides a
+backend implementation for some platform, and we do that with the <code class="language-plaintext highlighter-rouge">desktop</code>
+project, which will simply contain a <code class="language-plaintext highlighter-rouge">Main</code> object that links in the proper
+backend implementation, in that case the <code class="language-plaintext highlighter-rouge">sgl-desktop-awt</code> artifact.</p>
 
-<p>Let’s add our first <code class="highlighter-rouge">GameScreen</code> in <code class="highlighter-rouge">core/src/main/scala/ScalavatorGame.scala</code>:</p>
+<p>Let’s add our first <code class="language-plaintext highlighter-rouge">GameScreen</code> in <code class="language-plaintext highlighter-rouge">core/src/main/scala/ScalavatorGame.scala</code>:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.regblanc.scalavator</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.regblanc.scalavator</span>
 <span class="k">package</span> <span class="nn">core</span>
 
 <span class="k">import</span> <span class="nn">sgl._</span>
@@ -360,11 +365,12 @@ backend implementation, in that case the <code class="highlighter-rouge">sgl-des
   <span class="o">}</span>
 
   <span class="k">override</span> <span class="k">def</span> <span class="nf">startingScreen</span><span class="k">:</span> <span class="kt">GameScreen</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MainScreen</span>
-<span class="o">}</span></code></pre></figure>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>That’s all the code we need for our game implementation. Let’s explain a bit.
-There’s a top-level trait, <code class="highlighter-rouge">ScalavatorGame</code>, with some dependencies defined as
-<code class="highlighter-rouge">this: ... with ... =&gt;</code>. this is a pattern invented in the old days of Scala,
+There’s a top-level trait, <code class="language-plaintext highlighter-rouge">ScalavatorGame</code>, with some dependencies defined as
+<code class="language-plaintext highlighter-rouge">this: ... with ... =&gt;</code>. this is a pattern invented in the old days of Scala,
 called the <a href="http://jonasboner.com/real-world-scala-dependency-injection-di/">cake
 pattern</a>, and
 it’s a way to do typesafe, compile-time, no-framework, dependency injection.
@@ -372,38 +378,38 @@ You can read up on the cake pattern if you want, but the way to understand this
 code is that we are declaring a module with some dependencies that will need to
 be injected later (in the Main class). By declaring these dependencies, we can
 implement our game using the API of SGL (these are provided by
-<code class="highlighter-rouge">GraphicsProvider</code>, <code class="highlighter-rouge">WindowProvider</code>, <code class="highlighter-rouge">SystemProvider</code>, <code class="highlighter-rouge">InputProvider</code>, and
-<code class="highlighter-rouge">GameScreenComponent</code>). You can think of this list of dependencies as a list of
+<code class="language-plaintext highlighter-rouge">GraphicsProvider</code>, <code class="language-plaintext highlighter-rouge">WindowProvider</code>, <code class="language-plaintext highlighter-rouge">SystemProvider</code>, <code class="language-plaintext highlighter-rouge">InputProvider</code>, and
+<code class="language-plaintext highlighter-rouge">GameScreenComponent</code>). You can think of this list of dependencies as a list of
 package imports, but since we do not know statically the implementation, we
 instead use this cake pattern to inject them.</p>
 
-<p>The actual game implementation takes place inside the <code class="highlighter-rouge">ScalavatorGame</code> module.
-The basic building blocks of SGL are <code class="highlighter-rouge">GameScreen</code> (provided by the
-<code class="highlighter-rouge">GameScreenComponent</code>), and they are meant to abstract self-contained parts
+<p>The actual game implementation takes place inside the <code class="language-plaintext highlighter-rouge">ScalavatorGame</code> module.
+The basic building blocks of SGL are <code class="language-plaintext highlighter-rouge">GameScreen</code> (provided by the
+<code class="language-plaintext highlighter-rouge">GameScreenComponent</code>), and they are meant to abstract self-contained parts
 of the game. Typically you would have a Menu screen, a map screen, a settings
 screen, etc. It’s up to you to choose how to connect screens together. Here
 we just use a single screen to keep things simple.</p>
 
-<p>A <code class="highlighter-rouge">GameScreen</code> must implement three functions, <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">update</code>, and <code class="highlighter-rouge">render</code>.
-Name is mostly for debugging, so just give it a unique name. Then <code class="highlighter-rouge">update</code> and
-<code class="highlighter-rouge">render</code> are automatically called in the main game loop, and they provides
-hooks to do what game loop usually do. For <code class="highlighter-rouge">update</code>, that means you simulate
-the world according to the delta time, and for <code class="highlighter-rouge">render</code>, you use the
-<code class="highlighter-rouge">Graphics.Canvas</code> to render the world on the screen. The <code class="highlighter-rouge">Graphics.Canvas</code> is
-one of these abstract APIs that are provided by the <code class="highlighter-rouge">GraphicsProvider</code> and
+<p>A <code class="language-plaintext highlighter-rouge">GameScreen</code> must implement three functions, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">update</code>, and <code class="language-plaintext highlighter-rouge">render</code>.
+Name is mostly for debugging, so just give it a unique name. Then <code class="language-plaintext highlighter-rouge">update</code> and
+<code class="language-plaintext highlighter-rouge">render</code> are automatically called in the main game loop, and they provides
+hooks to do what game loop usually do. For <code class="language-plaintext highlighter-rouge">update</code>, that means you simulate
+the world according to the delta time, and for <code class="language-plaintext highlighter-rouge">render</code>, you use the
+<code class="language-plaintext highlighter-rouge">Graphics.Canvas</code> to render the world on the screen. The <code class="language-plaintext highlighter-rouge">Graphics.Canvas</code> is
+one of these abstract APIs that are provided by the <code class="language-plaintext highlighter-rouge">GraphicsProvider</code> and
 which will become a concrete native object depending on the platform.</p>
 
-<p>Finally we override the <code class="highlighter-rouge">startingScreen</code> method, which is a top-level method
+<p>Finally we override the <code class="language-plaintext highlighter-rouge">startingScreen</code> method, which is a top-level method
 that needs to be provided by your game. The game loop will automatically
 instantiate the first screen using this method, and will start running it
-through the <code class="highlighter-rouge">update</code>/<code class="highlighter-rouge">render</code> loop. This is essentially the entry point into
+through the <code class="language-plaintext highlighter-rouge">update</code>/<code class="language-plaintext highlighter-rouge">render</code> loop. This is essentially the entry point into
 the game.</p>
 
 <p>Now we have a game that compiles and does nothing. But we still cannot run it
 because the game is missing a concrete platform implementation. So we will add
-a <code class="highlighter-rouge">Main</code> class in <code class="highlighter-rouge">desktop/src/main/scala/Main.scala</code>:</p>
+a <code class="language-plaintext highlighter-rouge">Main</code> class in <code class="language-plaintext highlighter-rouge">desktop/src/main/scala/Main.scala</code>:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.regblanc.scalavator</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.regblanc.scalavator</span>
 <span class="k">package</span> <span class="nn">desktop</span>
 
 <span class="k">import</span> <span class="nn">core.ScalavatorGame</span>
@@ -415,27 +421,28 @@ a <code class="highlighter-rouge">Main</code> class in <code class="highlighter-
   <span class="k">with</span> <span class="nc">VerboseStdOutLoggingProvider</span> <span class="o">{</span>
 
   <span class="k">override</span> <span class="k">val</span> <span class="nv">frameDimension</span> <span class="k">=</span> <span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">650</span><span class="o">)</span>
-<span class="o">}</span></code></pre></figure>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>As you can see, the main object doesn’t do much. It basically links in the
-<code class="highlighter-rouge">AWTApp</code> implementation (which is the AWT JVM platform implementation of the
-SGL core API) with our abstract <code class="highlighter-rouge">ScalavatorGame</code> that we implemented. This
-does not look like much, but this is where the magic happens. The <code class="highlighter-rouge">AWTApp</code> is
+<code class="language-plaintext highlighter-rouge">AWTApp</code> implementation (which is the AWT JVM platform implementation of the
+SGL core API) with our abstract <code class="language-plaintext highlighter-rouge">ScalavatorGame</code> that we implemented. This
+does not look like much, but this is where the magic happens. The <code class="language-plaintext highlighter-rouge">AWTApp</code> is
 a complete implementation of the API exported by SGL through the
-<code class="highlighter-rouge">GraphicsProvider</code>, <code class="highlighter-rouge">InputProvider</code>, <code class="highlighter-rouge">WindowProvider</code>, and so on. The <code class="highlighter-rouge">AWTApp</code>
+<code class="language-plaintext highlighter-rouge">GraphicsProvider</code>, <code class="language-plaintext highlighter-rouge">InputProvider</code>, <code class="language-plaintext highlighter-rouge">WindowProvider</code>, and so on. The <code class="language-plaintext highlighter-rouge">AWTApp</code>
 implements all these modules with the AWT framework on the JVM, and by
 injecting these when declaring our main class, we are creating a concrete
 instance of our game ready to run on the JVM on our desktop computer.</p>
 
 <p>There’s one additional provider that is linke din, the
-<code class="highlighter-rouge">VerboseStdOutLoggingProvider</code>, which is required to implement logging.  The
-main object can also override some properties of <code class="highlighter-rouge">AWTApp</code>, in that case it sets
-the window size with <code class="highlighter-rouge">frameDimension</code>. Our game will be playable on mobile so
+<code class="language-plaintext highlighter-rouge">VerboseStdOutLoggingProvider</code>, which is required to implement logging.  The
+main object can also override some properties of <code class="language-plaintext highlighter-rouge">AWTApp</code>, in that case it sets
+the window size with <code class="language-plaintext highlighter-rouge">frameDimension</code>. Our game will be playable on mobile so
 we will target a typical portrait resolution.</p>
 
 <p>Now we can run our game! Just type the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt desktop/run
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt desktop/run
 </code></pre></div></div>
 
 <p>You should get a blank window on the screen.</p>
@@ -446,37 +453,38 @@ we will target a typical portrait resolution.</p>
 make it a bit more exciting. Let’s get some character on the screen, using some
 placeholder shapes for starters:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="o">...</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">...</span>
 <span class="k">import</span> <span class="nn">sgl.geometry._</span>
 
   <span class="k">class</span> <span class="nc">MainScreen</span> <span class="k">extends</span> <span class="nc">GameScreen</span> <span class="o">{</span>
     <span class="o">...</span>
 
-    <span class="k">private</span> <span class="k">val</span> <span class="nv">characterWidth</span> <span class="k">=</span> <span class="mi">32</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="nv">characterHeight</span> <span class="k">=</span> <span class="mi">64</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="nv">CharacterWidth</span> <span class="k">=</span> <span class="mi">32</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="nv">CharacterHeight</span> <span class="k">=</span> <span class="mi">64</span>
 
     <span class="k">private</span> <span class="k">var</span> <span class="n">characterPosition</span> <span class="k">=</span>
-      <span class="nc">Point</span><span class="o">(</span><span class="nv">Window</span><span class="o">.</span><span class="py">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">characterWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="nv">Window</span><span class="o">.</span><span class="py">height</span><span class="o">)</span>
+      <span class="nc">Point</span><span class="o">(</span><span class="nv">Window</span><span class="o">.</span><span class="py">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="nc">CharacterWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="nv">Window</span><span class="o">.</span><span class="py">height</span><span class="o">)</span>
 
     <span class="o">...</span>
 
     <span class="k">override</span> <span class="k">def</span> <span class="nf">render</span><span class="o">(</span><span class="n">canvas</span><span class="k">:</span> <span class="kt">Graphics.Canvas</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
       <span class="nv">canvas</span><span class="o">.</span><span class="py">drawColor</span><span class="o">(</span><span class="nv">Graphics</span><span class="o">.</span><span class="py">Color</span><span class="o">.</span><span class="py">White</span><span class="o">)</span>
-      <span class="nv">canvas</span><span class="o">.</span><span class="py">drawRect</span><span class="o">(</span><span class="nv">characterPosition</span><span class="o">.</span><span class="py">x</span><span class="o">,</span> <span class="nv">characterPosition</span><span class="o">.</span><span class="py">y</span> <span class="o">-</span> <span class="n">characterHeight</span><span class="o">,</span> <span class="n">characterWidth</span><span class="o">,</span> <span class="n">characterHeight</span><span class="o">,</span> <span class="nv">Graphics</span><span class="o">.</span><span class="py">defaultPaint</span><span class="o">.</span><span class="py">withColor</span><span class="o">(</span><span class="nv">Graphics</span><span class="o">.</span><span class="py">Color</span><span class="o">.</span><span class="py">Green</span><span class="o">))</span>
+      <span class="nv">canvas</span><span class="o">.</span><span class="py">drawRect</span><span class="o">(</span><span class="nv">characterPosition</span><span class="o">.</span><span class="py">x</span><span class="o">,</span> <span class="nv">characterPosition</span><span class="o">.</span><span class="py">y</span> <span class="o">-</span> <span class="nc">CharacterHeight</span><span class="o">,</span> <span class="nc">CharacterWidth</span><span class="o">,</span> <span class="nc">CharacterHeight</span><span class="o">,</span> <span class="nv">Graphics</span><span class="o">.</span><span class="py">defaultPaint</span><span class="o">.</span><span class="py">withColor</span><span class="o">(</span><span class="nv">Graphics</span><span class="o">.</span><span class="py">Color</span><span class="o">.</span><span class="py">Green</span><span class="o">))</span>
     <span class="o">}</span>
   <span class="o">}</span>
   <span class="o">...</span>
-<span class="o">}</span></code></pre></figure>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<p>We imported the <code class="highlighter-rouge">sgl.geometry._</code> package which provides a few basic geometric
-classes (<code class="highlighter-rouge">Point</code>, <code class="highlighter-rouge">Vec</code>, <code class="highlighter-rouge">Rect</code>, etc). Now is a good time to explain the
+<p>We imported the <code class="language-plaintext highlighter-rouge">sgl.geometry._</code> package which provides a few basic geometric
+classes (<code class="language-plaintext highlighter-rouge">Point</code>, <code class="language-plaintext highlighter-rouge">Vec</code>, <code class="language-plaintext highlighter-rouge">Rect</code>, etc). Now is a good time to explain the
 coordinates system of the screen. The origin (0, 0) is on the top left,
 the x axis expands on the right and the y axis expands towards the bottom.</p>
 
 <p>We want to define our character position on the bottom center. For reasons that
 will become apparent later, we use the bottom-left of the character as the
 coordinates for the character position. You can access the total available
-screen dimensions with <code class="highlighter-rouge">Window.width</code> and <code class="highlighter-rouge">Window.height</code>, so we use these to
+screen dimensions with <code class="language-plaintext highlighter-rouge">Window.width</code> and <code class="language-plaintext highlighter-rouge">Window.height</code>, so we use these to
 position it in the center at the bottom of the screen.</p>
 
 <p>Then we render this character on the screen using a simple green rectangle. We
@@ -491,17 +499,18 @@ as high as possible. So let’s listen for user inputs and jump when appropriate
 As we are planning to make this game playable on mobile, we will just look for
 a click event on the screen instead of using keyboard keys like the space bar.</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="o">...</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">...</span>
 
   <span class="k">class</span> <span class="nc">MainScreen</span> <span class="k">extends</span> <span class="nc">GameScreen</span> <span class="o">{</span>
     <span class="o">...</span>
     <span class="k">private</span> <span class="k">var</span> <span class="n">characterVelocity</span> <span class="k">=</span> <span class="nc">Vec</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
 
     <span class="k">private</span> <span class="k">val</span> <span class="nv">Gravity</span> <span class="k">=</span> <span class="nc">Vec</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">430</span><span class="o">)</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="nv">JumpImpulsion</span> <span class="k">=</span> <span class="nc">Vec</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">320</span><span class="o">)</span>
 
     <span class="k">def</span> <span class="nf">handleInput</span><span class="o">(</span><span class="n">ev</span><span class="k">:</span> <span class="kt">Input.InputEvent</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">ev</span> <span class="k">match</span> <span class="o">{</span>
       <span class="k">case</span> <span class="nv">Input</span><span class="o">.</span><span class="py">TouchUpEvent</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="o">|</span> <span class="nv">Input</span><span class="o">.</span><span class="py">MouseUpEvent</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">,</span> <span class="nv">Input</span><span class="o">.</span><span class="py">MouseButtons</span><span class="o">.</span><span class="py">Left</span><span class="o">)</span> <span class="k">=&gt;</span>
-        <span class="n">characterVelocity</span> <span class="k">=</span> <span class="nc">Vec</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">320</span><span class="o">)</span>
+        <span class="n">characterVelocity</span> <span class="k">=</span> <span class="nc">JumpImpulsion</span>
       <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="o">()</span>
     <span class="o">}</span>
     <span class="nv">Input</span><span class="o">.</span><span class="py">setEventProcessor</span><span class="o">(</span><span class="n">handleInput</span><span class="o">)</span>
@@ -509,28 +518,31 @@ a click event on the screen instead of using keyboard keys like the space bar.</
     <span class="k">override</span> <span class="k">def</span> <span class="nf">update</span><span class="o">(</span><span class="n">dt</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
       <span class="n">characterPosition</span> <span class="o">+=</span> <span class="n">characterVelocity</span><span class="o">*(</span><span class="n">dt</span><span class="o">/</span><span class="mf">1000f</span><span class="o">)</span>
       <span class="n">characterVelocity</span> <span class="o">+=</span> <span class="nc">Gravity</span><span class="o">*(</span><span class="n">dt</span><span class="o">/</span><span class="mf">1000f</span><span class="o">)</span>
-      <span class="nf">if</span><span class="o">(</span><span class="nv">characterPosition</span><span class="o">.</span><span class="py">y</span><span class="o">.</span><span class="py">toInt</span> <span class="o">-</span> <span class="nv">Window</span><span class="o">.</span><span class="py">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+      <span class="nf">if</span><span class="o">(</span><span class="nv">characterPosition</span><span class="o">.</span><span class="py">y</span> <span class="o">-</span> <span class="nv">Window</span><span class="o">.</span><span class="py">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">characterVelocity</span> <span class="k">=</span> <span class="nc">Vec</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="n">characterPosition</span> <span class="k">=</span> <span class="nv">characterPosition</span><span class="o">.</span><span class="py">withY</span><span class="o">(</span><span class="nv">Window</span><span class="o">.</span><span class="py">height</span><span class="o">)</span>
+      <span class="o">}</span>
     <span class="o">}</span>
     <span class="o">...</span>
   <span class="o">}</span>
   <span class="o">...</span>
-<span class="o">}</span></code></pre></figure>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<p>A few notes on what we added. We defined a constant <code class="highlighter-rouge">Gravity</code> which a vector
-force pointing downward (hence positive because the y-axis is pointing downward). We add a <code class="highlighter-rouge">characterVelocity</code> variable to track the current velocity of the
-character. On an <code class="highlighter-rouge">up</code> event (either mouse or touch), we set the velocity to
-push the character up. On each <code class="highlighter-rouge">update</code> call, we update the character position,
+<p>A few notes on what we added. We defined a constant <code class="language-plaintext highlighter-rouge">Gravity</code> which a vector
+force pointing downward (hence positive because the y-axis is pointing downward). We add a <code class="language-plaintext highlighter-rouge">characterVelocity</code> variable to track the current velocity of the
+character. On an <code class="language-plaintext highlighter-rouge">up</code> event (either mouse or touch), we set the velocity to
+push the character up. On each <code class="language-plaintext highlighter-rouge">update</code> call, we update the character position,
 and then apply the gravity force to the velocity, until we are back to the
 bottom of the screen where we stop.</p>
 
-<p>This demonstrates the API provided by the <code class="highlighter-rouge">InputProvider</code>, in particular you
+<p>This demonstrates the API provided by the <code class="language-plaintext highlighter-rouge">InputProvider</code>, in particular you
 can set (at initialization of the screen) an event processor, which will be
-called on each <code class="highlighter-rouge">Input.InputEvent</code>. You can pattern match on the large number
-of inputs, and act accordingly. We also see a typical use of the <code class="highlighter-rouge">update</code>
+called on each <code class="language-plaintext highlighter-rouge">Input.InputEvent</code>. You can pattern match on the large number
+of inputs, and act accordingly. We also see a typical use of the <code class="language-plaintext highlighter-rouge">update</code>
 method to simulate the physics of the game world.</p>
 
-<p>Now you can <code class="highlighter-rouge">sbt desktop/run</code> and click on the screen to jump around. The game
+<p>Now you can <code class="language-plaintext highlighter-rouge">sbt desktop/run</code> and click on the screen to jump around. The game
 is slightly more interesting, now, so let’s see how we can port it to other
 platforms.</p>
 
@@ -538,16 +550,16 @@ platforms.</p>
 
 <p>Now comes the fun part. We implemented a (tiny) game using an abstract API, and
 we have been running it conveniently from our SBT session with a simple run
-command. The reason it has been so smooth is that the <code class="highlighter-rouge">desktop</code> backend is
+command. The reason it has been so smooth is that the <code class="language-plaintext highlighter-rouge">desktop</code> backend is
 using the standard Java AWT API for windowing, rendering, and inputs, and it
 just works out of the box without any external dependencies. But SGL provides
 backends for other platforms, which require a bit more setup, but also open
 up opportunities for publishing your game.</p>
 
 <p>Let’s first make a web version of the game. Let’s append a new project to our
-<code class="highlighter-rouge">build.sbt</code>:</p>
+<code class="language-plaintext highlighter-rouge">build.sbt</code>:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">lazy</span> <span class="k">val</span> <span class="nv">html5</span> <span class="k">=</span> <span class="o">(</span><span class="n">project</span> <span class="n">in</span> <span class="nf">file</span><span class="o">(</span><span class="s">"./html5"</span><span class="o">))</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lazy</span> <span class="k">val</span> <span class="nv">html5</span> <span class="k">=</span> <span class="o">(</span><span class="n">project</span> <span class="n">in</span> <span class="nf">file</span><span class="o">(</span><span class="s">"./html5"</span><span class="o">))</span>
   <span class="o">.</span><span class="py">enablePlugins</span><span class="o">(</span><span class="nc">ScalaJSPlugin</span><span class="o">)</span>
   <span class="o">.</span><span class="py">settings</span><span class="o">(</span><span class="n">commonSettings</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
   <span class="o">.</span><span class="py">settings</span><span class="o">(</span>
@@ -555,14 +567,15 @@ up opportunities for publishing your game.</p>
     <span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"com.regblanc.sgl"</span> <span class="o">%%%</span> <span class="s">"sgl-html5"</span> <span class="o">%</span> <span class="s">"0.0.1"</span><span class="o">,</span>
     <span class="n">scalaJSUseMainModuleInitializer</span> <span class="o">:=</span> <span class="kc">true</span>
   <span class="o">)</span>
-  <span class="o">.</span><span class="py">dependsOn</span><span class="o">(</span><span class="n">coreJS</span><span class="o">)</span></code></pre></figure>
+  <span class="o">.</span><span class="py">dependsOn</span><span class="o">(</span><span class="n">coreJS</span><span class="o">)</span>
+</code></pre></div></div>
 
-<p>This is a new <code class="highlighter-rouge">html5</code> project, which is a Scala.js project and depends on the
-<code class="highlighter-rouge">sgl-html5</code> artifact, which provides the scala.js implementation of the SGL
+<p>This is a new <code class="language-plaintext highlighter-rouge">html5</code> project, which is a Scala.js project and depends on the
+<code class="language-plaintext highlighter-rouge">sgl-html5</code> artifact, which provides the scala.js implementation of the SGL
 core APIs. We need a Main class for instantiating the game on the platform, so
-add this file <code class="highlighter-rouge">html5/src/main/scala/Main.scala</code>:</p>
+add this file <code class="language-plaintext highlighter-rouge">html5/src/main/scala/Main.scala</code>:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.regblanc.scalavator</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">com.regblanc.scalavator</span>
 <span class="k">package</span> <span class="nn">html5</span>
 
 <span class="k">import</span> <span class="nn">core.ScalavatorGame</span>
@@ -579,37 +592,39 @@ add this file <code class="highlighter-rouge">html5/src/main/scala/Main.scala</c
   <span class="k">override</span> <span class="k">val</span> <span class="nv">theme</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">FixedWindowTheme</span> <span class="o">{</span>
     <span class="k">override</span> <span class="k">val</span> <span class="nv">frameSize</span> <span class="k">=</span> <span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">650</span><span class="o">)</span>
   <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<p>This code is very similar to the <code class="highlighter-rouge">desktop</code> Main object, but instead it links in
-the <code class="highlighter-rouge">Html5App</code> implementation of SGL. It has a slightly different configuration,
+<p>This code is very similar to the <code class="language-plaintext highlighter-rouge">desktop</code> Main object, but instead it links in
+the <code class="language-plaintext highlighter-rouge">Html5App</code> implementation of SGL. It has a slightly different configuration,
 because the settings you can control for a web app are different than for a
-desktop app. In particular, you have to set the <code class="highlighter-rouge">GameCanvasID</code>, which is the
+desktop app. In particular, you have to set the <code class="language-plaintext highlighter-rouge">GameCanvasID</code>, which is the
 id of an HTML canvas tag that will be used to render the game. You have to
-provide the <code class="highlighter-rouge">index.html</code> shell in which the game will run, so you have total
+provide the <code class="language-plaintext highlighter-rouge">index.html</code> shell in which the game will run, so you have total
 freedom to place the canvas whenever you want. Here for convenience, we used
-an <code class="highlighter-rouge">FixedWindowTheme</code>, which is a prebuilt theme that makes it convenient to
+an <code class="language-plaintext highlighter-rouge">FixedWindowTheme</code>, which is a prebuilt theme that makes it convenient to
 get full-page app. The theme will automatically sets a bunch of style and
 positions on the HTML page, so it can be convenient to get started quickly.
-With that theme, you can just use a bare <code class="highlighter-rouge">html5/index.html</code> file:</p>
+With that theme, you can just use a bare <code class="language-plaintext highlighter-rouge">html5/index.html</code> file:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;body&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
   <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"scalavator_canvas"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
   <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"scalavator.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span></code></pre></figure>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
 
 <p>Now all that you need is to compile your game as a Javascript file and
-move it next to the <code class="highlighter-rouge">index.html</code> file:</p>
+move it next to the <code class="language-plaintext highlighter-rouge">index.html</code> file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt html5/fastOptJS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt html5/fastOptJS
 cp html5/target/scala-2.12/scalavator-html5-fastopt.js html5/scalavator.js
 </code></pre></div></div>
 
 <p>Then you can just browse your local filesystem from your browser, and when
-you visit the <code class="highlighter-rouge">index.html</code> file, you should see your game. As said above, you
+you visit the <code class="language-plaintext highlighter-rouge">index.html</code> file, you should see your game. As said above, you
 have total flexibility on how you want to embed your game in your webpage. By
-setting the theme to <code class="highlighter-rouge">NoTheme</code>, you could for example embed the game in a
-<code class="highlighter-rouge">&lt;canvas&gt;</code> tag that you include in an online tutorial, just like this:</p>
+setting the theme to <code class="language-plaintext highlighter-rouge">NoTheme</code>, you could for example embed the game in a
+<code class="language-plaintext highlighter-rouge">&lt;canvas&gt;</code> tag that you include in an online tutorial, just like this:</p>
 
 <canvas id="scalavator_canvas_1" width="400" height="550" style="display: block; margin: auto; border: 1px solid black;"></canvas>
 <script type="text/javascript" src="/resources/scalavator/tutorial/scalavator1.js"></script>
@@ -617,52 +632,53 @@ setting the theme to <code class="highlighter-rouge">NoTheme</code>, you could f
 <h2 id="porting-our-game-to-scala-native">Porting our Game to Scala Native</h2>
 
 <p>Assuming you have a working Scala Native setup, and you installed OpenGL, SDL2,
-and SDL2 image, this should <em>just work</em>. Let’s add the <code class="highlighter-rouge">native</code> project to our
-<code class="highlighter-rouge">build.sbt</code>:</p>
+and SDL2 image, this should <em>just work</em>. Let’s add the <code class="language-plaintext highlighter-rouge">native</code> project to our
+<code class="language-plaintext highlighter-rouge">build.sbt</code>:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">lazy</span> <span class="k">val</span> <span class="nv">native</span> <span class="k">=</span> <span class="o">(</span><span class="n">project</span> <span class="n">in</span> <span class="nf">file</span><span class="o">(</span><span class="s">"./native"</span><span class="o">))</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lazy</span> <span class="k">val</span> <span class="nv">native</span> <span class="k">=</span> <span class="o">(</span><span class="n">project</span> <span class="n">in</span> <span class="nf">file</span><span class="o">(</span><span class="s">"./native"</span><span class="o">))</span>
   <span class="o">.</span><span class="py">enablePlugins</span><span class="o">(</span><span class="nc">ScalaNativePlugin</span><span class="o">)</span>
   <span class="o">.</span><span class="py">settings</span><span class="o">(</span><span class="n">commonSettings</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span>
   <span class="o">.</span><span class="py">settings</span><span class="o">(</span><span class="n">scalaVersion</span> <span class="o">:=</span> <span class="n">scalaNativeVer</span><span class="o">)</span>
   <span class="o">.</span><span class="py">settings</span><span class="o">(</span>
     <span class="n">name</span> <span class="o">:=</span> <span class="s">"scalavator-native"</span><span class="o">,</span>
     <span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"com.regblanc.sgl"</span> <span class="o">%%%</span> <span class="s">"sgl-desktop-native"</span> <span class="o">%</span> <span class="s">"0.0.1"</span><span class="o">,</span>
-    <span class="c1">// This only works on Linux, if you are running on Mac you
-</span>    <span class="c1">// need these linking options instead:
-</span>    <span class="c1">//    nativeLinkingOptions ++= Seq("-framework", "OpenGL")
-</span>    <span class="n">nativeLinkingOptions</span> <span class="o">+=</span> <span class="s">"-lGL"</span>
+    <span class="c1">// This only works on Linux, if you are running on Mac you</span>
+    <span class="c1">// need these linking options instead:</span>
+    <span class="c1">//    nativeLinkingOptions ++= Seq("-framework", "OpenGL")</span>
+    <span class="n">nativeLinkingOptions</span> <span class="o">+=</span> <span class="s">"-lGL"</span>
   <span class="o">)</span>
-  <span class="o">.</span><span class="py">dependsOn</span><span class="o">(</span><span class="n">coreNative</span><span class="o">)</span></code></pre></figure>
+  <span class="o">.</span><span class="py">dependsOn</span><span class="o">(</span><span class="n">coreNative</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>The only tricky part is that Scala Native requires Scala 2.11, which is done by
-overriding the <code class="highlighter-rouge">scalaVersion</code> above. We did the same when we added the <code class="highlighter-rouge">core</code>
+overriding the <code class="language-plaintext highlighter-rouge">scalaVersion</code> above. We did the same when we added the <code class="language-plaintext highlighter-rouge">core</code>
 project with a native-only settings. With this, our code will need to be
 compatible with both Scala 2.11 and Scala 2.12, at least until Scala Native
 supports 2.12.</p>
 
 <p>You should be able to run a native version of the game with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt native/run
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt native/run
 </code></pre></div></div>
 
 <p>But,  I hear you say, it looks just like the JVM version, what proves me it’s
 actually running natively? On more convincing way to run it is to do just link
 the binary:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt native/nativeLink
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt native/nativeLink
 </code></pre></div></div>
 
 <p>And then to actually run the binary directly:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./native/target/scala-2.11/scalavator-native-out
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./native/target/scala-2.11/scalavator-native-out
 </code></pre></div></div>
 
 <h2 id="recap">Recap</h2>
 
-<p>Let’s see where we are at. We have created 4 projects, a shared <code class="highlighter-rouge">core</code> project,
+<p>Let’s see where we are at. We have created 4 projects, a shared <code class="language-plaintext highlighter-rouge">core</code> project,
 and three implementation of this project for three platforms (awt, web, and
-native). Now typically we would work hard on our <code class="highlighter-rouge">core</code> project to make a great
-game, test it along the way with the convenient <code class="highlighter-rouge">desktop/run</code> which is fast and
+native). Now typically we would work hard on our <code class="language-plaintext highlighter-rouge">core</code> project to make a great
+game, test it along the way with the convenient <code class="language-plaintext highlighter-rouge">desktop/run</code> which is fast and
 runs directly in your SBT session, and every now and then you could make
 release build for your target platform.</p>
 
@@ -679,8 +695,9 @@ you have been reading without actually writing code, you can clone this
 project and try it out now. You can also start from there for any SGL-related
 project.</p>
 
-<p>In a follow-up post, we will expand our game by using many more features of
-SGL. We will also show how to build the game for Android and iOS.</p>
+<p>In <a href="/blog/making-a-scala-game-part2/">the next post</a>, we
+will expand our game by using many more features of SGL. We will also show how
+to build the game for Android and iOS.</p>
 
         </article>
 

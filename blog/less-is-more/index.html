@@ -85,6 +85,8 @@
   <link rel="stylesheet" href="/libcss/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/libcss/font-awesome.min.css">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+
 
   <link rel="canonical" 
         href="http://regblanc.com/blog/less-is-more/">
@@ -256,10 +258,10 @@ to return a new list with a new integer appended to the end of the list.  Let’
 not focus on the implementation, to keep the example to the point. Now, the
 class can be used in the expected manner:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span>  <span class="c1">// l1 = []
-</span><span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="nv">l1</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// l2 = [1]
-</span><span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="nv">l2</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// l3 = [1, 2]
-</span><span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="nv">l3</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">//</span> <span class="n">l4</span> <span class="k">=</span> <span class="o">[</span><span class="err">1</span>, <span class="err">2</span>, <span class="err">3</span><span class="o">]</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">l1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IntList</span>  <span class="c1">// l1 = []</span>
+<span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="nv">l1</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// l2 = [1]</span>
+<span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="nv">l2</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// l3 = [1, 2]</span>
+<span class="k">val</span> <span class="nv">l4</span> <span class="k">=</span> <span class="nv">l3</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="c1">// l4 = [1, 2, 3]</span></code></pre></figure>
 
 <p>Most object-oriented languages use a similar syntax for defining and calling
 methods. Scala has a syntactic rule where methods with a single parameter can
@@ -281,14 +283,14 @@ use this syntax in the above case, as it can make the code actually confusing,
 but it is a popular syntax when using higher-order functions:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">inc</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
-<span class="k">val</span> <span class="nv">l5</span> <span class="k">=</span> <span class="n">l4</span> <span class="n">map</span> <span class="n">incr</span> <span class="o">//</span> <span class="n">l5</span> <span class="k">=</span> <span class="o">[</span><span class="err">2</span>, <span class="err">3</span>, <span class="err">4</span><span class="o">]</span></code></pre></figure>
+<span class="k">val</span> <span class="nv">l5</span> <span class="k">=</span> <span class="n">l4</span> <span class="n">map</span> <span class="n">incr</span> <span class="c1">// l5 = [2, 3, 4]</span></code></pre></figure>
 
-<p>Of course, one could also use the syntax <code class="highlighter-rouge">l4.map(incr)</code> but it is somewhat of a
+<p>Of course, one could also use the syntax <code class="language-plaintext highlighter-rouge">l4.map(incr)</code> but it is somewhat of a
 convention to use the infix notation with higher-order functions as it tends to
 be more readable (perhaps due to the roots of the notation coming from the
-likes of Haskell and Caml). In more standard cases like the <code class="highlighter-rouge">append</code> function,
+likes of Haskell and Caml). In more standard cases like the <code class="language-plaintext highlighter-rouge">append</code> function,
 it is more natural and readable to use the more familiar and consistant
-<code class="highlighter-rouge">object.method(arg)</code> syntax.</p>
+<code class="language-plaintext highlighter-rouge">object.method(arg)</code> syntax.</p>
 
 <p>Let us look at another example:</p>
 
@@ -297,7 +299,7 @@ it is more natural and readable to use the more familiar and consistant
 <span class="o">}</span>
 <span class="k">val</span> <span class="nv">v1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
 <span class="k">val</span> <span class="nv">v2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
-<span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="nv">v1</span><span class="o">.</span><span class="py">plus</span><span class="o">(</span><span class="n">v2</span><span class="o">)</span> <span class="o">//</span> <span class="n">v3</span> <span class="k">=</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span></code></pre></figure>
+<span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="nv">v1</span><span class="o">.</span><span class="py">plus</span><span class="o">(</span><span class="n">v2</span><span class="o">)</span> <span class="c1">// v3 = (3, 4)</span></code></pre></figure>
 
 <p>This is a simple 2D vector and an example of how to use it. It’s very close to
 how we would write in a language like Java, except for the short constructor
@@ -307,22 +309,22 @@ another feature: flexible syntax for identifiers. In Scala, identifiers are
 very flexible and, in particular, they can contain any combination of standard
 symbols (although if they do, they cannot contain <a href="https://www.scala-lang.org/files/archive/spec/2.11/02-identifiers-names-and-scopes.html">any other
 characers</a>).
-Taking advantage of that rule, the <code class="highlighter-rouge">plus</code> method could be defined more
+Taking advantage of that rule, the <code class="language-plaintext highlighter-rouge">plus</code> method could be defined more
 naturally as:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">Vector</span><span class="o">(</span><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">)</span><span class="k">:</span> <span class="kt">Vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="py">a</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">a</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="py">b</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">b</span><span class="o">)</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>The language treats <code class="highlighter-rouge">plus</code> and <code class="highlighter-rouge">+</code> in exactly the same way, so the way we use
+<p>The language treats <code class="language-plaintext highlighter-rouge">plus</code> and <code class="language-plaintext highlighter-rouge">+</code> in exactly the same way, so the way we use
 the vector remains the same:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">v1</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
 <span class="k">val</span> <span class="nv">v2</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Vector</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
 <span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="n">v1</span><span class="o">.+(</span><span class="n">v2</span><span class="o">)</span></code></pre></figure>
 
-<p>That is because <code class="highlighter-rouge">+</code> is just the name of the method and a method can be used
-with the <code class="highlighter-rouge">object.method(arg)</code> syntax. Of course, here it makes sense to take
+<p>That is because <code class="language-plaintext highlighter-rouge">+</code> is just the name of the method and a method can be used
+with the <code class="language-plaintext highlighter-rouge">object.method(arg)</code> syntax. Of course, here it makes sense to take
 advantage of the infix notation for methods, and we can actually write:</p>
 
 <figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">v3</span> <span class="k">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span></code></pre></figure>
